@@ -509,7 +509,7 @@ public class Selector {
 
             for (int i=0; i<paramsD.length; i++){
                 ArrayList<String> parametr = new ArrayList<>();
-                if (i>3&&i<16) {
+                if ((i>3&&i<16) || i==73) {
                     paramsD[i][0] = MyMath.round(paramsD[i][0] / numberOfMatchesWithParam[i], 2);
                     paramsD[i][1] = MyMath.round(paramsD[i][1] / numberOfMatchesWithParam[i], 2);
                 }

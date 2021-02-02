@@ -396,8 +396,8 @@ public class PanelMatching extends JPanel{
                 int draws = (int) Double.parseDouble(selector.pList.get(1).get(1));
                 int loses = (int) Double.parseDouble(selector.pList.get(2).get(1));
                 int points = (int) Double.parseDouble(selector.pList.get(3).get(1));
-                String teamStats = "Матчей: " + String.valueOf(matches) + ";    Побед: " + String.valueOf(wins) + ";    Ничьих: "
-                        + String.valueOf(draws) + ";    Поражений: " + String.valueOf(loses) +";    Набрано очков: " + String.valueOf(points) + ";\n";
+                String teamStats = "Матчей: " + matches + ";    Побед: " + wins + ";    Ничьих: "
+                        + draws + ";    Поражений: " + loses +";    Набрано очков: " + points + ";\n";
                 final JTextField label = new JTextField(teamStats);
                 label.setBackground(new Color(238, 238, 238));
                 label.setLocation(10, otstup);
@@ -412,8 +412,8 @@ public class PanelMatching extends JPanel{
                 double xDraws = Double.parseDouble(selector.pList.get(19).get(1));
                 double xLoses = Double.parseDouble(selector.pList.get(20).get(1));
                 double xPoints = MyMath.round(Double.parseDouble(selector.pList.get(21).get(1)), 2);
-                String teamStatsxG = "xGMatches: " + String.valueOf(xGmatches) + ";   xWins: " + String.valueOf(xWins) + ";   wDraws: "
-                        + String.valueOf(xDraws) + ";   xLoses: " + String.valueOf(xLoses) +";   xPoints: " + String.valueOf(xPoints) + ";";
+                String teamStatsxG = "xGMatches: " + xGmatches + ";   xWins: " + xWins + ";   wDraws: "
+                        + xDraws + ";   xLoses: " + xLoses +";   xPoints: " + xPoints + ";";
                 final JTextField label2 = new JTextField(teamStatsxG);
                 label2.setBackground(new Color(238, 238, 238));
                 label2.setLocation(10, otstup);
@@ -426,8 +426,8 @@ public class PanelMatching extends JPanel{
                 int goalsS = (int) Math.round(selector.listOfMatches.size() * Double.parseDouble(selector.pList.get(4).get(1)));
                 int goalsC = (int) Math.round(selector.listOfMatches.size() * Double.parseDouble(selector.pList.get(4).get(2)));
                 int diff = goalsS - goalsC;
-                String teamGoals = "Голов забито:   " + String.valueOf(goalsS) + ";                 Голов пропущено:   " + String.valueOf(goalsC) +
-                        ";                   Разница:   " + String.valueOf(diff) + ";";
+                String teamGoals = "Голов забито:   " + goalsS + ";                 Голов пропущено:   " + goalsC +
+                        ";                   Разница:   " + diff + ";";
                 final JTextField label3 = new JTextField(teamGoals);
                 label3.setBackground(new Color(238, 238, 238));
                 label3.setLocation(10, otstup);
@@ -439,22 +439,22 @@ public class PanelMatching extends JPanel{
 
                 String forma = selector.pList.get(16).get(1);
                 if (settings.form.equals("rightToLeft")){
-                    String s = "";
+                    StringBuilder s = new StringBuilder();
                     for (int j=forma.length()-1; j>=0; j--){
-                        s = s + forma.charAt(j);
+                        s.append(forma.charAt(j));
                     }
-                    forma = s;
+                    forma = s.toString();
                 }
                 final Dimension defFormaLocation = new Dimension(70,78);
                 for (int i=0; i<forma.length(); i++){
                     JLabel imageLabel = null;
-                    if (forma.substring(i, i+1).equals("W")){
+                    if (forma.charAt(i) == 'W'){
                         imageLabel = new JLabel(new ImageIcon("images/win.png"));
                     }
-                    if (forma.substring(i, i+1).equals("D")){
+                    if (forma.charAt(i) == 'D'){
                         imageLabel = new JLabel(new ImageIcon("images/draw.png"));
                     }
-                    if (forma.substring(i, i+1).equals("L")){
+                    if (forma.charAt(i) == 'L'){
                         imageLabel = new JLabel(new ImageIcon("images/lose.png"));
                     }
                     imageLabel.setLocation(defFormaLocation.width + 25*i, defFormaLocation.height);
@@ -606,7 +606,7 @@ public class PanelMatching extends JPanel{
                 String[] params = {"Голы (сред)", "xG (сред.)", "Реализация", "Голы в 1T и доля в %", "Голы в 2T и доля в %",
                         "Голы 1'-15' и доля в %", "Голы 16'-30' и доля в %", "Голы 31'-45+' и доля в %", "Голы 46'-60' и доля в %", "Голы 61'-75' и доля в %", "Голы 76'-90+' и доля в %",
                         "Владение", "Ударов всего", "Удары в створ", "Удары мимо", "Блокировано ударов",
-                        "Угловые", "Офсайды", "Фолы", "Желтые карточки", "Красные карточки"};
+                        "Угловые", "Офсайды", "Фолы", "Отборы", "Желтые карточки", "Красные карточки"};
                 Object[][] data;
                 int rowCount = params.length;
                 double real = MyMath.round(Double.parseDouble(selector.pList.get(4).get(1)) / Double.parseDouble(selector.pList.get(5).get(1)), 2);
@@ -637,8 +637,9 @@ public class PanelMatching extends JPanel{
                             {"  " + params[16], selector.pList.get(10).get(1), selector.pList.get(10).get(2), MyMath.round(Double.parseDouble(selector.pList.get(10).get(1)) + Double.parseDouble(selector.pList.get(10).get(2)) ,2), MyMath.round(Double.parseDouble(selector.pList.get(10).get(1)) - Double.parseDouble(selector.pList.get(10).get(2)), 2)},
                             {"  " + params[17], selector.pList.get(11).get(1), selector.pList.get(11).get(2), MyMath.round(Double.parseDouble(selector.pList.get(11).get(1)) + Double.parseDouble(selector.pList.get(11).get(2)) ,2), MyMath.round(Double.parseDouble(selector.pList.get(11).get(1)) - Double.parseDouble(selector.pList.get(11).get(2)), 2)},
                             {"  " + params[18], selector.pList.get(13).get(1), selector.pList.get(13).get(2), MyMath.round(Double.parseDouble(selector.pList.get(13).get(1)) + Double.parseDouble(selector.pList.get(13).get(2)) ,2), MyMath.round(Double.parseDouble(selector.pList.get(13).get(1)) - Double.parseDouble(selector.pList.get(13).get(2)), 2)},
-                            {"  " + params[19], selector.pList.get(14).get(1), selector.pList.get(14).get(2), MyMath.round(Double.parseDouble(selector.pList.get(14).get(1)) + Double.parseDouble(selector.pList.get(14).get(2)) ,2), MyMath.round(Double.parseDouble(selector.pList.get(14).get(1)) - Double.parseDouble(selector.pList.get(14).get(2)), 2)},
-                            {"  " + params[20], selector.pList.get(15).get(1), selector.pList.get(15).get(2), MyMath.round(Double.parseDouble(selector.pList.get(15).get(1)) + Double.parseDouble(selector.pList.get(15).get(2)) ,2), MyMath.round(Double.parseDouble(selector.pList.get(15).get(1)) - Double.parseDouble(selector.pList.get(15).get(2)), 2)}
+                            {"  " + params[19], selector.pList.get(73).get(1), selector.pList.get(73).get(2), MyMath.round(Double.parseDouble(selector.pList.get(73).get(1)) + Double.parseDouble(selector.pList.get(73).get(2)) ,2), MyMath.round(Double.parseDouble(selector.pList.get(73).get(1)) - Double.parseDouble(selector.pList.get(73).get(2)), 2)},
+                            {"  " + params[20], selector.pList.get(14).get(1), selector.pList.get(14).get(2), MyMath.round(Double.parseDouble(selector.pList.get(14).get(1)) + Double.parseDouble(selector.pList.get(14).get(2)) ,2), MyMath.round(Double.parseDouble(selector.pList.get(14).get(1)) - Double.parseDouble(selector.pList.get(14).get(2)), 2)},
+                            {"  " + params[21], selector.pList.get(15).get(1), selector.pList.get(15).get(2), MyMath.round(Double.parseDouble(selector.pList.get(15).get(1)) + Double.parseDouble(selector.pList.get(15).get(2)) ,2), MyMath.round(Double.parseDouble(selector.pList.get(15).get(1)) - Double.parseDouble(selector.pList.get(15).get(2)), 2)}
                     };
                 } else{
                     data = new Object[][]{
@@ -653,8 +654,9 @@ public class PanelMatching extends JPanel{
                             {"  " + params[16], selector.pList.get(10).get(1), selector.pList.get(10).get(2), MyMath.round(Double.parseDouble(selector.pList.get(10).get(1)) + Double.parseDouble(selector.pList.get(10).get(2)),2), MyMath.round(Double.parseDouble(selector.pList.get(10).get(1)) - Double.parseDouble(selector.pList.get(10).get(2)),2)},
                             {"  " + params[17], selector.pList.get(11).get(1), selector.pList.get(11).get(2), MyMath.round(Double.parseDouble(selector.pList.get(11).get(1)) + Double.parseDouble(selector.pList.get(11).get(2)),2), MyMath.round(Double.parseDouble(selector.pList.get(11).get(1)) - Double.parseDouble(selector.pList.get(11).get(2)),2)},
                             {"  " + params[18], selector.pList.get(13).get(1), selector.pList.get(13).get(2), MyMath.round(Double.parseDouble(selector.pList.get(13).get(1)) + Double.parseDouble(selector.pList.get(13).get(2)),2), MyMath.round(Double.parseDouble(selector.pList.get(13).get(1)) - Double.parseDouble(selector.pList.get(13).get(2)),2)},
-                            {"  " + params[19], selector.pList.get(14).get(1), selector.pList.get(14).get(2), MyMath.round(Double.parseDouble(selector.pList.get(14).get(1)) + Double.parseDouble(selector.pList.get(14).get(2)),2), MyMath.round(Double.parseDouble(selector.pList.get(14).get(1)) - Double.parseDouble(selector.pList.get(14).get(2)),2)},
-                            {"  " + params[20], selector.pList.get(15).get(1), selector.pList.get(15).get(2), MyMath.round(Double.parseDouble(selector.pList.get(15).get(1)) + Double.parseDouble(selector.pList.get(15).get(2)),2), MyMath.round(Double.parseDouble(selector.pList.get(15).get(1)) - Double.parseDouble(selector.pList.get(15).get(2)),2)}
+                            {"  " + params[19], selector.pList.get(73).get(1), selector.pList.get(73).get(2), MyMath.round(Double.parseDouble(selector.pList.get(73).get(1)) + Double.parseDouble(selector.pList.get(73).get(2)),2), MyMath.round(Double.parseDouble(selector.pList.get(73).get(1)) - Double.parseDouble(selector.pList.get(73).get(2)),2)},
+                            {"  " + params[20], selector.pList.get(14).get(1), selector.pList.get(14).get(2), MyMath.round(Double.parseDouble(selector.pList.get(14).get(1)) + Double.parseDouble(selector.pList.get(14).get(2)),2), MyMath.round(Double.parseDouble(selector.pList.get(14).get(1)) - Double.parseDouble(selector.pList.get(14).get(2)),2)},
+                            {"  " + params[21], selector.pList.get(15).get(1), selector.pList.get(15).get(2), MyMath.round(Double.parseDouble(selector.pList.get(15).get(1)) + Double.parseDouble(selector.pList.get(15).get(2)),2), MyMath.round(Double.parseDouble(selector.pList.get(15).get(1)) - Double.parseDouble(selector.pList.get(15).get(2)),2)}
                     };
                     rowCount = rowCount - 8;
                 }
@@ -675,8 +677,6 @@ public class PanelMatching extends JPanel{
                 }
 
                 table.getColumnModel().getColumn(0).setPreferredWidth(180);
-                //table.getColumnModel().getColumn(2).setPreferredWidth(160);
-                //table.getColumnModel().getColumn(1).setPreferredWidth(160);
 
                 JPanel tablePanel = new JPanel();
                 tablePanel.setLayout(new BorderLayout());
@@ -841,16 +841,16 @@ public class PanelMatching extends JPanel{
                 buttonNotice.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        String resultS = "";
+                        StringBuilder resultS = new StringBuilder();
                         try {
                             File fileDir = new File("notices/" + teamName + ".txt");
 
                             BufferedReader in = new BufferedReader(
                                     new InputStreamReader(
-                                            new FileInputStream(fileDir), "UTF-8"));
+                                            new FileInputStream(fileDir), StandardCharsets.UTF_8));
                             String str;
                             while (((str = in.readLine()) != null)) {
-                                resultS += str + "\n";
+                                resultS.append(str).append("\n");
                             }
                             in.close();
 
@@ -861,7 +861,7 @@ public class PanelMatching extends JPanel{
                         windowNotice.setSize(400, 300);
                         windowNotice.setLocation(100, 100);
 
-                        final JTextArea textArea = new JTextArea(resultS);
+                        final JTextArea textArea = new JTextArea(resultS.toString());
                         textArea.setFont(font15);
                         textArea.setLineWrap(true);
                         textArea.setWrapStyleWord(true);

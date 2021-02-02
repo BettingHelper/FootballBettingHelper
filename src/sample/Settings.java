@@ -232,6 +232,12 @@ public class Settings {
         result.add(this.showDispossessed);
         result.add(this.showPassesAcc);
         result.add(this.showKeyPasses);
+        result.add(this.showGoalKicks);
+        result.add(this.showGoalKicks1T);
+        result.add(this.showGoalKicks2T);
+        result.add(this.showThrowIns);
+        result.add(this.showThrowIns1T);
+        result.add(this.showThrowIns2T);
         result.add(this.showTotal);
 
         return result;
