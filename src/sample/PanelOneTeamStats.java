@@ -525,14 +525,14 @@ public class PanelOneTeamStats extends JPanel{
                     // Вставка таблицы корреляционных показателей
                     String corrLabelText = "Таблица корреляций статистических показателей " + teamName;
                     final JLabel labelCorr = new JLabel(corrLabelText);
-                    labelCorr.setLocation(610, 190);
+                    labelCorr.setLocation(610, 215);
                     labelCorr.setSize(650, 25);
                     labelCorr.setFont(font15);
                     container.add(labelCorr);
 
                     JButton buttonCorrInfo = new JButton();
                     buttonCorrInfo.setIcon(new ImageIcon("images/info.png"));
-                    buttonCorrInfo.setLocation(610 + 643, 190);
+                    buttonCorrInfo.setLocation(610 + 643, 215);
                     buttonCorrInfo.setSize(20, 20);
                     container.add(buttonCorrInfo);
 
@@ -561,7 +561,8 @@ public class PanelOneTeamStats extends JPanel{
 
                     JPanel panelCorrSP = new JPanel(new BorderLayout());
                     panelCorrSP.setSize(675, 350);
-                    panelCorrSP.setLocation(600, 210);
+                    panelCorrSP.setLocation(600, 235);
+                    otstup += 15;
                     JTable panelCorr = TableMaker.getTableCorrelation(teamName, selector.listOfMatches, selector.pList);
                     panelCorrSP.add(panelCorr);
                     panelCorrSP.add(panelCorr.getTableHeader(), BorderLayout.NORTH);
@@ -570,18 +571,29 @@ public class PanelOneTeamStats extends JPanel{
 
 
                 //Вставка просмотрщика параметров
+                final JPanel panelWithIndents = new JPanel(new BorderLayout());
+                panelWithIndents.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
                 final JPanel paramsPanel = new JPanel(new VerticalLayout());
                 paramsPanel.setBorder(BorderFactory.createTitledBorder(""));
-                JPanel selectorsPanel = new JPanel(new GridLayout(1, 0, 5, 5));
 
+                JLabel labelTitleParamsPanel = new JLabel("Слайдер проходимости");
+                labelTitleParamsPanel.setFont(font15);
+                labelTitleParamsPanel.setHorizontalAlignment(SwingConstants.CENTER);
+                labelTitleParamsPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
+                paramsPanel.add(labelTitleParamsPanel);
+
+                JPanel selectorsPanel = new JPanel(new GridLayout(1, 0, 5, 5));
                 String[] paramsList = Parameters.getParamsList();
                 final JComboBox<String> paramsChooser = new JComboBox<>(paramsList);
                 paramsChooser.setFont(font15);
+                paramsChooser.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
                 selectorsPanel.add(paramsChooser);
 
                 String[] indexList = {"Выберите тип ставки"};
                 final JComboBox<String> indexChooser = new JComboBox<>(indexList);
                 indexChooser.setFont(font15);
+                indexChooser.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
                 selectorsPanel.add(indexChooser);
                 paramsPanel.add(selectorsPanel);
 
@@ -609,10 +621,13 @@ public class PanelOneTeamStats extends JPanel{
                 slider.setPaintTicks(true);
                 slider.setEnabled(false);
                 panelSlider.add(slider);
-                panelSlider.setBorder(new EmptyBorder(10, 0, 0, 0));
                 paramsPanel.add(panelSlider);
+                paramsPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-                paramsPanel.setSize(670, 170);
+                panelWithIndents.add(paramsPanel);
+                container.add(panelWithIndents);
+
+                paramsPanel.setSize(670, 200);
                 paramsPanel.setLocation(610, 10);
                 container.add(paramsPanel);
                 container.setPreferredSize(new Dimension(700, otstup));
@@ -1120,8 +1135,8 @@ public class PanelOneTeamStats extends JPanel{
     }
 
     private void getParamsPanel(JPanel paramsPanel, String teamName, Selector selector, JComboBox paramsChooser, JComboBox indexChooser, double valueOfSlider){
-        if (paramsPanel.getComponentCount()>2){
-            paramsPanel.remove(2);
+        if (paramsPanel.getComponentCount()>3){
+            paramsPanel.remove(3);
         }
         final JTable tableByParams = Parameters.getTableByParams(teamName, selector.listOfMatches, (String) (paramsChooser.getSelectedItem()), (String) (indexChooser.getSelectedItem()), valueOfSlider);
         JPanel tablePanel = new JPanel();

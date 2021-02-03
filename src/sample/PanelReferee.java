@@ -4,6 +4,8 @@ import org.jfree.ui.tabbedui.VerticalLayout;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,6 +18,23 @@ public class PanelReferee extends JPanel{
     JScrollPane scrollPane;
     JComboBox<String> seasonCB;
     JComboBox<String> leagueChooser;
+
+    JLabel leftValue;
+    JLabel rightValue;
+    JLabel bottomValue;
+    int indexForParameterChooser = 0;
+    int indexForIndexChooser = 0;
+    int indexForValueChooser = 0;
+    double valueForSlider = 0;
+    double minSliderValue = 0;
+    double maxSliderValue = 0;
+    double stepSlider = 0.5;
+    JSlider slider = new JSlider(0,10,0);
+
+    final Font font15 = new Font("Arial", Font.BOLD, 15);
+    final Font font16 = new Font("Arial", Font.BOLD, 16);
+    final Font font18 = new Font("Arial", Font.BOLD, 18);
+    final Font font20 = new Font("Arial", Font.BOLD, 20);
 
     public PanelReferee(){
         this.setLayout(new BorderLayout());
@@ -168,7 +187,7 @@ public class PanelReferee extends JPanel{
         JScrollPane scrollPane;
         if ((!leagueName.contains("Выберите"))&&(!refName.contains("Выберите"))){
 
-            Selector selector = new Selector();
+            final Selector selector = new Selector();
             selector.getRefListOfMatches(leagueName, refName, season.replace("Сезон ", ""), lastOrFullSeason);
 
             if (selector.listOfMatches.size()>0){
@@ -322,8 +341,138 @@ public class PanelReferee extends JPanel{
                     tablePanelCorr.setBorder(BorderFactory.createLineBorder(new Color(50, 50, 50), 1));
 
                     container.add(tablePanelCorr);
-                }
 
+                    //Вставка просмотрщика параметров
+                    final JPanel paramsPanel = new JPanel(new VerticalLayout());
+
+                    JLabel labelTitleParamsPanel = new JLabel("Слайдер проходимости");
+                    labelTitleParamsPanel.setFont(font15);
+                    labelTitleParamsPanel.setHorizontalAlignment(SwingConstants.CENTER);
+                    labelTitleParamsPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
+                    paramsPanel.add(labelTitleParamsPanel);
+
+//                    paramsPanel.setBorder(BorderFactory.createTitledBorder(""));
+                    paramsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+                    JPanel selectorsPanel = new JPanel(new GridLayout(1, 0, 5, 5));
+
+                    String[] paramsList = Parameters.getRefParamsList();
+                    final JComboBox<String> paramsChooser = new JComboBox<>(paramsList);
+                    paramsChooser.setFont(font15);
+                    paramsChooser.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+                    selectorsPanel.add(paramsChooser);
+
+                    String[] indexList = {"Выберите тип ставки"};
+                    final JComboBox<String> indexChooser = new JComboBox<>(indexList);
+                    indexChooser.setFont(font15);
+                    indexChooser.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
+                    selectorsPanel.add(indexChooser);
+                    paramsPanel.add(selectorsPanel);
+
+                    JPanel panelSlider = new JPanel(new BorderLayout());
+
+                    leftValue = new JLabel("");
+                    leftValue.setFont(font15);
+                    leftValue.setPreferredSize(new Dimension(40, 40));
+                    leftValue.setHorizontalAlignment(SwingConstants.CENTER);
+                    panelSlider.add(leftValue, BorderLayout.WEST);
+                    rightValue = new JLabel("");
+                    rightValue.setFont(font15);
+                    rightValue.setPreferredSize(new Dimension(40, 40));
+                    rightValue.setHorizontalAlignment(SwingConstants.CENTER);
+                    panelSlider.add(rightValue, BorderLayout.EAST);
+                    bottomValue = new JLabel("");
+                    bottomValue.setFont(font15);
+                    bottomValue.setPreferredSize(new Dimension(40, 40));
+                    bottomValue.setHorizontalAlignment(SwingConstants.CENTER);
+                    panelSlider.add(bottomValue, BorderLayout.SOUTH);
+
+
+                    slider.setPaintLabels(false);
+                    slider.setMajorTickSpacing(1);
+                    slider.setPaintTicks(true);
+                    slider.setEnabled(false);
+                    panelSlider.add(slider);
+                    panelSlider.setBorder(new EmptyBorder(10, 0, 0, 0));
+                    paramsPanel.add(panelSlider);
+
+                    container.add(paramsPanel);
+
+                    paramsChooser.setSelectedIndex(indexForParameterChooser);
+                    String[] list = Parameters.getRefIndex((String) paramsChooser.getSelectedItem());
+                    DefaultComboBoxModel modelH = new DefaultComboBoxModel(list);
+                    indexChooser.setModel(modelH);
+                    indexChooser.setSelectedIndex(indexForIndexChooser);
+                    slider.setValue(indexForValueChooser);
+                    final double[] sliderParams = Parameters.getRefValues((String) paramsChooser.getSelectedItem(), (String) indexChooser.getSelectedItem());
+                    stepSlider = sliderParams[2];
+
+                    if (sliderParams[2] > 0){
+                        minSliderValue = sliderParams[0];
+                        stepSlider = sliderParams[2];
+                        leftValue.setText(String.valueOf(sliderParams[0]));
+                        rightValue.setText(String.valueOf(sliderParams[1]));
+                        bottomValue.setText("Выбрано значение: " + valueForSlider);
+                        getParamsPanel(paramsPanel, refName, selector, paramsChooser, indexChooser, valueForSlider);
+                        slider.setMajorTickSpacing(1);
+                        slider.setPaintTicks(true);
+                        slider.setEnabled(true);
+                        int numberOfVariants = (int) ((sliderParams[1] - sliderParams[0]) / sliderParams[2] + 1);
+                        slider.setMaximum(numberOfVariants-1);
+                    }
+
+                    paramsChooser.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            indexForParameterChooser = paramsChooser.getSelectedIndex();
+                            String[] list = Parameters.getRefIndex((String) paramsChooser.getSelectedItem());
+                            DefaultComboBoxModel modelH = new DefaultComboBoxModel(list);
+                            indexChooser.setModel(modelH);
+                            indexForIndexChooser = indexChooser.getSelectedIndex();
+                            slider.setEnabled(false);
+                            slider.setValue(0);
+                            indexForValueChooser = 0;
+                            bottomValue.setText("");
+                            leftValue.setText("");
+                            rightValue.setText("");
+
+                            paramsChooser.setFocusable(false);
+                        }
+                    });
+
+                    indexChooser.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            indexForIndexChooser = indexChooser.getSelectedIndex();
+                            double[] sliderParams = Parameters.getRefValues((String) paramsChooser.getSelectedItem(), (String) indexChooser.getSelectedItem());
+                            minSliderValue = sliderParams[0];
+                            valueForSlider = sliderParams[0];
+                            stepSlider = sliderParams[2];
+                            slider.setEnabled(true);
+                            slider.setValue(0);
+                            indexForValueChooser = 0;
+                            int numberOfVariants = (int) ((sliderParams[1] - sliderParams[0]) / sliderParams[2] + 1);
+                            slider.setMaximum(numberOfVariants-1);
+                            leftValue.setText(String.valueOf(sliderParams[0]));
+                            rightValue.setText(String.valueOf(sliderParams[1]));
+                            bottomValue.setText("Выбрано значение: " + String.valueOf(valueForSlider));
+
+                            getParamsPanel(paramsPanel, refName, selector, paramsChooser, indexChooser, valueForSlider);
+                            indexChooser.setFocusable(false);
+                        }
+                    });
+
+                    slider.addChangeListener(new ChangeListener() {
+                        @Override
+                        public void stateChanged(ChangeEvent e) {
+                            valueForSlider = minSliderValue + stepSlider*slider.getValue();
+                            bottomValue.setText("Выбрано значение: " + String.valueOf(valueForSlider));
+                            indexForValueChooser = slider.getValue();
+                            getParamsPanel(paramsPanel, refName, selector, paramsChooser, indexChooser, valueForSlider);
+                        }
+                    });
+
+
+                }
 
 
                 allInfoPanel.add(container, BorderLayout.NORTH);
@@ -392,6 +541,39 @@ public class PanelReferee extends JPanel{
         this.setCursor(Cursor.getDefaultCursor());
         return scrollPane;
     }
+
+    private void getParamsPanel(JPanel paramsPanel, String teamName, Selector selector, JComboBox paramsChooser, JComboBox indexChooser, double valueOfSlider){
+        if (paramsPanel.getComponentCount()>3){
+            paramsPanel.remove(3);
+        }
+        final JTable tableByParams = Parameters.getTableRefByParams(teamName, selector.listOfMatches, (String) (paramsChooser.getSelectedItem()), (String) (indexChooser.getSelectedItem()), valueOfSlider);
+        JPanel tablePanel = new JPanel();
+        tablePanel.setLayout(null);
+        tablePanel.setSize(600,44);
+        tablePanel.setLocation(0,40);
+
+        tableByParams.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tableByParams.setEnabled(false);
+        tableByParams.getTableHeader().setFont(font15);
+        tableByParams.setFont(font15);
+        tableByParams.setRowHeight(25);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for (int i=0; i<tableByParams.getColumnCount(); i++){
+            tableByParams.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        tablePanel.setLayout(new BorderLayout());
+        tablePanel.add(new JScrollPane(tableByParams), BorderLayout.CENTER);
+        tablePanel.add(tableByParams.getTableHeader(), BorderLayout.NORTH);
+
+        tableByParams.setSize(200, 180);
+        tableByParams.setLocation(5, 5);
+
+        tablePanel.add(tableByParams);
+        paramsPanel.add(tablePanel);
+        paramsPanel.revalidate();
+    }
+
 
     public void setFilters(String league){
         String season = Settings.getCurrentSeasonInLeague(league);

@@ -24,14 +24,12 @@ public class Parameters {
             case "Выберите показатель":{
                 result = new String[]{"Выберите тип ставки"}; break;
             }
-            case "Голы":
-            case "Голы 1 тайм":
-            case "Голы 2 тайм":{
-                result = new String[]{"Выберите тип ставки", "Общий тотал", "Инд.тотал команды", "Инд.тотал соперника", "Фора команды"}; break;
-            }
             case "Владение":{
                 result = new String[]{"Выберите тип ставки", "Фора команды"}; break;
             }
+            case "Голы":
+            case "Голы 1 тайм":
+            case "Голы 2 тайм":
             case "Удары":
             case "Удары 1 тайм":
             case "Удары 2 тайм":
@@ -3489,4 +3487,558 @@ public class Parameters {
 
         return  result;
     }
+
+    public static String[] getRefParamsList(){
+        return new String[]{"Выберите показатель", "Желтые карточки", "Фолы", "Желтые карточки 1 тайм", "Желтые карточки 2 тайм",
+                "Фолы 1 тайм", "Фолы 2 тайм", "Минута первой желтой карточки", "Минута последней желтой карточки"};
+    }
+
+    public static String[] getRefIndex( String parameter){
+        String[] result = new String[0];
+
+        switch (parameter){
+            case "Выберите показатель":{
+                result = new String[]{"Выберите тип ставки"}; break;
+            }
+            case "Фолы":
+            case "Фолы 1 тайм":
+            case "Фолы 2 тайм":
+            case "Желтые карточки":
+            case "Желтые карточки 1 тайм":
+            case "Желтые карточки 2 тайм":
+            {
+                result = new String[]{"Выберите тип ставки", "Общий тотал", "Инд.тотал хозяев", "Инд.тотал гостей", "Фора хозяев"}; break;
+            }
+
+            case "Минута первой желтой карточки":
+            case "Минута последней желтой карточки":
+            {
+                result = new String[]{"Выберите тип ставки", "Больше-меньше"}; break;
+            }
+        }
+
+        return result;
+    }
+
+    public static double[] getRefValues(String parameter, String index){
+        double[] result = new double[3];
+
+        if ((index.equals("Выберите тип ставки"))||(parameter.equals("Выберите показатель"))){
+            return new double[]{0,0,0};
+        }
+        if ((parameter.equals("Фолы"))&&(index.equals("Общий тотал"))){
+            return new double[]{9.5,45.5,0.5};
+        }
+        if ((parameter.equals("Фолы"))&&(index.equals("Инд.тотал хозяев"))){
+            return new double[]{0.5,25.5,0.5};
+        }
+        if ((parameter.equals("Фолы"))&&(index.equals("Инд.тотал гостей"))){
+            return new double[]{0.5,25.5,0.5};
+        }
+        if ((parameter.equals("Фолы"))&&(index.equals("Фора хозяев"))){
+            return new double[]{-10.5,10.5,0.5};
+        }
+        if ((parameter.equals("Фолы 1 тайм"))&&(index.equals("Общий тотал"))){
+            return new double[]{9.5,45.5,0.5};
+        }
+        if ((parameter.equals("Фолы 1 тайм"))&&(index.equals("Инд.тотал хозяев"))){
+            return new double[]{0.5,25.5,0.5};
+        }
+        if ((parameter.equals("Фолы 1 тайм"))&&(index.equals("Инд.тотал гостей"))){
+            return new double[]{0.5,25.5,0.5};
+        }
+        if ((parameter.equals("Фолы 1 тайм"))&&(index.equals("Фора хозяев"))){
+            return new double[]{-10.5,10.5,0.5};
+        }
+        if ((parameter.equals("Фолы 2 тайм"))&&(index.equals("Общий тотал"))){
+            return new double[]{9.5,45.5,0.5};
+        }
+        if ((parameter.equals("Фолы 2 тайм"))&&(index.equals("Инд.тотал хозяев"))){
+            return new double[]{0.5,25.5,0.5};
+        }
+        if ((parameter.equals("Фолы 2 тайм"))&&(index.equals("Инд.тотал гостей"))){
+            return new double[]{0.5,25.5,0.5};
+        }
+        if ((parameter.equals("Фолы 2 тайм"))&&(index.equals("Фора хозяев"))){
+            return new double[]{-10.5,10.5,0.5};
+        }
+        if ((parameter.equals("Желтые карточки"))&&(index.equals("Общий тотал"))){
+            return new double[]{0.5,9.5,0.5};
+        }
+        if ((parameter.equals("Желтые карточки"))&&(index.equals("Инд.тотал хозяев"))){
+            return new double[]{0.5,6.5,0.5};
+        }
+        if ((parameter.equals("Желтые карточки"))&&(index.equals("Инд.тотал гостей"))){
+            return new double[]{0.5,6.5,0.5};
+        }
+        if ((parameter.equals("Желтые карточки"))&&(index.equals("Фора хозяев"))){
+            return new double[]{-3.5,3.5,0.5};
+        }
+        if ((parameter.equals("Желтые карточки 1 тайм"))&&(index.equals("Общий тотал"))){
+            return new double[]{0.5,5.5,0.5};
+        }
+        if ((parameter.equals("Желтые карточки 1 тайм"))&&(index.equals("Инд.тотал хозяев"))){
+            return new double[]{0.5,4.5,0.5};
+        }
+        if ((parameter.equals("Желтые карточки 1 тайм"))&&(index.equals("Инд.тотал гостей"))){
+            return new double[]{0.5,4.5,0.5};
+        }
+        if ((parameter.equals("Желтые карточки 1 тайм"))&&(index.equals("Фора хозяев"))){
+            return new double[]{-2.5,2.5,0.5};
+        }
+        if ((parameter.equals("Желтые карточки 2 тайм"))&&(index.equals("Общий тотал"))){
+            return new double[]{0.5,5.5,0.5};
+        }
+        if ((parameter.equals("Желтые карточки 2 тайм"))&&(index.equals("Инд.тотал хозяев"))){
+            return new double[]{0.5,4.5,0.5};
+        }
+        if ((parameter.equals("Желтые карточки 2 тайм"))&&(index.equals("Инд.тотал гостей"))){
+            return new double[]{0.5,4.5,0.5};
+        }
+        if ((parameter.equals("Желтые карточки 2 тайм"))&&(index.equals("Фора хозяев"))){
+            return new double[]{-2.5,2.5,0.5};
+        }
+        if ((parameter.equals("Минута первой желтой карточки"))&&(index.equals("Больше-меньше"))){
+            return new double[]{0.5,90.5,0.5};
+        }
+        if ((parameter.equals("Минута последней желтой карточки"))&&(index.equals("Больше-меньше"))){
+            return new double[]{0.5, 90.5, 0.5};
+        }
+        return result;
+    }
+
+    public static JTable getTableRefByParams(String teamName, ArrayList<Match> matchList, String parameter, String index, Double value){
+
+        int typeOfTable = 1;
+
+        if ((index == null)||(value == null)){
+            index = "Выберите тип ставки";
+        }
+        int numberOfMatches = matchList.size();
+        int numberPlus = 0;
+        int numberEqual = 0;
+        int numberMinus = 0;
+
+        double morePercent;
+        double lessPercent;
+        double equalPercent;
+
+        switch (parameter + "_" + index){
+            case "Фолы_Общий тотал":{
+                matchList = deleteEmptyMatches("Фолы", matchList);
+                numberOfMatches = matchList.size();
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeFouls + matchList.get(i).awayFouls > value)
+                        numberPlus++;
+                    if (matchList.get(i).homeFouls + matchList.get(i).awayFouls < value)
+                        numberMinus++;
+                    if (matchList.get(i).homeFouls + matchList.get(i).awayFouls == value)
+                        numberEqual++;
+                }
+                if (numberOfMatches > 0){
+                    typeOfTable = 1;
+                } else {
+                    typeOfTable = 3;
+                }
+                break;
+            }
+            case "Фолы_Инд.тотал хозяев":{
+                matchList = deleteEmptyMatches("Фолы", matchList);
+                numberOfMatches = matchList.size();
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeFouls > value)
+                        numberPlus++;
+                    if (matchList.get(i).homeFouls < value)
+                        numberMinus++;
+                    if (matchList.get(i).homeFouls == value)
+                        numberEqual++;
+                }
+                if (numberOfMatches > 0){
+                    typeOfTable = 1;
+                } else {
+                    typeOfTable = 3;
+                }
+                break;
+            }
+            case "Фолы_Инд.тотал гостей":{
+                matchList = deleteEmptyMatches("Фолы", matchList);
+                numberOfMatches = matchList.size();
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).awayFouls > value)
+                        numberPlus++;
+                    if (matchList.get(i).awayFouls < value)
+                        numberMinus++;
+                    if (matchList.get(i).awayFouls == value)
+                        numberEqual++;
+                }
+                if (numberOfMatches > 0){
+                    typeOfTable = 1;
+                } else {
+                    typeOfTable = 3;
+                }
+                break;
+            }
+            case "Фолы_Фора хозяев":{
+                matchList = deleteEmptyMatches("Фолы", matchList);
+                numberOfMatches = matchList.size();
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeFouls - matchList.get(i).awayFouls + value > 0)
+                        numberPlus++;
+                    if (matchList.get(i).homeFouls - matchList.get(i).awayFouls + value < 0)
+                        numberMinus++;
+                    if (matchList.get(i).homeFouls - matchList.get(i).awayFouls + value == 0)
+                        numberEqual++;
+                }
+                if (numberOfMatches > 0){
+                    typeOfTable = 2;
+                } else {
+                    typeOfTable = 3;
+                }
+                break;
+            }
+            case "Фолы 1 тайм_Общий тотал":{
+                matchList = deleteEmptyMatches("Фолы 1 тайм", matchList);
+                numberOfMatches = matchList.size();
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeFouls1T + matchList.get(i).awayFouls1T > value)
+                        numberPlus++;
+                    if (matchList.get(i).homeFouls1T + matchList.get(i).awayFouls1T < value)
+                        numberMinus++;
+                    if (matchList.get(i).homeFouls1T + matchList.get(i).awayFouls1T == value)
+                        numberEqual++;
+                }
+                if (numberOfMatches > 0){
+                    typeOfTable = 1;
+                } else {
+                    typeOfTable = 3;
+                }
+                break;
+            }
+            case "Фолы 1 тайм_Инд.тотал хозяев":{
+                matchList = deleteEmptyMatches("Фолы 1 тайм", matchList);
+                numberOfMatches = matchList.size();
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeFouls1T > value)
+                        numberPlus++;
+                    if (matchList.get(i).homeFouls1T < value)
+                        numberMinus++;
+                    if (matchList.get(i).homeFouls1T == value)
+                        numberEqual++;
+                }
+                if (numberOfMatches > 0){
+                    typeOfTable = 1;
+                } else {
+                    typeOfTable = 3;
+                }
+                break;
+            }
+            case "Фолы 1 тайм_Инд.тотал гостей":{
+                matchList = deleteEmptyMatches("Фолы 1 тайм", matchList);
+                numberOfMatches = matchList.size();
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).awayFouls1T > value)
+                        numberPlus++;
+                    if (matchList.get(i).awayFouls1T < value)
+                        numberMinus++;
+                    if (matchList.get(i).awayFouls1T == value)
+                        numberEqual++;
+                }
+                if (numberOfMatches > 0){
+                    typeOfTable = 1;
+                } else {
+                    typeOfTable = 3;
+                }
+                break;
+            }
+            case "Фолы 1 тайм_Фора хозяев":{
+                matchList = deleteEmptyMatches("Фолы 1 тайм", matchList);
+                numberOfMatches = matchList.size();
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeFouls1T - matchList.get(i).awayFouls1T + value > 0)
+                        numberPlus++;
+                    if (matchList.get(i).homeFouls1T - matchList.get(i).awayFouls1T + value < 0)
+                        numberMinus++;
+                    if (matchList.get(i).homeFouls1T - matchList.get(i).awayFouls1T + value == 0)
+                        numberEqual++;
+                }
+                if (numberOfMatches > 0){
+                    typeOfTable = 2;
+                } else {
+                    typeOfTable = 3;
+                }
+                break;
+            }
+            case "Фолы 2 тайм_Общий тотал":{
+                matchList = deleteEmptyMatches("Фолы 2 тайм", matchList);
+                numberOfMatches = matchList.size();
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeFouls2T + matchList.get(i).awayFouls2T > value)
+                        numberPlus++;
+                    if (matchList.get(i).homeFouls2T + matchList.get(i).awayFouls2T < value)
+                        numberMinus++;
+                    if (matchList.get(i).homeFouls2T + matchList.get(i).awayFouls2T == value)
+                        numberEqual++;
+                }
+                if (numberOfMatches > 0){
+                    typeOfTable = 1;
+                } else {
+                    typeOfTable = 3;
+                }
+                break;
+            }
+            case "Фолы 2 тайм_Инд.тотал хозяев":{
+                matchList = deleteEmptyMatches("Фолы 2 тайм", matchList);
+                numberOfMatches = matchList.size();
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeFouls2T > value)
+                        numberPlus++;
+                    if (matchList.get(i).homeFouls2T < value)
+                        numberMinus++;
+                    if (matchList.get(i).homeFouls2T == value)
+                        numberEqual++;
+                }
+                if (numberOfMatches > 0){
+                    typeOfTable = 1;
+                } else {
+                    typeOfTable = 3;
+                }
+                break;
+            }
+            case "Фолы 2 тайм_Инд.тотал гостей":{
+                matchList = deleteEmptyMatches("Фолы 2 тайм", matchList);
+                numberOfMatches = matchList.size();
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).awayFouls2T > value)
+                        numberPlus++;
+                    if (matchList.get(i).awayFouls2T < value)
+                        numberMinus++;
+                    if (matchList.get(i).awayFouls2T == value)
+                        numberEqual++;
+                }
+                if (numberOfMatches > 0){
+                    typeOfTable = 1;
+                } else {
+                    typeOfTable = 3;
+                }
+                break;
+            }
+            case "Фолы 2 тайм_Фора хозяев":{
+                matchList = deleteEmptyMatches("Фолы 2 тайм", matchList);
+                numberOfMatches = matchList.size();
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeFouls2T - matchList.get(i).awayFouls2T + value > 0)
+                        numberPlus++;
+                    if (matchList.get(i).homeFouls2T - matchList.get(i).awayFouls2T + value < 0)
+                        numberMinus++;
+                    if (matchList.get(i).homeFouls2T - matchList.get(i).awayFouls2T + value == 0)
+                        numberEqual++;
+                }
+                if (numberOfMatches > 0){
+                    typeOfTable = 2;
+                } else {
+                    typeOfTable = 3;
+                }
+                break;
+            }
+            case "Желтые карточки_Общий тотал":{
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeYellowCards + matchList.get(i).awayYellowCards > value)
+                        numberPlus++;
+                    if (matchList.get(i).homeYellowCards + matchList.get(i).awayYellowCards < value)
+                        numberMinus++;
+                    if (matchList.get(i).homeYellowCards + matchList.get(i).awayYellowCards == value)
+                        numberEqual++;
+                }
+                typeOfTable = 1;
+                break;
+            }
+            case "Желтые карточки_Инд.тотал хозяев":{
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeYellowCards > value)
+                        numberPlus++;
+                    if (matchList.get(i).homeYellowCards < value)
+                        numberMinus++;
+                    if (matchList.get(i).homeYellowCards == value)
+                        numberEqual++;
+                }
+                typeOfTable = 1;
+                break;
+            }
+            case "Желтые карточки_Инд.тотал гостей":{
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).awayYellowCards > value)
+                        numberPlus++;
+                    if (matchList.get(i).awayYellowCards < value)
+                        numberMinus++;
+                    if (matchList.get(i).awayYellowCards == value)
+                        numberEqual++;
+                }
+                typeOfTable = 1;
+                break;
+            }
+            case "Желтые карточки_Фора хозяев":{
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeYellowCards - matchList.get(i).awayYellowCards + value > 0)
+                        numberPlus++;
+                    if (matchList.get(i).homeYellowCards - matchList.get(i).awayYellowCards + value < 0)
+                        numberMinus++;
+                    if (matchList.get(i).homeYellowCards - matchList.get(i).awayYellowCards + value == 0)
+                        numberEqual++;
+                }
+                typeOfTable = 2;
+                break;
+            }
+            case "Желтые карточки 1 тайм_Общий тотал":{
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeYellowCards1T + matchList.get(i).awayYellowCards1T > value)
+                        numberPlus++;
+                    if (matchList.get(i).homeYellowCards1T + matchList.get(i).awayYellowCards1T < value)
+                        numberMinus++;
+                    if (matchList.get(i).homeYellowCards1T + matchList.get(i).awayYellowCards1T == value)
+                        numberEqual++;
+                }
+                typeOfTable = 1;
+                break;
+            }
+            case "Желтые карточки 1 тайм_Инд.тотал хозяев":{
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeYellowCards1T > value)
+                        numberPlus++;
+                    if (matchList.get(i).homeYellowCards1T < value)
+                        numberMinus++;
+                    if (matchList.get(i).homeYellowCards1T == value)
+                        numberEqual++;
+                }
+                typeOfTable = 1;
+                break;
+            }
+            case "Желтые карточки 1 тайм_Инд.тотал гостей":{
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).awayYellowCards1T > value)
+                        numberPlus++;
+                    if (matchList.get(i).awayYellowCards1T < value)
+                        numberMinus++;
+                    if (matchList.get(i).awayYellowCards1T == value)
+                        numberEqual++;
+                }
+                typeOfTable = 1;
+                break;
+            }
+            case "Желтые карточки 1 тайм_Фора хозяев":{
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeYellowCards1T - matchList.get(i).awayYellowCards1T + value > 0)
+                        numberPlus++;
+                    if (matchList.get(i).homeYellowCards1T - matchList.get(i).awayYellowCards1T + value < 0)
+                        numberMinus++;
+                    if (matchList.get(i).homeYellowCards1T - matchList.get(i).awayYellowCards1T + value == 0)
+                        numberEqual++;
+                }
+                typeOfTable = 2;
+                break;
+            }
+            case "Желтые карточки 2 тайм_Общий тотал":{
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeYellowCards2T + matchList.get(i).awayYellowCards2T > value)
+                        numberPlus++;
+                    if (matchList.get(i).homeYellowCards2T + matchList.get(i).awayYellowCards2T < value)
+                        numberMinus++;
+                    if (matchList.get(i).homeYellowCards2T + matchList.get(i).awayYellowCards2T == value)
+                        numberEqual++;
+                }
+                typeOfTable = 1;
+                break;
+            }
+            case "Желтые карточки 2 тайм_Инд.тотал хозяев":{
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeYellowCards2T > value)
+                        numberPlus++;
+                    if (matchList.get(i).homeYellowCards2T < value)
+                        numberMinus++;
+                    if (matchList.get(i).homeYellowCards2T == value)
+                        numberEqual++;
+                }
+                typeOfTable = 1;
+                break;
+            }
+            case "Желтые карточки 2 тайм_Инд.тотал гостей":{
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).awayYellowCards2T > value)
+                        numberPlus++;
+                    if (matchList.get(i).awayYellowCards2T < value)
+                        numberMinus++;
+                    if (matchList.get(i).awayYellowCards2T == value)
+                        numberEqual++;
+                }
+                typeOfTable = 1;
+                break;
+            }
+            case "Желтые карточки 2 тайм_Фора хозяев":{
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).homeYellowCards2T - matchList.get(i).awayYellowCards2T + value > 0)
+                        numberPlus++;
+                    if (matchList.get(i).homeYellowCards2T - matchList.get(i).awayYellowCards2T + value < 0)
+                        numberMinus++;
+                    if (matchList.get(i).homeYellowCards2T - matchList.get(i).awayYellowCards2T + value == 0)
+                        numberEqual++;
+                }
+                typeOfTable = 2;
+                break;
+            }
+            case "Минута первой желтой карточки_Больше-меньше":{
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).firstYCMinute > value)
+                        numberPlus++;
+                    if (matchList.get(i).firstYCMinute < value)
+                        numberMinus++;
+                    if (matchList.get(i).firstYCMinute == value)
+                        numberEqual++;
+                }
+                typeOfTable = 1;
+                break;
+            }
+            case "Минута последней желтой карточки_Больше-меньше":{
+                for (int i=0; i<numberOfMatches; i++){
+                    if (matchList.get(i).lastYCMinute > value)
+                        numberPlus++;
+                    if (matchList.get(i).lastYCMinute < value)
+                        numberMinus++;
+                    if (matchList.get(i).lastYCMinute == value)
+                        numberEqual++;
+                }
+                typeOfTable = 1;
+                break;
+            }
+
+            case "":{
+
+                break;
+            }
+        }
+
+        morePercent =  MyMath.round(100 * (double) numberPlus / numberOfMatches, 2);
+        lessPercent =  MyMath.round(100 * (double) numberMinus / numberOfMatches, 2);
+        equalPercent = MyMath.round(100 * (double) numberEqual / numberOfMatches, 2);
+
+        String[] heads = new String[0];
+        Object[][] data = new Object[0][];
+        if (typeOfTable == 1){
+            heads = new String[]{"Больше", "Меньше", "Ровно", "% больше", "% меньше", "% ровно"};
+            data = new Object[][]{
+                    {String.valueOf(numberPlus), String.valueOf(numberMinus), String.valueOf(numberEqual), String.valueOf(morePercent), String.valueOf(lessPercent), String.valueOf(equalPercent)}
+            };
+        }
+        if (typeOfTable == 2){
+            heads = new String[]{"Прошла", "Не прошла", "Возврат", "% прохода", "% непрохода", "% возврата"};
+            data = new Object[][]{
+                    {String.valueOf(numberPlus), String.valueOf(numberMinus), String.valueOf(numberEqual), String.valueOf(morePercent), String.valueOf(lessPercent), String.valueOf(equalPercent)}
+            };
+        }
+        if (typeOfTable == 3){
+            heads = new String[]{"Данных по параметру " + parameter + " нет."};
+            data = new Object[][]{{""}
+            };
+        }
+        return new JTable(data, heads);
+    }
+
 }
