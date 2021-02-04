@@ -205,14 +205,19 @@ public class PanelReferee extends JPanel{
                 double averageAwayYC = MyMath.round(league.awayYellowCards / (double) league.matchesPlayed, 2);
                 double averageAwayYC1T = MyMath.round(league.awayYellowCards1T / (double) league.matchesPlayed, 2);
                 double averageAwayYC2T = MyMath.round(league.awayYellowCards2T / (double) league.matchesPlayed, 2);
-                String sAvarageYC = String.valueOf(averageYC) + "   -   " + String.valueOf(averageHomeYC) + "   -   " + String.valueOf(averageAwayYC);
-                String sAvarageYC1T = String.valueOf(averageYC1T) + "   -   " + String.valueOf(averageHomeYC1T) + "   -   " + String.valueOf(averageAwayYC1T);
-                String sAvarageYC2T = String.valueOf(averageYC2T) + "   -   " + String.valueOf(averageHomeYC2T) + "   -   " + String.valueOf(averageAwayYC2T);
-
                 double averageFouls = MyMath.round((league.homeFouls + league.awayFouls) / (double) league.matchesPlayed, 2);
-                double averageHomeFouls = MyMath.round(league.homeFouls / (double) league.matchesPlayed, 2);
-                double averageAwayFouls = MyMath.round(league.awayFouls / (double) league.matchesPlayed, 2);
-                String sAverageFouls = String.valueOf(averageFouls) + "   -   " + String.valueOf(averageHomeFouls) + "   -   " + String.valueOf(averageAwayFouls);
+                double averageHomeFouls = MyMath.round((league.homeFouls) / (double) league.matchesPlayed, 2);
+                double averageAwayFouls = MyMath.round((league.awayFouls) / (double) league.matchesPlayed, 2);
+                double averageTackles = MyMath.round((league.homeTackles + league.awayTackles) / (double) league.matchesPlayed, 2);
+                double averageHomeTackles = MyMath.round((league.homeTackles) / (double) league.matchesPlayed, 2);
+                double averageAwayTackles = MyMath.round((league.awayTackles) / (double) league.matchesPlayed, 2);
+
+                String sAverageYC = averageYC + "   -   " + averageHomeYC + "   -   " + averageAwayYC;
+                String sAverageYC1T = averageYC1T + "   -   " + averageHomeYC1T + "   -   " + averageAwayYC1T;
+                String sAverageYC2T = averageYC2T + "   -   " + averageHomeYC2T + "   -   " + averageAwayYC2T;
+
+                String sAverageFouls = averageFouls + "   -   " + averageHomeFouls + "   -   " + averageAwayFouls;
+                String sAverageFoulsTackles = MyMath.round(averageFouls/averageTackles ,2 ) + "   -   " + MyMath.round(averageHomeFouls/averageHomeTackles ,2 ) + "   -   " + MyMath.round(averageAwayFouls/averageAwayTackles ,2 );
 
 
                 String labelRef = "   Статистика арбитра " + refName + " в сезоне " + season.replace("Сезон ", "");
@@ -225,16 +230,17 @@ public class PanelReferee extends JPanel{
                 label.setFont(fontLabel);
                 container.add(label);
 
-                final JLabel label2 = new JLabel("   Провел матчей:  " + String.valueOf(matches));
+                final JLabel label2 = new JLabel("   Провел матчей:  " + matches);
                 label2.setBorder(new EmptyBorder(5, 10, 0, 0));
                 label2.setFont(fontLabel);
                 container.add(label2);
 
                 String[] colHeads = {"Параметр" , "Всего", "Хозяева", "Гости", "В среднем по лиге (общ. - хоз. - гос.)"};
                 final String[] params = {"Желтые карточки (все)", "Желтые карточки 1 тайм ", "Желтые карточки 2 тайм ",
-                        "Желтые карточки (в среднем за матч)", "Желтые карточки 1 тайм (в среднем)",
-                         "Желтые карточки 2 тайм (в среднем)", "СКО желтых карточек", "СКО фолов",
-                        "ЖК --> КК", "Прямые КК", "Фолы (в среднем за матч)", "Фолы 1 тайм (сред.)", "Фолы 2 тайм (сред.)", "Назначенные пенальти"};
+                        "Желтые карточки (в среднем за матч)", "Желтые карточки 1 тайм (в среднем)", "Желтые карточки 2 тайм (в среднем)",
+                        "СКО желтых карточек", "СКО фолов",
+                        "ЖК --> КК", "Прямые КК", "Фолы (в среднем за матч)", "Фолы 1 тайм (сред.)", "Фолы 2 тайм (сред.)",
+                        "Назначенные пенальти",  "Фолы/Отборы"};
                 Object[][] data;
 
                 if (Settings.isWhoScoredLeague(leagueName)){
@@ -242,17 +248,18 @@ public class PanelReferee extends JPanel{
                             {" " + params[0], (int) Double.parseDouble(selector.refList.get(0).get(1)), (int) Double.parseDouble(selector.refList.get(0).get(2)), (int) Double.parseDouble(selector.refList.get(0).get(3)), "-"},
                             {" " + params[1], (int) Double.parseDouble(selector.refList.get(1).get(1)), (int) Double.parseDouble(selector.refList.get(1).get(2)), (int) Double.parseDouble(selector.refList.get(1).get(3)), "-"},
                             {" " + params[2], (int) Double.parseDouble(selector.refList.get(2).get(1)), (int) Double.parseDouble(selector.refList.get(2).get(2)), (int) Double.parseDouble(selector.refList.get(2).get(3)), "-"},
-                            {" " + params[3], MyMath.round(Double.parseDouble(selector.refList.get(0).get(1)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(0).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(0).get(3)) / matches, 2), sAvarageYC},
-                            {" " + params[4], MyMath.round(Double.parseDouble(selector.refList.get(1).get(1)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(1).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(1).get(3)) / matches, 2), sAvarageYC1T},
-                            {" " + params[5], MyMath.round(Double.parseDouble(selector.refList.get(2).get(1)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(2).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(2).get(3)) / matches, 2), sAvarageYC2T},
-                            {" " + params[6], MyMath.round(Double.parseDouble(selector.refList.get(9).get(1)), 2), MyMath.round(Double.parseDouble(selector.refList.get(9).get(2)), 2), MyMath.round(Double.parseDouble(selector.refList.get(9).get(3)), 2), "-"},
-                            {" " + params[7], MyMath.round(Double.parseDouble(selector.refList.get(10).get(1)), 2), MyMath.round(Double.parseDouble(selector.refList.get(10).get(2)), 2), MyMath.round(Double.parseDouble(selector.refList.get(10).get(3)), 2), "-"},
+                            {" " + params[3], MyMath.round(Double.parseDouble(selector.refList.get(0).get(1)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(0).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(0).get(3)) / matches, 2), sAverageYC},
+                            {" " + params[4], MyMath.round(Double.parseDouble(selector.refList.get(1).get(1)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(1).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(1).get(3)) / matches, 2), sAverageYC1T},
+                            {" " + params[5], MyMath.round(Double.parseDouble(selector.refList.get(2).get(1)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(2).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(2).get(3)) / matches, 2), sAverageYC2T},
+                            {" " + params[6], MyMath.round(Double.parseDouble(selector.refList.get(11).get(1)), 2), MyMath.round(Double.parseDouble(selector.refList.get(11).get(2)), 2), MyMath.round(Double.parseDouble(selector.refList.get(11).get(3)), 2), "-"},
+                            {" " + params[7], MyMath.round(Double.parseDouble(selector.refList.get(12).get(1)), 2), MyMath.round(Double.parseDouble(selector.refList.get(12).get(2)), 2), MyMath.round(Double.parseDouble(selector.refList.get(12).get(3)), 2), "-"},
                             {" " + params[8], (int) Double.parseDouble(selector.refList.get(3).get(1)), (int) Double.parseDouble(selector.refList.get(3).get(2)), (int) Double.parseDouble(selector.refList.get(3).get(3)), "-"},
                             {" " + params[9], (int) Double.parseDouble(selector.refList.get(4).get(1)), (int) Double.parseDouble(selector.refList.get(4).get(2)), (int) Double.parseDouble(selector.refList.get(4).get(3)), "-"},
-                            {" " + params[10], MyMath.round(Double.parseDouble(selector.refList.get(5).get(1)) / selector.refNumberOfMatchesWithParam[5], 2), MyMath.round(Double.parseDouble(selector.refList.get(5).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(5).get(3)) / matches, 2), sAverageFouls},
-                            {" " + params[11], MyMath.round(Double.parseDouble(selector.refList.get(6).get(1)) / selector.refNumberOfMatchesWithParam[6], 2), MyMath.round(Double.parseDouble(selector.refList.get(6).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(6).get(3)) / matches, 2), "-"},
-                            {" " + params[12], MyMath.round(Double.parseDouble(selector.refList.get(7).get(1)) / selector.refNumberOfMatchesWithParam[7], 2), MyMath.round(Double.parseDouble(selector.refList.get(7).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(7).get(3)) / matches, 2), "-"},
+                            {" " + params[10], MyMath.round(Double.parseDouble(selector.refList.get(5).get(1)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(5).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(5).get(3)) / matches, 2), sAverageFouls},
+                            {" " + params[11], MyMath.round(Double.parseDouble(selector.refList.get(6).get(1)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(6).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(6).get(3)) / matches, 2), "-"},
+                            {" " + params[12], MyMath.round(Double.parseDouble(selector.refList.get(7).get(1)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(7).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(7).get(3)) / matches, 2), "-"},
                             {" " + params[13], (int) Double.parseDouble(selector.refList.get(8).get(1)), (int) Double.parseDouble(selector.refList.get(8).get(2)), (int) Double.parseDouble(selector.refList.get(8).get(3)), "-"},
+                            {" " + params[14], MyMath.round( (Double.parseDouble(selector.refList.get(9).get(1)) / Double.parseDouble(selector.refList.get(10).get(1))) , 2), MyMath.round( (Double.parseDouble(selector.refList.get(9).get(2)) / Double.parseDouble(selector.refList.get(10).get(2))) , 2), MyMath.round( (Double.parseDouble(selector.refList.get(9).get(3)) / Double.parseDouble(selector.refList.get(10).get(3))) , 2), sAverageFoulsTackles},
                     };
                 } else {
                     data = new Object[][]{
@@ -262,7 +269,7 @@ public class PanelReferee extends JPanel{
                             {" " + params[3], MyMath.round(Double.parseDouble(selector.refList.get(0).get(1)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(0).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(0).get(3)) / matches, 2), "-"},
                             {" " + params[4], MyMath.round(Double.parseDouble(selector.refList.get(1).get(1)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(1).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(1).get(3)) / matches, 2), "-"},
                             {" " + params[5], MyMath.round(Double.parseDouble(selector.refList.get(2).get(1)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(2).get(2)) / matches, 2), MyMath.round(Double.parseDouble(selector.refList.get(2).get(3)) / matches, 2), "-"},
-                            {" " + params[6], MyMath.round(Double.parseDouble(selector.refList.get(9).get(1)), 2), MyMath.round(Double.parseDouble(selector.refList.get(9).get(2)), 2), MyMath.round(Double.parseDouble(selector.refList.get(9).get(3)), 2), "-"},
+                            {" " + params[6], MyMath.round(Double.parseDouble(selector.refList.get(11).get(1)), 2), MyMath.round(Double.parseDouble(selector.refList.get(11).get(2)), 2), MyMath.round(Double.parseDouble(selector.refList.get(11).get(3)), 2), "-"},
                             {" " + params[7], "-", "-", "-", "-"},
                             {" " + params[8], (int) Double.parseDouble(selector.refList.get(3).get(1)), (int) Double.parseDouble(selector.refList.get(3).get(2)), (int) Double.parseDouble(selector.refList.get(3).get(3)), "-"},
                             {" " + params[9], (int) Double.parseDouble(selector.refList.get(4).get(1)), (int) Double.parseDouble(selector.refList.get(4).get(2)), (int) Double.parseDouble(selector.refList.get(4).get(3)), "-"},
@@ -270,6 +277,7 @@ public class PanelReferee extends JPanel{
                             {" " + params[11], MyMath.round(Double.parseDouble(selector.refList.get(6).get(1)) / selector.refNumberOfMatchesWithParam[6], 2), MyMath.round(Double.parseDouble(selector.refList.get(6).get(2))  / selector.refNumberOfMatchesWithParam[6], 2), MyMath.round(Double.parseDouble(selector.refList.get(6).get(3))  / selector.refNumberOfMatchesWithParam[6], 2), "-"},
                             {" " + params[12], MyMath.round(Double.parseDouble(selector.refList.get(7).get(1)) / selector.refNumberOfMatchesWithParam[7], 2), MyMath.round(Double.parseDouble(selector.refList.get(7).get(2))  / selector.refNumberOfMatchesWithParam[7], 2), MyMath.round(Double.parseDouble(selector.refList.get(7).get(3))  / selector.refNumberOfMatchesWithParam[7], 2), "-"},
                             {" " + params[13], (int) Double.parseDouble(selector.refList.get(8).get(1)), (int) Double.parseDouble(selector.refList.get(8).get(2)), (int) Double.parseDouble(selector.refList.get(8).get(3)), "-"},
+                            {" " + params[14], "-", "-", "-", "-"},
                     };
                 }
 
@@ -454,7 +462,7 @@ public class PanelReferee extends JPanel{
                             slider.setMaximum(numberOfVariants-1);
                             leftValue.setText(String.valueOf(sliderParams[0]));
                             rightValue.setText(String.valueOf(sliderParams[1]));
-                            bottomValue.setText("Выбрано значение: " + String.valueOf(valueForSlider));
+                            bottomValue.setText("Выбрано значение: " + valueForSlider);
 
                             getParamsPanel(paramsPanel, refName, selector, paramsChooser, indexChooser, valueForSlider);
                             indexChooser.setFocusable(false);
@@ -465,7 +473,7 @@ public class PanelReferee extends JPanel{
                         @Override
                         public void stateChanged(ChangeEvent e) {
                             valueForSlider = minSliderValue + stepSlider*slider.getValue();
-                            bottomValue.setText("Выбрано значение: " + String.valueOf(valueForSlider));
+                            bottomValue.setText("Выбрано значение: " + valueForSlider);
                             indexForValueChooser = slider.getValue();
                             getParamsPanel(paramsPanel, refName, selector, paramsChooser, indexChooser, valueForSlider);
                         }

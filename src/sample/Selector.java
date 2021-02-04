@@ -26,7 +26,7 @@ public class Selector {
     };
     public String[] refParams = {"Желтые карточки (все)", "Желтые карточки 1 тайм ", "Желтые карточки 2 тайм ","ЖК --> КК", "Прямые КК",
             "Фолы", "Фолы 1 тайм", "Фолы 2 тайм", "Назначенные пенальти", "СКО по ЖК", "СКО по фолам",
-            "Корреляция фолов и ЖК", "Корреляция форы фолов и  форы ЖК"};
+            "Корреляция фолов и ЖК", "Корреляция форы фолов и  форы ЖК",  "Фолы", "Отборы"};
 
     public Selector(){
         pList = new ArrayList<>();
@@ -113,8 +113,8 @@ public class Selector {
                         listOfMatches.remove(listOfMatches.size()-1);
                     }
                 } else{
-                    for (int i=0; i<beginIndex; i++){
-                        listOfMatches.remove(0);
+                    if (beginIndex > 0) {
+                        listOfMatches.subList(0, beginIndex).clear();
                     }
                 }
             }
@@ -124,7 +124,7 @@ public class Selector {
     public void getPList(ArrayList<Match> listOfMatches, String teamName){
         if (listOfMatches.size()>0){
             double[][] paramsD = new double[params.length][2];
-            String forma = "";
+            StringBuilder forma = new StringBuilder();
             for (int i=0; i<listOfMatches.size(); i++){
                 Match m = listOfMatches.get(i);
                 incNumbersArray(m);
@@ -134,19 +134,19 @@ public class Selector {
                         paramsD[1][1] += 1;
                         paramsD[3][0] += 1;
                         paramsD[3][1] += 1;
-                        forma = forma + "D";
+                        forma.append("D");
                     }
                     else if (m.homeScore > m.awayScore){
                         paramsD[0][0] += 1;
                         paramsD[2][1] += 1;
                         paramsD[3][0] += 3;
-                        forma = forma + "W";
+                        forma.append("W");
                     }
                     else {
                         paramsD[2][0] += 1;
                         paramsD[0][1] += 1;
                         paramsD[3][1] += 3;
-                        forma = forma + "L";
+                        forma.append("L");
                     }
 
                     paramsD[4][0] += m.homeScore;
@@ -322,19 +322,19 @@ public class Selector {
                         paramsD[1][1] += 1;
                         paramsD[3][0] += 1;
                         paramsD[3][1] += 1;
-                        forma = forma + "D";
+                        forma.append("D");
                     }
                     else if (m.awayScore > m.homeScore){
                         paramsD[0][0] += 1;
                         paramsD[2][1] += 1;
                         paramsD[3][0] += 3;
-                        forma = forma + "W";
+                        forma.append("W");
                     }
                     else {
                         paramsD[2][0] += 1;
                         paramsD[0][1] += 1;
                         paramsD[3][1] += 3;
-                        forma = forma + "L";
+                        forma.append("L");
                     }
 
                     paramsD[4][1] += m.homeScore;
@@ -520,11 +520,11 @@ public class Selector {
             }
             ArrayList<String> f = new ArrayList<>();
             if (forma.length()>20){
-                forma = forma.substring(forma.length()-20,forma.length());
+                forma = new StringBuilder(forma.substring(forma.length() - 20, forma.length()));
             }
             f.add("Форма");
-            f.add(forma);
-            f.add(forma);
+            f.add(forma.toString());
+            f.add(forma.toString());
             pList.set(16,f);
         }
     }
@@ -596,6 +596,17 @@ public class Selector {
                 paramsD[8][1] += listOfMatches.get(i).homePen;
                 paramsD[8][2] += listOfMatches.get(i).awayPen;
                 refNumberOfMatchesWithParam[8] ++;
+
+                paramsD[9][0] += listOfMatches.get(i).homeFouls + listOfMatches.get(i).awayFouls;
+                paramsD[9][1] += listOfMatches.get(i).homeFouls;
+                paramsD[9][2] += listOfMatches.get(i).awayFouls;
+                refNumberOfMatchesWithParam[9] ++;
+
+                paramsD[10][0] += listOfMatches.get(i).homeTackles + listOfMatches.get(i).awayTackles;
+                paramsD[10][1] += listOfMatches.get(i).homeTackles;
+                paramsD[10][2] += listOfMatches.get(i).awayTackles;
+                refNumberOfMatchesWithParam[10] ++;
+
             }
 
             double dispF1 = 0;
@@ -613,12 +624,12 @@ public class Selector {
                 dispYC3 += Math.pow( (listOfMatches.get(i).awayYellowCards - paramsD[0][2]/ (double) listOfMatches.size()) , 2);
             }
 
-            paramsD[9][0] = Math.sqrt(dispYC1 / (double) listOfMatches.size());
-            paramsD[9][1] = Math.sqrt(dispYC2 / (double) listOfMatches.size());
-            paramsD[9][2] = Math.sqrt(dispYC3 / (double) listOfMatches.size());
-            paramsD[10][0] = Math.sqrt(dispF1 / (double) listOfMatches.size());
-            paramsD[10][1] = Math.sqrt(dispF2 / (double) listOfMatches.size());
-            paramsD[10][2] = Math.sqrt(dispF3 / (double) listOfMatches.size());
+            paramsD[11][0] = Math.sqrt(dispYC1 / (double) listOfMatches.size());
+            paramsD[11][1] = Math.sqrt(dispYC2 / (double) listOfMatches.size());
+            paramsD[11][2] = Math.sqrt(dispYC3 / (double) listOfMatches.size());
+            paramsD[12][0] = Math.sqrt(dispF1 / (double) listOfMatches.size());
+            paramsD[12][1] = Math.sqrt(dispF2 / (double) listOfMatches.size());
+            paramsD[12][2] = Math.sqrt(dispF3 / (double) listOfMatches.size());
 
 
             double MO_Fouls = paramsD[5][0]/ (double) listOfMatches.size();
@@ -639,7 +650,7 @@ public class Selector {
                 nizSumm1 += Math.pow( listOfMatches.get(i).homeFouls + listOfMatches.get(i).awayFouls - MO_Fouls , 2);
                 nizSumm2 += Math.pow( listOfMatches.get(i).homeYellowCards + listOfMatches.get(i).awayYellowCards - MO_YC , 2);
             }
-            paramsD[11][0] = verhSumm / Math.sqrt(nizSumm1*nizSumm2);
+            paramsD[13][0] = verhSumm / Math.sqrt(nizSumm1*nizSumm2);
 
             verhSumm = 0;
             nizSumm1 = 0;
@@ -650,7 +661,7 @@ public class Selector {
                 nizSumm1 += Math.pow( listOfMatches.get(i).homeFouls - MO_FoulsHT , 2);
                 nizSumm2 += Math.pow( listOfMatches.get(i).homeYellowCards - MO_YCHT , 2);
             }
-            paramsD[11][1] = verhSumm / Math.sqrt(nizSumm1*nizSumm2);
+            paramsD[13][1] = verhSumm / Math.sqrt(nizSumm1*nizSumm2);
 
             verhSumm = 0;
             nizSumm1 = 0;
@@ -661,7 +672,7 @@ public class Selector {
                 nizSumm1 += Math.pow( listOfMatches.get(i).awayFouls - MO_FoulsAT , 2);
                 nizSumm2 += Math.pow( listOfMatches.get(i).awayYellowCards - MO_YCAT , 2);
             }
-            paramsD[11][2] = verhSumm / Math.sqrt(nizSumm1*nizSumm2);
+            paramsD[13][2] = verhSumm / Math.sqrt(nizSumm1*nizSumm2);
 
             verhSumm = 0;
             nizSumm1 = 0;
@@ -672,7 +683,7 @@ public class Selector {
                 nizSumm1 += Math.pow( listOfMatches.get(i).homeFouls - listOfMatches.get(i).awayFouls - MO_FoulsDiff , 2);
                 nizSumm2 += Math.pow( listOfMatches.get(i).homeYellowCards - listOfMatches.get(i).awayYellowCards - MO_YCDiff , 2);
             }
-            paramsD[12][0] = verhSumm / Math.sqrt(nizSumm1*nizSumm2);
+            paramsD[14][0] = verhSumm / Math.sqrt(nizSumm1*nizSumm2);
 
 
 
@@ -764,14 +775,8 @@ public class Selector {
                 dataArrayThis[34][i] = m.homeYellowCards1T;
                 dataArrayThis[35][i] = m.homeYellowCards2T;
 
-                if (m.firstYCMinute > 90)
-                    dataArrayThis[36][i] = 90;
-                else
-                    dataArrayThis[36][i] = m.firstYCMinute;
-                if (m.lastYCMinute < 0)
-                    dataArrayThis[37][i] = 0;
-                else
-                    dataArrayThis[37][i] = m.lastYCMinute;
+                dataArrayThis[36][i] = Math.min(m.firstYCMinute, 90);
+                dataArrayThis[37][i] = Math.max(m.lastYCMinute, 0);
 
                 dataArrayThis[38][i] = m.homeRedCards;
                 dataArrayThis[39][i] = m.homeDribbles;
@@ -937,14 +942,10 @@ public class Selector {
                 dataArrayThis[33][i] = m.awayYellowCards;
                 dataArrayThis[34][i] = m.awayYellowCards1T;
                 dataArrayThis[35][i] = m.awayYellowCards2T;
-                if (m.firstYCMinute > 90)
-                    dataArrayThis[36][i] = 90;
-                else
-                    dataArrayThis[36][i] = m.firstYCMinute;
-                if (m.lastYCMinute < 0)
-                    dataArrayThis[37][i] = 0;
-                else
-                    dataArrayThis[37][i] = m.lastYCMinute;
+
+                dataArrayThis[36][i] = Math.min(m.firstYCMinute, 90);
+                dataArrayThis[37][i] = Math.max(m.lastYCMinute, 0);
+
                 dataArrayThis[38][i] = m.awayRedCards;
                 dataArrayThis[39][i] = m.awayDribbles;
                 dataArrayThis[40][i] = m.awayAerialsWon;

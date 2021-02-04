@@ -9,6 +9,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class RefereesThread extends Thread{
@@ -78,16 +79,16 @@ public class RefereesThread extends Thread{
         JPanel content = new JPanel(new BorderLayout());
 
         int ttt = 0;
-        String refString = "";
+        StringBuilder refString = new StringBuilder();
 
         try {
             File fileDir = new File(path + season + "/" + leagueName + "/Referees/Referees.txt");
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream(fileDir), "UTF-8"));
+                            new FileInputStream(fileDir), StandardCharsets.UTF_8));
             String str;
             while (((str = in.readLine()) != null)) {
-                refString += str + "*";
+                refString.append(str).append("*");
             }
             in.close();
         } catch (IOException e)
@@ -95,7 +96,7 @@ public class RefereesThread extends Thread{
             System.out.println(e.getMessage());
         }
 
-        String[] directoryList = refString.split("\\*");
+        String[] directoryList = refString.toString().split("\\*");
 
         if (!leagueName.contains("Выберите") && directoryList.length > 0){
 
@@ -110,7 +111,7 @@ public class RefereesThread extends Thread{
 
                     if (selector.listOfMatches.size() > 0){
                         listOfRefs.add(directoryList[i].replace(".xml", ""));
-                        double matches = (double) selector.listOfMatches.size();
+                        double matches = selector.listOfMatches.size();
 
                         if (Settings.isWhoScoredLeague(leagueName)){
                             record.add(matches);
@@ -120,16 +121,19 @@ public class RefereesThread extends Thread{
                             record.add(MyMath.round(Double.parseDouble(selector.refList.get(5).get(1)) / matches, 2));
                             record.add(MyMath.round(Double.parseDouble(selector.refList.get(5).get(2)) / matches, 2));
                             record.add(MyMath.round(Double.parseDouble(selector.refList.get(5).get(3)) / matches, 2));
-                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(9).get(1)), 2));
-                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(9).get(2)), 2));
-                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(9).get(3)), 2));
-                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(10).get(1)), 2));
-                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(10).get(2)), 2));
-                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(10).get(3)), 2));
                             record.add(MyMath.round(Double.parseDouble(selector.refList.get(11).get(1)), 2));
                             record.add(MyMath.round(Double.parseDouble(selector.refList.get(11).get(2)), 2));
                             record.add(MyMath.round(Double.parseDouble(selector.refList.get(11).get(3)), 2));
                             record.add(MyMath.round(Double.parseDouble(selector.refList.get(12).get(1)), 2));
+                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(12).get(2)), 2));
+                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(12).get(3)), 2));
+                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(9).get(1)) / Double.parseDouble(selector.refList.get(10).get(1)), 2));
+                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(9).get(2)) / Double.parseDouble(selector.refList.get(10).get(2)), 2));
+                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(9).get(3)) / Double.parseDouble(selector.refList.get(10).get(3)), 2));
+                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(13).get(1)), 2));
+                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(13).get(2)), 2));
+                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(13).get(3)), 2));
+                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(14).get(1)), 2));
                         } else {
                             record.add(matches);
                             record.add(MyMath.round(Double.parseDouble(selector.refList.get(0).get(1)) / matches, 2));
@@ -138,9 +142,9 @@ public class RefereesThread extends Thread{
                             record.add(MyMath.round(Double.parseDouble(selector.refList.get(5).get(1)) / selector.refNumberOfMatchesWithParam[5], 2));
                             record.add(MyMath.round(Double.parseDouble(selector.refList.get(5).get(2)) / selector.refNumberOfMatchesWithParam[5], 2));
                             record.add(MyMath.round(Double.parseDouble(selector.refList.get(5).get(3)) / selector.refNumberOfMatchesWithParam[5], 2));
-                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(9).get(1)), 2));
-                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(9).get(2)), 2));
-                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(9).get(3)), 2));
+                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(11).get(1)), 2));
+                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(11).get(2)), 2));
+                            record.add(MyMath.round(Double.parseDouble(selector.refList.get(11).get(3)), 2));
                         }
 
 
@@ -183,6 +187,7 @@ public class RefereesThread extends Thread{
                 colHeads = new String[]{"Арбитр", "М", "ЖК", "ЖК_Х", "ЖК_Г", "Ф", "Ф_Х", "Ф_Х",
                         "<html>&sigma; ЖК</html>", "<html>&sigma; ЖК_Х</html>", "<html>&sigma; ЖК_Г</html>",
                         "<html>&sigma; Ф</html>", "<html>&sigma; Ф_Х</html>", "<html>&sigma; Ф_Г</html>",
+                        "Ф/О", "Ф/О Х", "Ф/О Г",
                         "R1", "R2", "R3", "R4"
                 };
             } else {
@@ -276,7 +281,8 @@ public class RefereesThread extends Thread{
                     "Ф_Х   - среднее число фолов хозяев за матч <br>" +
                     "Ф_Г   - среднее число фолов гостей за матч <br>" +
                     "&sigma; ЖК - СКО желтых карточек <br>" +
-                    "&sigma; ЖК_Х - СКО желтых карточек хозяев <br></html>";
+                    "&sigma; ЖК_Х - СКО желтых карточек хозяев <br>" +
+                    "&sigma; ЖК_Г - СКО желтых карточек гостей <br></html>";
 
             textArea1.setText(text1);
             panelText.add(textArea1);
@@ -286,10 +292,12 @@ public class RefereesThread extends Thread{
             textArea2.setBackground(new Color(238, 238, 238));
             //textArea.setEnabled(false);
 
-            String text2 = "<html>&sigma; ЖК_Г - СКО желтых карточек гостей <br>" +
-                    "&sigma; Ф - СКО фолов <br>" +
+            String text2 =  "<html>&sigma; Ф - СКО фолов <br>" +
                     "&sigma; Ф_Х - СКО фолов хозяев <br>" +
                     "&sigma; Ф_Г - СКО фолов гостей <br>" +
+                    "Ф/О - Фолы / Отборы <br>" +
+                    "Ф/О Х - Фолы / Отборы хозяев<br>" +
+                    "Ф/О Г - Фолы / Отборы гостей<br>" +
                     "R1 - коэффициент корреляции фолов и ЖК<br>" +
                     "R2 - коэффициент корреляции фолов и ЖК у хозяев<br>" +
                     "R3 - коэффициент корреляции фолов и ЖК у гостей<br>" +
