@@ -154,6 +154,8 @@ public class PanelCalculator extends JPanel{
         JPanel panelSliders = new JPanel(new GridLayout(0, 2, 5, 5));
 
         Font font15 = new Font("", Font.BOLD, 15);
+        Dimension labelDimensionLeft = new Dimension(150, 25);
+        Dimension labelDimensionRight = new Dimension(150, 25);
 
         //***************** Слайдеры для хозяев
         JPanel homeTeamSlidersPanel = new JPanel(new GridLayout(0 , 1, 5, 5));
@@ -173,9 +175,13 @@ public class PanelCalculator extends JPanel{
         JLabel left_HT_1 = new JLabel("Все игры");
         left_HT_1.setFont(font15);
         left_HT_1.setBorder(new EmptyBorder(5, 5, 5, 5));
+        left_HT_1.setPreferredSize(labelDimensionLeft);
+        left_HT_1.setHorizontalAlignment(SwingConstants.CENTER);
         JLabel right_HT_1 = new JLabel("Последние игры");
         right_HT_1.setFont(font15);
         right_HT_1.setBorder(new EmptyBorder(5, 5, 5, 5));
+        right_HT_1.setPreferredSize(labelDimensionRight);
+        right_HT_1.setHorizontalAlignment(SwingConstants.CENTER);
         slider_HT_1_Panel.add(head_HT_1, BorderLayout.NORTH);
         slider_HT_1_Panel.add(slider_HT_1);
         slider_HT_1_Panel.add(left_HT_1, BorderLayout.WEST);
@@ -195,9 +201,13 @@ public class PanelCalculator extends JPanel{
         JLabel left_HT_2 = new JLabel("Все игры");
         left_HT_2.setFont(font15);
         left_HT_2.setBorder(new EmptyBorder(5, 5, 5, 5));
-        JLabel right_HT_2 = new JLabel("Только дом или выезд");
+        left_HT_2.setPreferredSize(labelDimensionLeft);
+        left_HT_2.setHorizontalAlignment(SwingConstants.CENTER);
+        JLabel right_HT_2 = new JLabel("Дом/выезд");
         right_HT_2.setFont(font15);
         right_HT_2.setBorder(new EmptyBorder(5, 5, 5, 5));
+        right_HT_2.setPreferredSize(labelDimensionRight);
+        right_HT_2.setHorizontalAlignment(SwingConstants.CENTER);
         slider_HT_2_Panel.add(head_HT_2, BorderLayout.NORTH);
         slider_HT_2_Panel.add(slider_HT_2);
         slider_HT_2_Panel.add(left_HT_2, BorderLayout.WEST);
@@ -217,9 +227,13 @@ public class PanelCalculator extends JPanel{
         JLabel left_HT_3 = new JLabel("Текущий сезон");
         left_HT_3.setFont(font15);
         left_HT_3.setBorder(new EmptyBorder(5, 5, 5, 5));
+        left_HT_3.setPreferredSize(labelDimensionLeft);
+        left_HT_3.setHorizontalAlignment(SwingConstants.CENTER);
         JLabel right_HT_3 = new JLabel("Личные встречи");
         right_HT_3.setFont(font15);
         right_HT_3.setBorder(new EmptyBorder(5, 5, 5, 5));
+        right_HT_3.setPreferredSize(labelDimensionRight);
+        right_HT_3.setHorizontalAlignment(SwingConstants.CENTER);
         slider_HT_3_Panel.add(head_HT_3, BorderLayout.NORTH);
         slider_HT_3_Panel.add(slider_HT_3);
         slider_HT_3_Panel.add(left_HT_3, BorderLayout.WEST);
@@ -236,12 +250,16 @@ public class PanelCalculator extends JPanel{
         head_HT_4.setHorizontalAlignment(SwingConstants.CENTER);
         head_HT_4.setBorder(new EmptyBorder(5, 5, 5, 5));
         head_HT_4.setFont(font15);
-        JLabel left_HT_4 = new JLabel("Как создает команда");
+        JLabel left_HT_4 = new JLabel("Как создает");
         left_HT_4.setFont(font15);
         left_HT_4.setBorder(new EmptyBorder(5, 5, 5, 5));
-        JLabel right_HT_4 = new JLabel("Как позволяет создавать");
+        left_HT_4.setPreferredSize(labelDimensionLeft);
+        left_HT_4.setHorizontalAlignment(SwingConstants.CENTER);
+        JLabel right_HT_4 = new JLabel("Как допускает");
         right_HT_4.setFont(font15);
         right_HT_4.setBorder(new EmptyBorder(5, 5, 5, 5));
+        right_HT_4.setPreferredSize(labelDimensionRight);
+        right_HT_4.setHorizontalAlignment(SwingConstants.CENTER);
         slider_HT_4_Panel.add(head_HT_4, BorderLayout.NORTH);
         slider_HT_4_Panel.add(slider_HT_4);
         slider_HT_4_Panel.add(left_HT_4, BorderLayout.WEST);
@@ -269,9 +287,13 @@ public class PanelCalculator extends JPanel{
         JLabel left_AT_1 = new JLabel("Все игры");
         left_AT_1.setFont(font15);
         left_AT_1.setBorder(new EmptyBorder(5, 5, 5, 5));
+        left_AT_1.setPreferredSize(labelDimensionLeft);
+        left_AT_1.setHorizontalAlignment(SwingConstants.CENTER);
         JLabel rigAT_AT_1 = new JLabel("Последние игры");
         rigAT_AT_1.setFont(font15);
         rigAT_AT_1.setBorder(new EmptyBorder(5, 5, 5, 5));
+        rigAT_AT_1.setPreferredSize(labelDimensionRight);
+        rigAT_AT_1.setHorizontalAlignment(SwingConstants.CENTER);
         slider_AT_1_Panel.add(head_AT_1, BorderLayout.NORTH);
         slider_AT_1_Panel.add(slider_AT_1);
         slider_AT_1_Panel.add(left_AT_1, BorderLayout.WEST);
@@ -291,9 +313,13 @@ public class PanelCalculator extends JPanel{
         JLabel left_AT_2 = new JLabel("Все игры");
         left_AT_2.setFont(font15);
         left_AT_2.setBorder(new EmptyBorder(5, 5, 5, 5));
-        JLabel rigAT_AT_2 = new JLabel("Только дом или выезд");
+        left_AT_2.setPreferredSize(labelDimensionLeft);
+        left_AT_2.setHorizontalAlignment(SwingConstants.CENTER);
+        JLabel rigAT_AT_2 = new JLabel("Дом/выезд");
         rigAT_AT_2.setFont(font15);
         rigAT_AT_2.setBorder(new EmptyBorder(5, 5, 5, 5));
+        rigAT_AT_2.setPreferredSize(labelDimensionRight);
+        rigAT_AT_2.setHorizontalAlignment(SwingConstants.CENTER);
         slider_AT_2_Panel.add(head_AT_2, BorderLayout.NORTH);
         slider_AT_2_Panel.add(slider_AT_2);
         slider_AT_2_Panel.add(left_AT_2, BorderLayout.WEST);
@@ -313,9 +339,13 @@ public class PanelCalculator extends JPanel{
         JLabel left_AT_3 = new JLabel("Текущий сезон");
         left_AT_3.setFont(font15);
         left_AT_3.setBorder(new EmptyBorder(5, 5, 5, 5));
+        left_AT_3.setPreferredSize(labelDimensionLeft);
+        left_AT_3.setHorizontalAlignment(SwingConstants.CENTER);
         JLabel rigAT_AT_3 = new JLabel("Личные встречи");
         rigAT_AT_3.setFont(font15);
         rigAT_AT_3.setBorder(new EmptyBorder(5, 5, 5, 5));
+        rigAT_AT_3.setPreferredSize(labelDimensionRight);
+        rigAT_AT_3.setHorizontalAlignment(SwingConstants.CENTER);
         slider_AT_3_Panel.add(head_AT_3, BorderLayout.NORTH);
         slider_AT_3_Panel.add(slider_AT_3);
         slider_AT_3_Panel.add(left_AT_3, BorderLayout.WEST);
@@ -332,12 +362,16 @@ public class PanelCalculator extends JPanel{
         head_AT_4.setHorizontalAlignment(SwingConstants.CENTER);
         head_AT_4.setBorder(new EmptyBorder(5, 5, 5, 5));
         head_AT_4.setFont(font15);
-        JLabel left_AT_4 = new JLabel("Как создает команда");
+        JLabel left_AT_4 = new JLabel("Как создает");
         left_AT_4.setFont(font15);
         left_AT_4.setBorder(new EmptyBorder(5, 5, 5, 5));
-        JLabel rigAT_AT_4 = new JLabel("Как позволяет создавать");
+        left_AT_4.setPreferredSize(labelDimensionLeft);
+        left_AT_4.setHorizontalAlignment(SwingConstants.CENTER);
+        JLabel rigAT_AT_4 = new JLabel("Как допускает");
         rigAT_AT_4.setFont(font15);
         rigAT_AT_4.setBorder(new EmptyBorder(5, 5, 5, 5));
+        rigAT_AT_4.setPreferredSize(labelDimensionRight);
+        rigAT_AT_4.setHorizontalAlignment(SwingConstants.CENTER);
         slider_AT_4_Panel.add(head_AT_4, BorderLayout.NORTH);
         slider_AT_4_Panel.add(slider_AT_4);
         slider_AT_4_Panel.add(left_AT_4, BorderLayout.WEST);
@@ -361,15 +395,12 @@ public class PanelCalculator extends JPanel{
         dataPanel = new JPanel(new BorderLayout());
         dataPanel.setBorder(BorderFactory.createTitledBorder(""));
 
-        //JLabel labelTotalHandicapHeader = new JLabel("Расчетное значение форы:");
-        //labelTotalHandicapHeader.setHorizontalAlignment(SwingConstants.CENTER);
-        //dataPanel.add(labelTotalHandicapHeader);
-
         this.add(dataPanel);
 
         seasonCB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 seasonCB.setFocusable(false);
+                buttonShow.setEnabled(false);
                 season = seasonCB.getSelectedItem().toString().replace("Сезон ", "");
 
                 String pathToLeaguesList = path + seasonCB.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/";
@@ -392,7 +423,6 @@ public class PanelCalculator extends JPanel{
                 modelH2 = new DefaultComboBoxModel(listRight);
                 teamChooserHome.setModel(modelH);
                 teamChooserAway.setModel(modelH2);
-
                 leagueChooser.setFocusable(true);
             }
         });
@@ -400,6 +430,7 @@ public class PanelCalculator extends JPanel{
         leagueChooser.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 leagueName = (String) leagueChooser.getSelectedItem();
+                buttonShow.setEnabled(false);
                 int index = leagueChooser.getSelectedIndex();
                 String pathToLeaguesList = path + seasonCB.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/";
                 JFileChooser fileChooser = new JFileChooser(pathToLeaguesList);
@@ -424,7 +455,6 @@ public class PanelCalculator extends JPanel{
                 modelH2 = new DefaultComboBoxModel(listRight);
                 teamChooserHome.setModel(modelH);
                 teamChooserAway.setModel(modelH2);
-                checkFilters();
 
             }
         });
@@ -433,6 +463,7 @@ public class PanelCalculator extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 teamChooserHome.setFocusable(false);
                 homeTeam = (String) teamChooserHome.getSelectedItem();
+                awayTeam = (String) teamChooserAway.getSelectedItem();
                 checkFilters();
             }
         });
@@ -440,6 +471,7 @@ public class PanelCalculator extends JPanel{
         teamChooserAway.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 teamChooserAway.setFocusable(false);
+                homeTeam = (String) teamChooserHome.getSelectedItem();
                 awayTeam = (String) teamChooserAway.getSelectedItem();
                 checkFilters();
             }

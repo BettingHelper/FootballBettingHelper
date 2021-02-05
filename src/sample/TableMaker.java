@@ -35,14 +35,14 @@ public class TableMaker {
                 total23++;
         }
         Object[][] data = {
-                {"Обе забьют" , String.valueOf(oz) + "/" + list.size() + " (" + MyMath.round(oz / (double) list.size() * 100, 1) + ")"},
-                {"Обе забьют - нет" , String.valueOf(list.size() - oz) + "/" + list.size() + " (" + MyMath.round((list.size() - oz) / (double) list.size() * 100, 1) + ")"},
-                {"ТБ(2.5)" , String.valueOf(tb25) + "/" + list.size() + " (" + MyMath.round(tb25 / (double) list.size() * 100, 1) + ")"},
-                {"ТМ(2.5)" , String.valueOf(list.size() - tb25) + "/" + list.size() + " (" + MyMath.round((list.size() - tb25) / (double) list.size() * 100, 1) + ")"},
-                {"Гол в обоих таймах" , String.valueOf(bothTimesWithGoals) + "/" + list.size() + " (" + MyMath.round(bothTimesWithGoals / (double) list.size() * 100, 1) + ")"},
-                {"1Т > 2Т" , String.valueOf(firstMoreSecond) + "/" + list.size() + " (" + MyMath.round(firstMoreSecond / (double) list.size() * 100, 1) + ")"},
-                {"2Т > 1Т" , String.valueOf(secondMoreFirst) + "/" + list.size() + " (" + MyMath.round(secondMoreFirst / (double) list.size() * 100, 1) + ")"},
-                {"Тотал 2-3" , String.valueOf(total23) + "/" + list.size() + " (" + MyMath.round(total23 / (double) list.size() * 100, 1) + ")"},
+                {"Обе забьют" , oz + "/" + list.size() + " (" + MyMath.round(oz / (double) list.size() * 100, 1) + ")"},
+                {"Обе забьют - нет" , (list.size() - oz) + "/" + list.size() + " (" + MyMath.round((list.size() - oz) / (double) list.size() * 100, 1) + ")"},
+                {"ТБ(2.5)" , tb25 + "/" + list.size() + " (" + MyMath.round(tb25 / (double) list.size() * 100, 1) + ")"},
+                {"ТМ(2.5)" , (list.size() - tb25) + "/" + list.size() + " (" + MyMath.round((list.size() - tb25) / (double) list.size() * 100, 1) + ")"},
+                {"Гол в обоих таймах" , bothTimesWithGoals + "/" + list.size() + " (" + MyMath.round(bothTimesWithGoals / (double) list.size() * 100, 1) + ")"},
+                {"1Т > 2Т" , firstMoreSecond + "/" + list.size() + " (" + MyMath.round(firstMoreSecond / (double) list.size() * 100, 1) + ")"},
+                {"2Т > 1Т" , secondMoreFirst + "/" + list.size() + " (" + MyMath.round(secondMoreFirst / (double) list.size() * 100, 1) + ")"},
+                {"Тотал 2-3" , total23 + "/" + list.size() + " (" + MyMath.round(total23 / (double) list.size() * 100, 1) + ")"},
         };
 
         JTable tableGoals = new JTable(data, colHeads);
@@ -84,9 +84,9 @@ public class TableMaker {
                 oz++;
         }
         Object[][] data = {
-                {"Обе забьют" , String.valueOf(oz)   + "/" + list.size() + " (" + MyMath.round(oz / (double) list.size() * 100, 1) + ")"},
-                {"ТБ(1.5)"    , String.valueOf(tb15) + "/" + list.size() + " (" + MyMath.round(tb15 / (double) list.size() * 100, 1) + ")"},
-                {"ТМ(1.5)"    , String.valueOf(tm15) + "/" + list.size() + " (" + MyMath.round(tm15 / (double) list.size() * 100, 1) + ")"},
+                {"Обе забьют" , oz + "/" + list.size() + " (" + MyMath.round(oz / (double) list.size() * 100, 1) + ")"},
+                {"ТБ(1.5)"    , tb15 + "/" + list.size() + " (" + MyMath.round(tb15 / (double) list.size() * 100, 1) + ")"},
+                {"ТМ(1.5)"    , tm15 + "/" + list.size() + " (" + MyMath.round(tm15 / (double) list.size() * 100, 1) + ")"},
         };
 
         JTable tableGoals = new JTable(data, colHeads);
@@ -128,9 +128,9 @@ public class TableMaker {
                 oz++;
         }
         Object[][] data = {
-                {"Обе забьют" , String.valueOf(oz)   + "/" + list.size() + " (" + MyMath.round(oz / (double) list.size() * 100, 1) + ")"},
-                {"ТБ(1.5)"    , String.valueOf(tb15) + "/" + list.size() + " (" + MyMath.round(tb15 / (double) list.size() * 100, 1) + ")"},
-                {"ТМ(1.5)"    , String.valueOf(tm15) + "/" + list.size() + " (" + MyMath.round(tm15 / (double) list.size() * 100, 1) + ")"},
+                {"Обе забьют" , oz + "/" + list.size() + " (" + MyMath.round(oz / (double) list.size() * 100, 1) + ")"},
+                {"ТБ(1.5)"    , tb15 + "/" + list.size() + " (" + MyMath.round(tb15 / (double) list.size() * 100, 1) + ")"},
+                {"ТМ(1.5)"    , tm15 + "/" + list.size() + " (" + MyMath.round(tm15 / (double) list.size() * 100, 1) + ")"},
         };
 
 
@@ -231,79 +231,79 @@ public class TableMaker {
         Object[][] data;
 
         if (number > 0){
-            String t85 = "ТБ(" + String.valueOf(totalAverageShots-1) + ")";
-            String t85s = String.valueOf((int) (totalMinus1)) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
+            String t85 = "ТБ(" + (totalAverageShots - 1) + ")";
+            String t85s = (int) (totalMinus1) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
             if (totalMinus1/number < 0.5){
-                t85 = "ТM(" + String.valueOf(totalAverageShots-1) + ")";
-                t85s = String.valueOf((int) (number - totalMinus1)) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
+                t85 = "ТM(" + (totalAverageShots - 1) + ")";
+                t85s = (int) (number - totalMinus1) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
             }
-            String t95 = "ТБ(" + String.valueOf(totalAverageShots) + ")";
-            String t95s = String.valueOf((int) (totalSred)) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
+            String t95 = "ТБ(" + totalAverageShots + ")";
+            String t95s = (int) (totalSred) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
             if (totalSred/number < 0.5){
-                t95 = "ТM(" + String.valueOf(totalAverageShots) + ")";
-                t95s = String.valueOf((int) (number - totalSred)) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
+                t95 = "ТM(" + totalAverageShots + ")";
+                t95s = (int) (number - totalSred) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
             }
 
-            String t105 = "ТБ(" + String.valueOf(totalAverageShots+1) + ")";
-            String t105s = String.valueOf((int) (totalPlus1)) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
+            String t105 = "ТБ(" + (totalAverageShots + 1) + ")";
+            String t105s = (int) (totalPlus1) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
             if (totalPlus1/number < 0.5){
-                t105 = "ТM(" + String.valueOf(totalAverageShots+1) + ")";
-                t105s = String.valueOf((int) (number - totalPlus1)) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
+                t105 = "ТM(" + (totalAverageShots + 1) + ")";
+                t105s = (int) (number - totalPlus1) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
             }
 
             double total = selfAverageShots + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" +number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" +number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageShots;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageShots - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number- selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number- selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageShots + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageShots;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageShots - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -418,77 +418,77 @@ public class TableMaker {
         Object[][] data;
         if (number > 0){
             String t75 = "ТБ(7.5)";
-            String t75s = String.valueOf((int) (tb75)) + "/" + number + " (" + MyMath.round(tb75 / number * 100, 1) + ")";
+            String t75s = (int) (tb75) + "/" + number + " (" + MyMath.round(tb75 / number * 100, 1) + ")";
             if (tb75/number < 0.5){
                 t75 = "ТМ(7.5)";
-                t75s = String.valueOf((int) (number - tb75)) + "/" + number + " (" + MyMath.round((number - tb75) / number * 100, 1) + ")";
+                t75s = (int) (number - tb75) + "/" + number + " (" + MyMath.round((number - tb75) / number * 100, 1) + ")";
             }
             String t85 = "ТБ(8.5)";
-            String t85s = String.valueOf((int) (tb85)) + "/" + number + " (" + MyMath.round(tb85 / number * 100, 1) + ")";
+            String t85s = (int) (tb85) + "/" + number + " (" + MyMath.round(tb85 / number * 100, 1) + ")";
             if (tb85/number < 0.5){
                 t85 = "ТМ(8.5)";
-                t85s = String.valueOf((int) (number - tb85)) + "/" + number + " (" + MyMath.round((number - tb85) / number * 100, 1) + ")";
+                t85s = (int) (number - tb85) + "/" + number + " (" + MyMath.round((number - tb85) / number * 100, 1) + ")";
             }
             String t95 = "ТБ(9.5)";
-            String t95s = String.valueOf((int) (tb95)) + "/" + number + " (" + MyMath.round(tb95 / number * 100, 1) + ")";
+            String t95s = (int) (tb95) + "/" + number + " (" + MyMath.round(tb95 / number * 100, 1) + ")";
             if (tb95/number < 0.5){
                 t95 = "ТМ(9.5)";
-                t95s = String.valueOf((int) (number - tb95)) + "/" + number + " (" + MyMath.round((number - tb95) / number * 100, 1) + ")";
+                t95s = (int) (number - tb95) + "/" + number + " (" + MyMath.round((number - tb95) / number * 100, 1) + ")";
             }
 
             double total = selfAverageUSV + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageUSV;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageUSV - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageUSV + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageUSV;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageUSV - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -600,77 +600,77 @@ public class TableMaker {
         Object[][] data;
         if (number > 0){
             String t35 = "ТБ(3.5)";
-            String t35s = String.valueOf((int) (tb35)) + "/" + number + " (" + MyMath.round(tb35 / number * 100, 1) + ")";
+            String t35s = (int) (tb35) + "/" + number + " (" + MyMath.round(tb35 / number * 100, 1) + ")";
             if (tb35/number < 0.5){
                 t35 = "ТМ(3.5)";
-                t35s = String.valueOf((int) (number - tb35)) + "/" + number + " (" + MyMath.round((number - tb35) / number * 100, 1) + ")";
+                t35s = (int) (number - tb35) + "/" + number + " (" + MyMath.round((number - tb35) / number * 100, 1) + ")";
             }
             String t45 = "ТБ(4.5)";
-            String t45s = String.valueOf((int) (tb45)) + "/" + number + " (" + MyMath.round(tb45 / number * 100, 1) + ")";
+            String t45s = (int) (tb45) + "/" + number + " (" + MyMath.round(tb45 / number * 100, 1) + ")";
             if (tb45/number < 0.5){
                 t45 = "ТМ(4.5)";
-                t45s = String.valueOf((int) (number - tb45)) + "/" + number + " (" + MyMath.round((number - tb45) / number * 100, 1) + ")";
+                t45s = (int) (number - tb45) + "/" + number + " (" + MyMath.round((number - tb45) / number * 100, 1) + ")";
             }
             String t55 = "ТБ(5.5)";
-            String t55s = String.valueOf((int) (tb55)) + "/" + number + " (" + MyMath.round(tb55 / number * 100, 1) + ")";
+            String t55s = (int) (tb55) + "/" + number + " (" + MyMath.round(tb55 / number * 100, 1) + ")";
             if (tb55/number < 0.5){
                 t55 = "ТМ(5.5)";
-                t55s = String.valueOf((int) (number - tb55)) + "/" + number + " (" + MyMath.round((number - tb55) / number * 100, 1) + ")";
+                t55s = (int) (number - tb55) + "/" + number + " (" + MyMath.round((number - tb55) / number * 100, 1) + ")";
             }
 
             double total = selfAverageUSV + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageUSV;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageUSV - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageUSV + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageUSV;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageUSV - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -782,77 +782,77 @@ public class TableMaker {
 
         if (number > 0){
             String t35 = "ТБ(3.5)";
-            String t35s = String.valueOf((int) (tb35)) + "/" + number + " (" + MyMath.round(tb35 / number * 100, 1) + ")";
+            String t35s = (int) (tb35) + "/" + number + " (" + MyMath.round(tb35 / number * 100, 1) + ")";
             if (tb35/number < 0.5){
                 t35 = "ТМ(3.5)";
-                t35s = String.valueOf((int) (number - tb35)) + "/" + number + " (" + MyMath.round((number - tb35) / number * 100, 1) + ")";
+                t35s = (int) (number - tb35) + "/" + number + " (" + MyMath.round((number - tb35) / number * 100, 1) + ")";
             }
             String t45 = "ТБ(4.5)";
-            String t45s = String.valueOf((int) (tb45)) + "/" + number + " (" + MyMath.round(tb45 / number * 100, 1) + ")";
+            String t45s = (int) (tb45) + "/" + number + " (" + MyMath.round(tb45 / number * 100, 1) + ")";
             if (tb45/number < 0.5){
                 t45 = "ТМ(4.5)";
-                t45s = String.valueOf((int) (number - tb45)) + "/" + number + " (" + MyMath.round((number - tb45) / number * 100, 1) + ")";
+                t45s = (int) (number - tb45) + "/" + number + " (" + MyMath.round((number - tb45) / number * 100, 1) + ")";
             }
             String t55 = "ТБ(5.5)";
-            String t55s = String.valueOf((int) (tb55)) + "/" + number + " (" + MyMath.round(tb55 / number * 100, 1) + ")";
+            String t55s = (int) (tb55) + "/" + number + " (" + MyMath.round(tb55 / number * 100, 1) + ")";
             if (tb55/number < 0.5){
                 t55 = "ТМ(5.5)";
-                t55s = String.valueOf((int) (number - tb55)) + "/" + number + " (" + MyMath.round((number - tb55) / number * 100, 1) + ")";
+                t55s = (int) (number - tb55) + "/" + number + " (" + MyMath.round((number - tb55) / number * 100, 1) + ")";
             }
 
             double total = selfAverageUSV + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageUSV;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageUSV - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageUSV + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageUSV;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageUSV - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new String[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -959,78 +959,78 @@ public class TableMaker {
         Object[][] data;
         if (number > 0){
             String t85 = "ТБ(8.5)";
-            String t85s = String.valueOf((int) (tb85)) + "/" + number + " (" + MyMath.round(tb85 / number * 100, 1) + ")";
+            String t85s = (int) (tb85) + "/" + number + " (" + MyMath.round(tb85 / number * 100, 1) + ")";
             if (tb85/number < 0.5){
                 t85 = "ТМ(8.5)";
-                t85s = String.valueOf((int) (number - tb85)) + "/" + number + " (" + MyMath.round((number - tb85) / number * 100, 1) + ")";
+                t85s = (int) (number - tb85) + "/" + number + " (" + MyMath.round((number - tb85) / number * 100, 1) + ")";
             }
             String t95 = "ТБ(9.5)";
-            String t95s = String.valueOf((int) (tb95)) + "/" + number + " (" + MyMath.round(tb95 / number * 100, 1) + ")";
+            String t95s = (int) (tb95) + "/" + number + " (" + MyMath.round(tb95 / number * 100, 1) + ")";
             if (tb95/number < 0.5){
                 t95 = "ТМ(9.5)";
-                t95s = String.valueOf((int) (number - tb95)) + "/" + number + " (" + MyMath.round((number - tb95) / number * 100, 1) + ")";
+                t95s = (int) (number - tb95) + "/" + number + " (" + MyMath.round((number - tb95) / number * 100, 1) + ")";
             }
 
             String t105 = "ТБ(10.5)";
-            String t105s = String.valueOf((int) (tb105)) + "/" + number + " (" + MyMath.round(tb105 / number * 100, 1) + ")";
+            String t105s = (int) (tb105) + "/" + number + " (" + MyMath.round(tb105 / number * 100, 1) + ")";
             if (tb105/number < 0.5){
                 t105 = "ТМ(10.5)";
-                t105s = String.valueOf((int) (number - tb105)) + "/" + number + " (" + MyMath.round((number - tb105) / number * 100, 1) + ")";
+                t105s = (int) (number - tb105) + "/" + number + " (" + MyMath.round((number - tb105) / number * 100, 1) + ")";
             }
 
             double total = selfAverageCorners + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageCorners;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageCorners - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageCorners + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageCorners;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageCorners - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -1140,78 +1140,78 @@ public class TableMaker {
         Object[][] data;
         if (number > 0){
             String t45 = "ТБ(4.5)";
-            String t45s = String.valueOf((int) (tb45)) + "/" + number + " (" + MyMath.round(tb45 / number * 100, 1) + ")";
+            String t45s = (int) (tb45) + "/" + number + " (" + MyMath.round(tb45 / number * 100, 1) + ")";
             if (tb45/number < 0.5){
                 t45 = "ТМ(4.5)";
-                t45s = String.valueOf((int) (number - tb45)) + "/" + number + " (" + MyMath.round((number - tb45) / number * 100, 1) + ")";
+                t45s = (int) (number - tb45) + "/" + number + " (" + MyMath.round((number - tb45) / number * 100, 1) + ")";
             }
             String t55 = "ТБ(5.5)";
-            String t55s = String.valueOf((int) (tb55)) + "/" + number + " (" + MyMath.round(tb55 / number * 100, 1) + ")";
+            String t55s = (int) (tb55) + "/" + number + " (" + MyMath.round(tb55 / number * 100, 1) + ")";
             if (tb55/number < 0.5){
                 t55 = "ТМ(5.5)";
-                t55s = String.valueOf((int) (number - tb55)) + "/" + number + " (" + MyMath.round((number - tb55) / number * 100, 1) + ")";
+                t55s = (int) (number - tb55) + "/" + number + " (" + MyMath.round((number - tb55) / number * 100, 1) + ")";
             }
 
             String t65 = "ТБ(6.5)";
-            String t65s = String.valueOf((int) (tb65)) + "/" + number + " (" + MyMath.round(tb65 / number * 100, 1) + ")";
+            String t65s = (int) (tb65) + "/" + number + " (" + MyMath.round(tb65 / number * 100, 1) + ")";
             if (tb65/number < 0.5){
                 t65 = "ТМ(6.5)";
-                t65s = String.valueOf((int) (number - tb65)) + "/" + number + " (" + MyMath.round((number - tb65) / number * 100, 1) + ")";
+                t65s = (int) (number - tb65) + "/" + number + " (" + MyMath.round((number - tb65) / number * 100, 1) + ")";
             }
 
             double total = selfAverageCorners + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageCorners;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageCorners - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageCorners + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageCorners;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageCorners - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -1321,78 +1321,78 @@ public class TableMaker {
         Object[][] data;
         if (number > 0){
             String t45 = "ТБ(4.5)";
-            String t45s = String.valueOf((int) (tb45)) + "/" + number + " (" + MyMath.round(tb45 / number * 100, 1) + ")";
+            String t45s = (int) (tb45) + "/" + number + " (" + MyMath.round(tb45 / number * 100, 1) + ")";
             if (tb45/number < 0.5){
                 t45 = "ТМ(4.5)";
-                t45s = String.valueOf((int) (number - tb45)) + "/" + number + " (" + MyMath.round((number - tb45) / number * 100, 1) + ")";
+                t45s = (int) (number - tb45) + "/" + number + " (" + MyMath.round((number - tb45) / number * 100, 1) + ")";
             }
             String t55 = "ТБ(5.5)";
-            String t55s = String.valueOf((int) (tb55)) + "/" + number + " (" + MyMath.round(tb55 / number * 100, 1) + ")";
+            String t55s = (int) (tb55) + "/" + number + " (" + MyMath.round(tb55 / number * 100, 1) + ")";
             if (tb55/number < 0.5){
                 t55 = "ТМ(5.5)";
-                t55s = String.valueOf((int) (number - tb55)) + "/" + number + " (" + MyMath.round((number - tb55) / number * 100, 1) + ")";
+                t55s = (int) (number - tb55) + "/" + number + " (" + MyMath.round((number - tb55) / number * 100, 1) + ")";
             }
 
             String t65 = "ТБ(6.5)";
-            String t65s = String.valueOf((int) (tb65)) + "/" + number + " (" + MyMath.round(tb65 / number * 100, 1) + ")";
+            String t65s = (int) (tb65) + "/" + number + " (" + MyMath.round(tb65 / number * 100, 1) + ")";
             if (tb65/number < 0.5){
                 t65 = "ТМ(6.5)";
-                t65s = String.valueOf((int) (number - tb65)) + "/" + number + " (" + MyMath.round((number - tb65) / number * 100, 1) + ")";
+                t65s = (int) (number - tb65) + "/" + number + " (" + MyMath.round((number - tb65) / number * 100, 1) + ")";
             }
 
             double total = selfAverageCorners + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageCorners;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageCorners - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageCorners + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageCorners;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageCorners - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -1503,79 +1503,79 @@ public class TableMaker {
         Object[] colHeads;
         Object[][] data;
         if ( number > 0 ){
-            String t85 = "ТБ(" + String.valueOf(totalAverageOffsides-1) + ")";
-            String t85s = String.valueOf((int) (totalMinus1)) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
+            String t85 = "ТБ(" + (totalAverageOffsides - 1) + ")";
+            String t85s = (int) (totalMinus1) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
             if (totalMinus1/number < 0.5){
-                t85 = "ТM(" + String.valueOf(totalAverageOffsides-1) + ")";
-                t85s = String.valueOf((int) (number - totalMinus1)) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
+                t85 = "ТM(" + (totalAverageOffsides - 1) + ")";
+                t85s = (int) (number - totalMinus1) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
             }
-            String t95 = "ТБ(" + String.valueOf(totalAverageOffsides) + ")";
-            String t95s = String.valueOf((int) (totalSred)) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
+            String t95 = "ТБ(" + totalAverageOffsides + ")";
+            String t95s = (int) (totalSred) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
             if (totalSred/number < 0.5){
-                t95 = "ТM(" + String.valueOf(totalAverageOffsides) + ")";
-                t95s = String.valueOf((int) (number - totalSred)) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
+                t95 = "ТM(" + totalAverageOffsides + ")";
+                t95s = (int) (number - totalSred) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
             }
 
-            String t105 = "ТБ(" + String.valueOf(totalAverageOffsides+1) + ")";
-            String t105s = String.valueOf((int) (totalPlus1)) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
+            String t105 = "ТБ(" + (totalAverageOffsides + 1) + ")";
+            String t105s = (int) (totalPlus1) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
             if (totalPlus1/number < 0.5){
-                t105 = "ТM(" + String.valueOf(totalAverageOffsides+1) + ")";
-                t105s = String.valueOf((int) (number - totalPlus1)) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
+                t105 = "ТM(" + (totalAverageOffsides + 1) + ")";
+                t105s = (int) (number - totalPlus1) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
             }
 
             double total = selfAverageOffsides + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageOffsides;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageOffsides - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageOffsides + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageOffsides;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageOffsides - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -1690,79 +1690,79 @@ public class TableMaker {
         Object[] colHeads;
         Object[][] data;
         if (number > 0){
-            String t85 = "ТБ(" + String.valueOf(totalAverageOffsides-1) + ")";
-            String t85s = String.valueOf((int) (totalMinus1)) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
+            String t85 = "ТБ(" + (totalAverageOffsides - 1) + ")";
+            String t85s = (int) (totalMinus1) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
             if (totalMinus1/number < 0.5){
-                t85 = "ТM(" + String.valueOf(totalAverageOffsides-1) + ")";
-                t85s = String.valueOf((int) (number - totalMinus1)) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
+                t85 = "ТM(" + (totalAverageOffsides - 1) + ")";
+                t85s = (int) (number - totalMinus1) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
             }
-            String t95 = "ТБ(" + String.valueOf(totalAverageOffsides) + ")";
-            String t95s = String.valueOf((int) (totalSred)) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
+            String t95 = "ТБ(" + totalAverageOffsides + ")";
+            String t95s = (int) (totalSred) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
             if (totalSred/number < 0.5){
-                t95 = "ТM(" + String.valueOf(totalAverageOffsides) + ")";
-                t95s = String.valueOf((int) (number - totalSred)) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
+                t95 = "ТM(" + totalAverageOffsides + ")";
+                t95s = (int) (number - totalSred) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
             }
 
-            String t105 = "ТБ(" + String.valueOf(totalAverageOffsides+1) + ")";
-            String t105s = String.valueOf((int) (totalPlus1)) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
+            String t105 = "ТБ(" + (totalAverageOffsides + 1) + ")";
+            String t105s = (int) (totalPlus1) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
             if (totalPlus1/number < 0.5){
-                t105 = "ТM(" + String.valueOf(totalAverageOffsides+1) + ")";
-                t105s = String.valueOf((int) (number - totalPlus1)) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
+                t105 = "ТM(" + (totalAverageOffsides + 1) + ")";
+                t105s = (int) (number - totalPlus1) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
             }
 
             double total = selfAverageOffsides + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageOffsides;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageOffsides - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageOffsides + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageOffsides;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageOffsides - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -1876,79 +1876,79 @@ public class TableMaker {
         Object[] colHeads;
         Object[][] data;
         if (number >  0){
-            String t85 = "ТБ(" + String.valueOf(totalAverageOffsides-1) + ")";
-            String t85s = String.valueOf((int) (totalMinus1)) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
+            String t85 = "ТБ(" + (totalAverageOffsides - 1) + ")";
+            String t85s = (int) (totalMinus1) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
             if (totalMinus1/number < 0.5){
-                t85 = "ТM(" + String.valueOf(totalAverageOffsides-1) + ")";
-                t85s = String.valueOf((int) (number - totalMinus1)) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
+                t85 = "ТM(" + (totalAverageOffsides - 1) + ")";
+                t85s = (int) (number - totalMinus1) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
             }
-            String t95 = "ТБ(" + String.valueOf(totalAverageOffsides) + ")";
-            String t95s = String.valueOf((int) (totalSred)) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
+            String t95 = "ТБ(" + totalAverageOffsides + ")";
+            String t95s = (int) (totalSred) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
             if (totalSred/number < 0.5){
-                t95 = "ТM(" + String.valueOf(totalAverageOffsides) + ")";
-                t95s = String.valueOf((int) (number - totalSred)) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
+                t95 = "ТM(" + totalAverageOffsides + ")";
+                t95s = (int) (number - totalSred) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
             }
 
-            String t105 = "ТБ(" + String.valueOf(totalAverageOffsides+1) + ")";
-            String t105s = String.valueOf((int) (totalPlus1)) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
+            String t105 = "ТБ(" + (totalAverageOffsides + 1) + ")";
+            String t105s = (int) (totalPlus1) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
             if (totalPlus1/number < 0.5){
-                t105 = "ТM(" + String.valueOf(totalAverageOffsides+1) + ")";
-                t105s = String.valueOf((int) (number - totalPlus1)) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
+                t105 = "ТM(" + (totalAverageOffsides + 1) + ")";
+                t105s = (int) (number - totalPlus1) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
             }
 
             double total = selfAverageOffsides + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageOffsides;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageOffsides - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageOffsides + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageOffsides;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageOffsides - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -2058,79 +2058,79 @@ public class TableMaker {
         Object[] colHeads;
         Object[][] data;
         if (number > 0){
-            String t85 = "ТБ(" + String.valueOf(totalAverageFouls-1) + ")";
-            String t85s = String.valueOf((int) (totalMinus1)) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
+            String t85 = "ТБ(" + (totalAverageFouls - 1) + ")";
+            String t85s = (int) (totalMinus1) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
             if (totalMinus1/number < 0.5){
-                t85 = "ТM(" + String.valueOf(totalAverageFouls-1) + ")";
-                t85s = String.valueOf((int) (number - totalMinus1)) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
+                t85 = "ТM(" + (totalAverageFouls - 1) + ")";
+                t85s = (int) (number - totalMinus1) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
             }
-            String t95 = "ТБ(" + String.valueOf(totalAverageFouls) + ")";
-            String t95s = String.valueOf((int) (totalSred)) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
+            String t95 = "ТБ(" + totalAverageFouls + ")";
+            String t95s = (int) (totalSred) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
             if (totalSred/number < 0.5){
-                t95 = "ТM(" + String.valueOf(totalAverageFouls) + ")";
-                t95s = String.valueOf((int) (number - totalSred)) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
+                t95 = "ТM(" + totalAverageFouls + ")";
+                t95s = (int) (number - totalSred) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
             }
 
-            String t105 = "ТБ(" + String.valueOf(totalAverageFouls+1) + ")";
-            String t105s = String.valueOf((int) (totalPlus1)) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
+            String t105 = "ТБ(" + (totalAverageFouls + 1) + ")";
+            String t105s = (int) (totalPlus1) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
             if (totalPlus1/number < 0.5){
-                t105 = "ТM(" + String.valueOf(totalAverageFouls+1) + ")";
-                t105s = String.valueOf((int) (number - totalPlus1)) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
+                t105 = "ТM(" + (totalAverageFouls + 1) + ")";
+                t105s = (int) (number - totalPlus1) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
             }
 
             double total = selfAverageFouls + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageFouls;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageFouls - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageFouls + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageFouls;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageFouls - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -2244,79 +2244,79 @@ public class TableMaker {
         Object[] colHeads;
         Object[][] data;
         if (number > 0){
-            String t85 = "ТБ(" + String.valueOf(totalAverageFouls-1) + ")";
-            String t85s = String.valueOf((int) (totalMinus1)) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
+            String t85 = "ТБ(" + (totalAverageFouls - 1) + ")";
+            String t85s = (int) (totalMinus1) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
             if (totalMinus1/number < 0.5){
-                t85 = "ТM(" + String.valueOf(totalAverageFouls-1) + ")";
-                t85s = String.valueOf((int) (number - totalMinus1)) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
+                t85 = "ТM(" + (totalAverageFouls - 1) + ")";
+                t85s = (int) (number - totalMinus1) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
             }
-            String t95 = "ТБ(" + String.valueOf(totalAverageFouls) + ")";
-            String t95s = String.valueOf((int) (totalSred)) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
+            String t95 = "ТБ(" + totalAverageFouls + ")";
+            String t95s = (int) (totalSred) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
             if (totalSred/number < 0.5){
-                t95 = "ТM(" + String.valueOf(totalAverageFouls) + ")";
-                t95s = String.valueOf((int) (number - totalSred)) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
+                t95 = "ТM(" + totalAverageFouls + ")";
+                t95s = (int) (number - totalSred) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
             }
 
-            String t105 = "ТБ(" + String.valueOf(totalAverageFouls+1) + ")";
-            String t105s = String.valueOf((int) (totalPlus1)) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
+            String t105 = "ТБ(" + (totalAverageFouls + 1) + ")";
+            String t105s = (int) (totalPlus1) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
             if (totalPlus1/number < 0.5){
-                t105 = "ТM(" + String.valueOf(totalAverageFouls+1) + ")";
-                t105s = String.valueOf((int) (number - totalPlus1)) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
+                t105 = "ТM(" + (totalAverageFouls + 1) + ")";
+                t105s = (int) (number - totalPlus1) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
             }
 
             double total = selfAverageFouls + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageFouls;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageFouls - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageFouls + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageFouls;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageFouls - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -2429,79 +2429,79 @@ public class TableMaker {
         Object[] colHeads;
         Object[][] data;
         if (number > 0){
-            String t85 = "ТБ(" + String.valueOf(totalAverageFouls-1) + ")";
-            String t85s = String.valueOf((int) (totalMinus1)) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
+            String t85 = "ТБ(" + (totalAverageFouls - 1) + ")";
+            String t85s = (int) (totalMinus1) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
             if (totalMinus1/number < 0.5){
-                t85 = "ТM(" + String.valueOf(totalAverageFouls-1) + ")";
-                t85s = String.valueOf((int) (number - totalMinus1)) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
+                t85 = "ТM(" + (totalAverageFouls - 1) + ")";
+                t85s = (int) (number - totalMinus1) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
             }
-            String t95 = "ТБ(" + String.valueOf(totalAverageFouls) + ")";
-            String t95s = String.valueOf((int) (totalSred)) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
+            String t95 = "ТБ(" + totalAverageFouls + ")";
+            String t95s = (int) (totalSred) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
             if (totalSred/number < 0.5){
-                t95 = "ТM(" + String.valueOf(totalAverageFouls) + ")";
-                t95s = String.valueOf((int) (number - totalSred)) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
+                t95 = "ТM(" + totalAverageFouls + ")";
+                t95s = (int) (number - totalSred) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
             }
 
-            String t105 = "ТБ(" + String.valueOf(totalAverageFouls+1) + ")";
-            String t105s = String.valueOf((int) (totalPlus1)) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
+            String t105 = "ТБ(" + (totalAverageFouls + 1) + ")";
+            String t105s = (int) (totalPlus1) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
             if (totalPlus1/number < 0.5){
-                t105 = "ТM(" + String.valueOf(totalAverageFouls+1) + ")";
-                t105s = String.valueOf((int) (number - totalPlus1)) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
+                t105 = "ТM(" + (totalAverageFouls + 1) + ")";
+                t105s = (int) (number - totalPlus1) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
             }
 
             double total = selfAverageFouls + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageFouls;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageFouls - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageFouls + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageFouls;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageFouls - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -2604,79 +2604,79 @@ public class TableMaker {
                 winX++;
         }
 
-        String t85 = "ТБ(" + String.valueOf(totalAverageYellowCards-1) + ")";
-        String t85s = String.valueOf((int) (totalMinus1)) + "/" + list.size() + " (" + MyMath.round(totalMinus1 / list.size() * 100, 1) + ")";
+        String t85 = "ТБ(" + (totalAverageYellowCards - 1) + ")";
+        String t85s = (int) (totalMinus1) + "/" + list.size() + " (" + MyMath.round(totalMinus1 / list.size() * 100, 1) + ")";
         if (totalMinus1/list.size() < 0.5){
-            t85 = "ТM(" + String.valueOf(totalAverageYellowCards-1) + ")";
-            t85s = String.valueOf((int) (list.size() - totalMinus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - totalMinus1) / list.size() * 100, 1) + ")";
+            t85 = "ТM(" + (totalAverageYellowCards - 1) + ")";
+            t85s = (int) (list.size() - totalMinus1) + "/" + list.size() + " (" + MyMath.round((list.size() - totalMinus1) / list.size() * 100, 1) + ")";
         }
-        String t95 = "ТБ(" + String.valueOf(totalAverageYellowCards) + ")";
-        String t95s = String.valueOf((int) (totalSred)) + "/" + list.size() + " (" + MyMath.round(totalSred / list.size() * 100, 1) + ")";
+        String t95 = "ТБ(" + totalAverageYellowCards + ")";
+        String t95s = (int) (totalSred) + "/" + list.size() + " (" + MyMath.round(totalSred / list.size() * 100, 1) + ")";
         if (totalSred/list.size() < 0.5){
-            t95 = "ТM(" + String.valueOf(totalAverageYellowCards) + ")";
-            t95s = String.valueOf((int) (list.size() - totalSred)) + "/" + list.size() + " (" + MyMath.round((list.size() - totalSred) / list.size() * 100, 1) + ")";
+            t95 = "ТM(" + totalAverageYellowCards + ")";
+            t95s = (int) (list.size() - totalSred) + "/" + list.size() + " (" + MyMath.round((list.size() - totalSred) / list.size() * 100, 1) + ")";
         }
 
-        String t105 = "ТБ(" + String.valueOf(totalAverageYellowCards+1) + ")";
-        String t105s = String.valueOf((int) (totalPlus1)) + "/" + list.size() + " (" + MyMath.round(totalPlus1 / list.size() * 100, 1) + ")";
+        String t105 = "ТБ(" + (totalAverageYellowCards + 1) + ")";
+        String t105s = (int) (totalPlus1) + "/" + list.size() + " (" + MyMath.round(totalPlus1 / list.size() * 100, 1) + ")";
         if (totalPlus1/list.size() < 0.5){
-            t105 = "ТM(" + String.valueOf(totalAverageYellowCards+1) + ")";
-            t105s = String.valueOf((int) (list.size() - totalPlus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - totalPlus1) / list.size() * 100, 1) + ")";
+            t105 = "ТM(" + (totalAverageYellowCards + 1) + ")";
+            t105s = (int) (list.size() - totalPlus1) + "/" + list.size() + " (" + MyMath.round((list.size() - totalPlus1) / list.size() * 100, 1) + ")";
         }
 
         double total = selfAverageYellowCards + 1;
         String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-        String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + list.size() + " (" + MyMath.round(selfPlus1 / list.size() * 100, 1) + ")";
+        String selfTBPlus1 = (int) (selfPlus1) + "/" + list.size() + " (" + MyMath.round(selfPlus1 / list.size() * 100, 1) + ")";
         if (selfPlus1/list.size() < 0.5){
             itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-            selfTBPlus1 = String.valueOf((int) (list.size() - selfPlus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - selfPlus1) / list.size() * 100, 1) + ")";
+            selfTBPlus1 = (int) (list.size() - selfPlus1) + "/" + list.size() + " (" + MyMath.round((list.size() - selfPlus1) / list.size() * 100, 1) + ")";
         }
 
         total = selfAverageYellowCards;
         String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-        String selfTBSred = String.valueOf((int) (selfSred)) + "/" + list.size() + " (" + MyMath.round(selfSred / list.size() * 100, 1) + ")";
+        String selfTBSred = (int) (selfSred) + "/" + list.size() + " (" + MyMath.round(selfSred / list.size() * 100, 1) + ")";
         if (selfSred/list.size() < 0.5){
             itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-            selfTBSred = String.valueOf((int) (list.size() - selfSred)) + "/" + list.size() + " (" + MyMath.round((list.size() - selfSred) / list.size() * 100, 1) + ")";
+            selfTBSred = (int) (list.size() - selfSred) + "/" + list.size() + " (" + MyMath.round((list.size() - selfSred) / list.size() * 100, 1) + ")";
         }
 
         total = selfAverageYellowCards - 1;
         String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-        String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + list.size() + " (" + MyMath.round(selfMinus1 / list.size() * 100, 1) + ")";
+        String selfTBMinus1 = (int) (selfMinus1) + "/" + list.size() + " (" + MyMath.round(selfMinus1 / list.size() * 100, 1) + ")";
         if (selfMinus1/list.size() < 0.5){
             itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-            selfTBMinus1 = String.valueOf((int) (list.size() - selfMinus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - selfMinus1) / list.size() * 100, 1) + ")";
+            selfTBMinus1 = (int) (list.size() - selfMinus1) + "/" + list.size() + " (" + MyMath.round((list.size() - selfMinus1) / list.size() * 100, 1) + ")";
         }
 
         total = opAverageYellowCards + 1;
         String optbPlus1 = "Opp: ТБ(" + total + ")";
-        String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + list.size() + " (" + MyMath.round(opPlus1 / list.size() * 100, 1) + ")";
+        String opTBPlus1 = (int) (opPlus1) + "/" + list.size() + " (" + MyMath.round(opPlus1 / list.size() * 100, 1) + ")";
         if (opPlus1/list.size() < 0.5){
             optbPlus1 = "Opp: ТM(" + total + ")";
-            opTBPlus1 = String.valueOf((int) (list.size() - opPlus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - opPlus1) / list.size() * 100, 1) + ")";
+            opTBPlus1 = (int) (list.size() - opPlus1) + "/" + list.size() + " (" + MyMath.round((list.size() - opPlus1) / list.size() * 100, 1) + ")";
         }
 
         total = opAverageYellowCards;
         String optbSred = "Opp: ТБ(" + total + ")";
-        String opTBSred = String.valueOf((int) (opSred)) + "/" + list.size() + " (" + MyMath.round(opSred / list.size() * 100, 1) + ")";
+        String opTBSred = (int) (opSred) + "/" + list.size() + " (" + MyMath.round(opSred / list.size() * 100, 1) + ")";
         if (opSred/list.size() < 0.5){
             optbSred = "Opp: ТM(" + total + ")";
-            opTBSred = String.valueOf((int) (list.size() - opSred)) + "/" + list.size() + " (" + MyMath.round((list.size() - opSred) / list.size() * 100, 1) + ")";
+            opTBSred = (int) (list.size() - opSred) + "/" + list.size() + " (" + MyMath.round((list.size() - opSred) / list.size() * 100, 1) + ")";
         }
 
         total = opAverageYellowCards - 1;
         String optbMinus1 = "Opp: ТБ(" + total + ")";
-        String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + list.size() + " (" + MyMath.round(opMinus1 / list.size() * 100, 1) + ")";
+        String opTBMinus1 = (int) (opMinus1) + "/" + list.size() + " (" + MyMath.round(opMinus1 / list.size() * 100, 1) + ")";
         if (opMinus1/list.size() < 0.5){
             optbMinus1 = "Opp: ТM(" + total + ")";
-            opTBMinus1 = String.valueOf((int) (list.size() - opMinus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - opMinus1) / list.size() * 100, 1) + ")";
+            opTBMinus1 = (int) (list.size() - opMinus1) + "/" + list.size() + " (" + MyMath.round((list.size() - opMinus1) / list.size() * 100, 1) + ")";
         }
 
         String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-        String winSS = String.valueOf((int) win) + "/" + list.size() + " (" + MyMath.round(win / list.size() * 100, 1) + ")";
+        String winSS = (int) win + "/" + list.size() + " (" + MyMath.round(win / list.size() * 100, 1) + ")";
 
         String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-        String winXSS = String.valueOf((int) winX) + "/" + list.size() + " (" + MyMath.round(winX / list.size() * 100, 1) + ")";
+        String winXSS = (int) winX + "/" + list.size() + " (" + MyMath.round(winX / list.size() * 100, 1) + ")";
 
         String[] colHeads = {"Ставка", "Заход и %"};
         Object[][] data = {
@@ -2774,79 +2774,79 @@ public class TableMaker {
                 winX++;
         }
 
-        String t85 = "ТБ(" + String.valueOf(totalAverageYellowCards-1) + ")";
-        String t85s = String.valueOf((int) (totalMinus1)) + "/" + list.size() + " (" + MyMath.round(totalMinus1 / list.size() * 100, 1) + ")";
+        String t85 = "ТБ(" + (totalAverageYellowCards - 1) + ")";
+        String t85s = (int) (totalMinus1) + "/" + list.size() + " (" + MyMath.round(totalMinus1 / list.size() * 100, 1) + ")";
         if (totalMinus1/list.size() < 0.5){
-            t85 = "ТM(" + String.valueOf(totalAverageYellowCards-1) + ")";
-            t85s = String.valueOf((int) (list.size() - totalMinus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - totalMinus1) / list.size() * 100, 1) + ")";
+            t85 = "ТM(" + (totalAverageYellowCards - 1) + ")";
+            t85s = (int) (list.size() - totalMinus1) + "/" + list.size() + " (" + MyMath.round((list.size() - totalMinus1) / list.size() * 100, 1) + ")";
         }
-        String t95 = "ТБ(" + String.valueOf(totalAverageYellowCards) + ")";
-        String t95s = String.valueOf((int) (totalSred)) + "/" + list.size() + " (" + MyMath.round(totalSred / list.size() * 100, 1) + ")";
+        String t95 = "ТБ(" + totalAverageYellowCards + ")";
+        String t95s = (int) (totalSred) + "/" + list.size() + " (" + MyMath.round(totalSred / list.size() * 100, 1) + ")";
         if (totalSred/list.size() < 0.5){
-            t95 = "ТM(" + String.valueOf(totalAverageYellowCards) + ")";
-            t95s = String.valueOf((int) (list.size() - totalSred)) + "/" + list.size() + " (" + MyMath.round((list.size() - totalSred) / list.size() * 100, 1) + ")";
+            t95 = "ТM(" + totalAverageYellowCards + ")";
+            t95s = (int) (list.size() - totalSred) + "/" + list.size() + " (" + MyMath.round((list.size() - totalSred) / list.size() * 100, 1) + ")";
         }
 
-        String t105 = "ТБ(" + String.valueOf(totalAverageYellowCards+1) + ")";
-        String t105s = String.valueOf((int) (totalPlus1)) + "/" + list.size() + " (" + MyMath.round(totalPlus1 / list.size() * 100, 1) + ")";
+        String t105 = "ТБ(" + (totalAverageYellowCards + 1) + ")";
+        String t105s = (int) (totalPlus1) + "/" + list.size() + " (" + MyMath.round(totalPlus1 / list.size() * 100, 1) + ")";
         if (totalPlus1/list.size() < 0.5){
-            t105 = "ТM(" + String.valueOf(totalAverageYellowCards+1) + ")";
-            t105s = String.valueOf((int) (list.size() - totalPlus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - totalPlus1) / list.size() * 100, 1) + ")";
+            t105 = "ТM(" + (totalAverageYellowCards + 1) + ")";
+            t105s = (int) (list.size() - totalPlus1) + "/" + list.size() + " (" + MyMath.round((list.size() - totalPlus1) / list.size() * 100, 1) + ")";
         }
 
         double total = selfAverageYellowCards + 1;
         String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-        String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + list.size() + " (" + MyMath.round(selfPlus1 / list.size() * 100, 1) + ")";
+        String selfTBPlus1 = (int) (selfPlus1) + "/" + list.size() + " (" + MyMath.round(selfPlus1 / list.size() * 100, 1) + ")";
         if (selfPlus1/list.size() < 0.5){
             itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-            selfTBPlus1 = String.valueOf((int) (list.size() - selfPlus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - selfPlus1) / list.size() * 100, 1) + ")";
+            selfTBPlus1 = (int) (list.size() - selfPlus1) + "/" + list.size() + " (" + MyMath.round((list.size() - selfPlus1) / list.size() * 100, 1) + ")";
         }
 
         total = selfAverageYellowCards;
         String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-        String selfTBSred = String.valueOf((int) (selfSred)) + "/" + list.size() + " (" + MyMath.round(selfSred / list.size() * 100, 1) + ")";
+        String selfTBSred = (int) (selfSred) + "/" + list.size() + " (" + MyMath.round(selfSred / list.size() * 100, 1) + ")";
         if (selfSred/list.size() < 0.5){
             itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-            selfTBSred = String.valueOf((int) (list.size() - selfSred)) + "/" + list.size() + " (" + MyMath.round((list.size() - selfSred) / list.size() * 100, 1) + ")";
+            selfTBSred = (int) (list.size() - selfSred) + "/" + list.size() + " (" + MyMath.round((list.size() - selfSred) / list.size() * 100, 1) + ")";
         }
 
         total = selfAverageYellowCards - 1;
         String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-        String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + list.size() + " (" + MyMath.round(selfMinus1 / list.size() * 100, 1) + ")";
+        String selfTBMinus1 = (int) (selfMinus1) + "/" + list.size() + " (" + MyMath.round(selfMinus1 / list.size() * 100, 1) + ")";
         if (selfMinus1/list.size() < 0.5){
             itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-            selfTBMinus1 = String.valueOf((int) (list.size() - selfMinus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - selfMinus1) / list.size() * 100, 1) + ")";
+            selfTBMinus1 = (int) (list.size() - selfMinus1) + "/" + list.size() + " (" + MyMath.round((list.size() - selfMinus1) / list.size() * 100, 1) + ")";
         }
 
         total = opAverageYellowCards + 1;
         String optbPlus1 = "Opp: ТБ(" + total + ")";
-        String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + list.size() + " (" + MyMath.round(opPlus1 / list.size() * 100, 1) + ")";
+        String opTBPlus1 = (int) (opPlus1) + "/" + list.size() + " (" + MyMath.round(opPlus1 / list.size() * 100, 1) + ")";
         if (opPlus1/list.size() < 0.5){
             optbPlus1 = "Opp: ТM(" + total + ")";
-            opTBPlus1 = String.valueOf((int) (list.size() - opPlus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - opPlus1) / list.size() * 100, 1) + ")";
+            opTBPlus1 = (int) (list.size() - opPlus1) + "/" + list.size() + " (" + MyMath.round((list.size() - opPlus1) / list.size() * 100, 1) + ")";
         }
 
         total = opAverageYellowCards;
         String optbSred = "Opp: ТБ(" + total + ")";
-        String opTBSred = String.valueOf((int) (opSred)) + "/" + list.size() + " (" + MyMath.round(opSred / list.size() * 100, 1) + ")";
+        String opTBSred = (int) (opSred) + "/" + list.size() + " (" + MyMath.round(opSred / list.size() * 100, 1) + ")";
         if (opSred/list.size() < 0.5){
             optbSred = "Opp: ТM(" + total + ")";
-            opTBSred = String.valueOf((int) (list.size() - opSred)) + "/" + list.size() + " (" + MyMath.round((list.size() - opSred) / list.size() * 100, 1) + ")";
+            opTBSred = (int) (list.size() - opSred) + "/" + list.size() + " (" + MyMath.round((list.size() - opSred) / list.size() * 100, 1) + ")";
         }
 
         total = opAverageYellowCards - 1;
         String optbMinus1 = "Opp: ТБ(" + total + ")";
-        String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + list.size() + " (" + MyMath.round(opMinus1 / list.size() * 100, 1) + ")";
+        String opTBMinus1 = (int) (opMinus1) + "/" + list.size() + " (" + MyMath.round(opMinus1 / list.size() * 100, 1) + ")";
         if (opMinus1/list.size() < 0.5){
             optbMinus1 = "Opp: ТM(" + total + ")";
-            opTBMinus1 = String.valueOf((int) (list.size() - opMinus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - opMinus1) / list.size() * 100, 1) + ")";
+            opTBMinus1 = (int) (list.size() - opMinus1) + "/" + list.size() + " (" + MyMath.round((list.size() - opMinus1) / list.size() * 100, 1) + ")";
         }
 
         String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-        String winSS = String.valueOf((int) win) + "/" + list.size() + " (" + MyMath.round(win / list.size() * 100, 1) + ")";
+        String winSS = (int) win + "/" + list.size() + " (" + MyMath.round(win / list.size() * 100, 1) + ")";
 
         String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-        String winXSS = String.valueOf((int) winX) + "/" + list.size() + " (" + MyMath.round(winX / list.size() * 100, 1) + ")";
+        String winXSS = (int) winX + "/" + list.size() + " (" + MyMath.round(winX / list.size() * 100, 1) + ")";
 
         String[] colHeads = {"Ставка", "Заход и %"};
         Object[][] data = {
@@ -2944,79 +2944,79 @@ public class TableMaker {
                 winX++;
         }
 
-        String t85 = "ТБ(" + String.valueOf(totalAverageYellowCards-1) + ")";
-        String t85s = String.valueOf((int) (totalMinus1)) + "/" + list.size() + " (" + MyMath.round(totalMinus1 / list.size() * 100, 1) + ")";
+        String t85 = "ТБ(" + (totalAverageYellowCards - 1) + ")";
+        String t85s = (int) (totalMinus1) + "/" + list.size() + " (" + MyMath.round(totalMinus1 / list.size() * 100, 1) + ")";
         if (totalMinus1/list.size() < 0.5){
-            t85 = "ТM(" + String.valueOf(totalAverageYellowCards-1) + ")";
-            t85s = String.valueOf((int) (list.size() - totalMinus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - totalMinus1) / list.size() * 100, 1) + ")";
+            t85 = "ТM(" + (totalAverageYellowCards - 1) + ")";
+            t85s = (int) (list.size() - totalMinus1) + "/" + list.size() + " (" + MyMath.round((list.size() - totalMinus1) / list.size() * 100, 1) + ")";
         }
-        String t95 = "ТБ(" + String.valueOf(totalAverageYellowCards) + ")";
-        String t95s = String.valueOf((int) (totalSred)) + "/" + list.size() + " (" + MyMath.round(totalSred / list.size() * 100, 1) + ")";
+        String t95 = "ТБ(" + totalAverageYellowCards + ")";
+        String t95s = (int) (totalSred) + "/" + list.size() + " (" + MyMath.round(totalSred / list.size() * 100, 1) + ")";
         if (totalSred/list.size() < 0.5){
-            t95 = "ТM(" + String.valueOf(totalAverageYellowCards) + ")";
-            t95s = String.valueOf((int) (list.size() - totalSred)) + "/" + list.size() + " (" + MyMath.round((list.size() - totalSred) / list.size() * 100, 1) + ")";
+            t95 = "ТM(" + totalAverageYellowCards + ")";
+            t95s = (int) (list.size() - totalSred) + "/" + list.size() + " (" + MyMath.round((list.size() - totalSred) / list.size() * 100, 1) + ")";
         }
 
-        String t105 = "ТБ(" + String.valueOf(totalAverageYellowCards+1) + ")";
-        String t105s = String.valueOf((int) (totalPlus1)) + "/" + list.size() + " (" + MyMath.round(totalPlus1 / list.size() * 100, 1) + ")";
+        String t105 = "ТБ(" + (totalAverageYellowCards + 1) + ")";
+        String t105s = (int) (totalPlus1) + "/" + list.size() + " (" + MyMath.round(totalPlus1 / list.size() * 100, 1) + ")";
         if (totalPlus1/list.size() < 0.5){
-            t105 = "ТM(" + String.valueOf(totalAverageYellowCards+1) + ")";
-            t105s = String.valueOf((int) (list.size() - totalPlus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - totalPlus1) / list.size() * 100, 1) + ")";
+            t105 = "ТM(" + (totalAverageYellowCards + 1) + ")";
+            t105s = (int) (list.size() - totalPlus1) + "/" + list.size() + " (" + MyMath.round((list.size() - totalPlus1) / list.size() * 100, 1) + ")";
         }
 
         double total = selfAverageYellowCards + 1;
         String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-        String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + list.size() + " (" + MyMath.round(selfPlus1 / list.size() * 100, 1) + ")";
+        String selfTBPlus1 = (int) (selfPlus1) + "/" + list.size() + " (" + MyMath.round(selfPlus1 / list.size() * 100, 1) + ")";
         if (selfPlus1/list.size() < 0.5){
             itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-            selfTBPlus1 = String.valueOf((int) (list.size() - selfPlus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - selfPlus1) / list.size() * 100, 1) + ")";
+            selfTBPlus1 = (int) (list.size() - selfPlus1) + "/" + list.size() + " (" + MyMath.round((list.size() - selfPlus1) / list.size() * 100, 1) + ")";
         }
 
         total = selfAverageYellowCards;
         String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-        String selfTBSred = String.valueOf((int) (selfSred)) + "/" + list.size() + " (" + MyMath.round(selfSred / list.size() * 100, 1) + ")";
+        String selfTBSred = (int) (selfSred) + "/" + list.size() + " (" + MyMath.round(selfSred / list.size() * 100, 1) + ")";
         if (selfSred/list.size() < 0.5){
             itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-            selfTBSred = String.valueOf((int) (list.size() - selfSred)) + "/" + list.size() + " (" + MyMath.round((list.size() - selfSred) / list.size() * 100, 1) + ")";
+            selfTBSred = (int) (list.size() - selfSred) + "/" + list.size() + " (" + MyMath.round((list.size() - selfSred) / list.size() * 100, 1) + ")";
         }
 
         total = selfAverageYellowCards - 1;
         String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-        String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + list.size() + " (" + MyMath.round(selfMinus1 / list.size() * 100, 1) + ")";
+        String selfTBMinus1 = (int) (selfMinus1) + "/" + list.size() + " (" + MyMath.round(selfMinus1 / list.size() * 100, 1) + ")";
         if (selfMinus1/list.size() < 0.5){
             itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-            selfTBMinus1 = String.valueOf((int) (list.size() - selfMinus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - selfMinus1) / list.size() * 100, 1) + ")";
+            selfTBMinus1 = (int) (list.size() - selfMinus1) + "/" + list.size() + " (" + MyMath.round((list.size() - selfMinus1) / list.size() * 100, 1) + ")";
         }
 
         total = opAverageYellowCards + 1;
         String optbPlus1 = "Opp: ТБ(" + total + ")";
-        String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + list.size() + " (" + MyMath.round(opPlus1 / list.size() * 100, 1) + ")";
+        String opTBPlus1 = (int) (opPlus1) + "/" + list.size() + " (" + MyMath.round(opPlus1 / list.size() * 100, 1) + ")";
         if (opPlus1/list.size() < 0.5){
             optbPlus1 = "Opp: ТM(" + total + ")";
-            opTBPlus1 = String.valueOf((int) (list.size() - opPlus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - opPlus1) / list.size() * 100, 1) + ")";
+            opTBPlus1 = (int) (list.size() - opPlus1) + "/" + list.size() + " (" + MyMath.round((list.size() - opPlus1) / list.size() * 100, 1) + ")";
         }
 
         total = opAverageYellowCards;
         String optbSred = "Opp: ТБ(" + total + ")";
-        String opTBSred = String.valueOf((int) (opSred)) + "/" + list.size() + " (" + MyMath.round(opSred / list.size() * 100, 1) + ")";
+        String opTBSred = (int) (opSred) + "/" + list.size() + " (" + MyMath.round(opSred / list.size() * 100, 1) + ")";
         if (opSred/list.size() < 0.5){
             optbSred = "Opp: ТM(" + total + ")";
-            opTBSred = String.valueOf((int) (list.size() - opSred)) + "/" + list.size() + " (" + MyMath.round((list.size() - opSred) / list.size() * 100, 1) + ")";
+            opTBSred = (int) (list.size() - opSred) + "/" + list.size() + " (" + MyMath.round((list.size() - opSred) / list.size() * 100, 1) + ")";
         }
 
         total = opAverageYellowCards - 1;
         String optbMinus1 = "Opp: ТБ(" + total + ")";
-        String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + list.size() + " (" + MyMath.round(opMinus1 / list.size() * 100, 1) + ")";
+        String opTBMinus1 = (int) (opMinus1) + "/" + list.size() + " (" + MyMath.round(opMinus1 / list.size() * 100, 1) + ")";
         if (opMinus1/list.size() < 0.5){
             optbMinus1 = "Opp: ТM(" + total + ")";
-            opTBMinus1 = String.valueOf((int) (list.size() - opMinus1)) + "/" + list.size() + " (" + MyMath.round((list.size() - opMinus1) / list.size() * 100, 1) + ")";
+            opTBMinus1 = (int) (list.size() - opMinus1) + "/" + list.size() + " (" + MyMath.round((list.size() - opMinus1) / list.size() * 100, 1) + ")";
         }
 
         String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-        String winSS = String.valueOf((int) win) + "/" + list.size() + " (" + MyMath.round(win / list.size() * 100, 1) + ")";
+        String winSS = (int) win + "/" + list.size() + " (" + MyMath.round(win / list.size() * 100, 1) + ")";
 
         String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-        String winXSS = String.valueOf((int) winX) + "/" + list.size() + " (" + MyMath.round(winX / list.size() * 100, 1) + ")";
+        String winXSS = (int) winX + "/" + list.size() + " (" + MyMath.round(winX / list.size() * 100, 1) + ")";
 
         String[] colHeads = {"Ставка", "Заход и %"};
         Object[][] data = {
@@ -3125,79 +3125,79 @@ public class TableMaker {
         Object[] colHeads;
         Object[][] data;
         if (number > 0){
-            String t85 = "ТБ(" + String.valueOf(totalAverageDribbles-1) + ")";
-            String t85s = String.valueOf((int) (totalMinus1)) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
+            String t85 = "ТБ(" + (totalAverageDribbles - 1) + ")";
+            String t85s = (int) (totalMinus1) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
             if (totalMinus1/number < 0.5){
-                t85 = "ТM(" + String.valueOf(totalAverageDribbles-1) + ")";
-                t85s = String.valueOf((int) (number - totalMinus1)) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
+                t85 = "ТM(" + (totalAverageDribbles - 1) + ")";
+                t85s = (int) (number - totalMinus1) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
             }
-            String t95 = "ТБ(" + String.valueOf(totalAverageDribbles) + ")";
-            String t95s = String.valueOf((int) (totalSred)) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
+            String t95 = "ТБ(" + totalAverageDribbles + ")";
+            String t95s = (int) (totalSred) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
             if (totalSred/number < 0.5){
-                t95 = "ТM(" + String.valueOf(totalAverageDribbles) + ")";
-                t95s = String.valueOf((int) (number - totalSred)) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
+                t95 = "ТM(" + totalAverageDribbles + ")";
+                t95s = (int) (number - totalSred) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
             }
 
-            String t105 = "ТБ(" + String.valueOf(totalAverageDribbles+1) + ")";
-            String t105s = String.valueOf((int) (totalPlus1)) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
+            String t105 = "ТБ(" + (totalAverageDribbles + 1) + ")";
+            String t105s = (int) (totalPlus1) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
             if (totalPlus1/number < 0.5){
-                t105 = "ТM(" + String.valueOf(totalAverageDribbles+1) + ")";
-                t105s = String.valueOf((int) (number - totalPlus1)) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
+                t105 = "ТM(" + (totalAverageDribbles + 1) + ")";
+                t105s = (int) (number - totalPlus1) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
             }
 
             double total = selfAverageDribbles + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageDribbles;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageDribbles - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageDribbles + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageDribbles;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageDribbles - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -3311,79 +3311,79 @@ public class TableMaker {
         Object[] colHeads;
         Object[][] data;
         if (number > 0){
-            String t85 = "ТБ(" + String.valueOf(totalAverageAerialsWon-1) + ")";
-            String t85s = String.valueOf((int) (totalMinus1)) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
+            String t85 = "ТБ(" + (totalAverageAerialsWon - 1) + ")";
+            String t85s = (int) (totalMinus1) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
             if (totalMinus1/number < 0.5){
-                t85 = "ТM(" + String.valueOf(totalAverageAerialsWon-1) + ")";
-                t85s = String.valueOf((int) (number - totalMinus1)) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
+                t85 = "ТM(" + (totalAverageAerialsWon - 1) + ")";
+                t85s = (int) (number - totalMinus1) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
             }
-            String t95 = "ТБ(" + String.valueOf(totalAverageAerialsWon) + ")";
-            String t95s = String.valueOf((int) (totalSred)) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
+            String t95 = "ТБ(" + totalAverageAerialsWon + ")";
+            String t95s = (int) (totalSred) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
             if (totalSred/number < 0.5){
-                t95 = "ТM(" + String.valueOf(totalAverageAerialsWon) + ")";
-                t95s = String.valueOf((int) (number - totalSred)) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
+                t95 = "ТM(" + totalAverageAerialsWon + ")";
+                t95s = (int) (number - totalSred) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
             }
 
-            String t105 = "ТБ(" + String.valueOf(totalAverageAerialsWon+1) + ")";
-            String t105s = String.valueOf((int) (totalPlus1)) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
+            String t105 = "ТБ(" + (totalAverageAerialsWon + 1) + ")";
+            String t105s = (int) (totalPlus1) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
             if (totalPlus1/number < 0.5){
-                t105 = "ТM(" + String.valueOf(totalAverageAerialsWon+1) + ")";
-                t105s = String.valueOf((int) (number - totalPlus1)) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
+                t105 = "ТM(" + (totalAverageAerialsWon + 1) + ")";
+                t105s = (int) (number - totalPlus1) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
             }
 
             double total = selfAverageAerialsWon + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageAerialsWon;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageAerialsWon - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageAerialsWon + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageAerialsWon;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageAerialsWon - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -3497,79 +3497,79 @@ public class TableMaker {
         Object[] colHeads;
         Object[][] data;
         if (number > 0){
-            String t85 = "ТБ(" + String.valueOf(totalAverageGoalKicks-1) + ")";
-            String t85s = String.valueOf((int) (totalMinus1)) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
+            String t85 = "ТБ(" + (totalAverageGoalKicks - 1) + ")";
+            String t85s = (int) (totalMinus1) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
             if (totalMinus1/number < 0.5){
-                t85 = "ТM(" + String.valueOf(totalAverageGoalKicks-1) + ")";
-                t85s = String.valueOf((int) (number - totalMinus1)) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
+                t85 = "ТM(" + (totalAverageGoalKicks - 1) + ")";
+                t85s = (int) (number - totalMinus1) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
             }
-            String t95 = "ТБ(" + String.valueOf(totalAverageGoalKicks) + ")";
-            String t95s = String.valueOf((int) (totalSred)) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
+            String t95 = "ТБ(" + totalAverageGoalKicks + ")";
+            String t95s = (int) (totalSred) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
             if (totalSred/number < 0.5){
-                t95 = "ТM(" + String.valueOf(totalAverageGoalKicks) + ")";
-                t95s = String.valueOf((int) (number - totalSred)) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
+                t95 = "ТM(" + totalAverageGoalKicks + ")";
+                t95s = (int) (number - totalSred) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
             }
 
-            String t105 = "ТБ(" + String.valueOf(totalAverageGoalKicks+1) + ")";
-            String t105s = String.valueOf((int) (totalPlus1)) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
+            String t105 = "ТБ(" + (totalAverageGoalKicks + 1) + ")";
+            String t105s = (int) (totalPlus1) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
             if (totalPlus1/number < 0.5){
-                t105 = "ТM(" + String.valueOf(totalAverageGoalKicks+1) + ")";
-                t105s = String.valueOf((int) (number - totalPlus1)) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
+                t105 = "ТM(" + (totalAverageGoalKicks + 1) + ")";
+                t105s = (int) (number - totalPlus1) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
             }
 
             double total = selfAverageGoalKicks + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageGoalKicks;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageGoalKicks - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageGoalsKicks + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageGoalsKicks;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageGoalsKicks - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -3683,79 +3683,79 @@ public class TableMaker {
         Object[] colHeads;
         Object[][] data;
         if (number > 0){
-            String t85 = "ТБ(" + String.valueOf(totalAverageThrowIns-1) + ")";
-            String t85s = String.valueOf((int) (totalMinus1)) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
+            String t85 = "ТБ(" + (totalAverageThrowIns - 1) + ")";
+            String t85s = (int) (totalMinus1) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
             if (totalMinus1/number < 0.5){
-                t85 = "ТM(" + String.valueOf(totalAverageThrowIns-1) + ")";
-                t85s = String.valueOf((int) (number - totalMinus1)) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
+                t85 = "ТM(" + (totalAverageThrowIns - 1) + ")";
+                t85s = (int) (number - totalMinus1) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
             }
-            String t95 = "ТБ(" + String.valueOf(totalAverageThrowIns) + ")";
-            String t95s = String.valueOf((int) (totalSred)) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
+            String t95 = "ТБ(" + totalAverageThrowIns + ")";
+            String t95s = (int) (totalSred) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
             if (totalSred/number < 0.5){
-                t95 = "ТM(" + String.valueOf(totalAverageThrowIns) + ")";
-                t95s = String.valueOf((int) (number - totalSred)) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
+                t95 = "ТM(" + totalAverageThrowIns + ")";
+                t95s = (int) (number - totalSred) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
             }
 
-            String t105 = "ТБ(" + String.valueOf(totalAverageThrowIns+1) + ")";
-            String t105s = String.valueOf((int) (totalPlus1)) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
+            String t105 = "ТБ(" + (totalAverageThrowIns + 1) + ")";
+            String t105s = (int) (totalPlus1) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
             if (totalPlus1/number < 0.5){
-                t105 = "ТM(" + String.valueOf(totalAverageThrowIns+1) + ")";
-                t105s = String.valueOf((int) (number - totalPlus1)) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
+                t105 = "ТM(" + (totalAverageThrowIns + 1) + ")";
+                t105s = (int) (number - totalPlus1) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
             }
 
             double total = selfAverageThrowIns + 1;
             String itbPlus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (selfPlus1)) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (selfPlus1) + "/" + number + " (" + MyMath.round(selfPlus1 / number * 100, 1) + ")";
             if (selfPlus1/number < 0.5){
                 itbPlus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - selfPlus1)) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - selfPlus1) + "/" + number + " (" + MyMath.round((number - selfPlus1) / number * 100, 1) + ")";
             }
 
             total = selfAverageThrowIns;
             String itbSred = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (selfSred)) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (selfSred) + "/" + number + " (" + MyMath.round(selfSred / number * 100, 1) + ")";
             if (selfSred/number < 0.5){
                 itbSred = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - selfSred)) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - selfSred) + "/" + number + " (" + MyMath.round((number - selfSred) / number * 100, 1) + ")";
             }
 
             total = selfAverageThrowIns - 1;
             String itbMinus1 = Team.getShortName(teamName) + ": ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (selfMinus1)) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (selfMinus1) + "/" + number + " (" + MyMath.round(selfMinus1 / number * 100, 1) + ")";
             if (selfMinus1/number < 0.5){
                 itbMinus1 = Team.getShortName(teamName) + ": ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - selfMinus1)) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - selfMinus1) + "/" + number + " (" + MyMath.round((number - selfMinus1) / number * 100, 1) + ")";
             }
 
             total = opAverageThrowIns + 1;
             String optbPlus1 = "Opp: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (opPlus1)) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (opPlus1) + "/" + number + " (" + MyMath.round(opPlus1 / number * 100, 1) + ")";
             if (opPlus1/number < 0.5){
                 optbPlus1 = "Opp: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - opPlus1)) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - opPlus1) + "/" + number + " (" + MyMath.round((number - opPlus1) / number * 100, 1) + ")";
             }
 
             total = opAverageThrowIns;
             String optbSred = "Opp: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (opSred)) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
+            String opTBSred = (int) (opSred) + "/" + number + " (" + MyMath.round(opSred / number * 100, 1) + ")";
             if (opSred/number < 0.5){
                 optbSred = "Opp: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - opSred)) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - opSred) + "/" + number + " (" + MyMath.round((number - opSred) / number * 100, 1) + ")";
             }
 
             total = opAverageThrowIns - 1;
             String optbMinus1 = "Opp: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (opMinus1)) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (opMinus1) + "/" + number + " (" + MyMath.round(opMinus1 / number * 100, 1) + ")";
             if (opMinus1/number < 0.5){
                 optbMinus1 = "Opp: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - opMinus1)) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - opMinus1) + "/" + number + " (" + MyMath.round((number - opMinus1) / number * 100, 1) + ")";
             }
 
             String winS = Team.getShortName(teamName) + ": Ф(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = Team.getShortName(teamName) + ": Ф(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -3973,79 +3973,79 @@ public class TableMaker {
         Object[] colHeads;
         Object[][] data;
         if (number > 0){
-            String t85 = "ТБ(" + String.valueOf(totalAverageFouls-1) + ")";
-            String t85s = String.valueOf((int) (totalMinus1)) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
+            String t85 = "ТБ(" + (totalAverageFouls - 1) + ")";
+            String t85s = (int) (totalMinus1) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
             if (totalMinus1/number < 0.5){
-                t85 = "ТM(" + String.valueOf(totalAverageFouls-1) + ")";
-                t85s = String.valueOf((int) (number - totalMinus1)) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
+                t85 = "ТM(" + (totalAverageFouls - 1) + ")";
+                t85s = (int) (number - totalMinus1) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
             }
-            String t95 = "ТБ(" + String.valueOf(totalAverageFouls) + ")";
-            String t95s = String.valueOf((int) (totalSred)) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
+            String t95 = "ТБ(" + totalAverageFouls + ")";
+            String t95s = (int) (totalSred) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
             if (totalSred/number < 0.5){
-                t95 = "ТM(" + String.valueOf(totalAverageFouls) + ")";
-                t95s = String.valueOf((int) (number - totalSred)) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
+                t95 = "ТM(" + totalAverageFouls + ")";
+                t95s = (int) (number - totalSred) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
             }
 
-            String t105 = "ТБ(" + String.valueOf(totalAverageFouls+1) + ")";
-            String t105s = String.valueOf((int) (totalPlus1)) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
+            String t105 = "ТБ(" + (totalAverageFouls + 1) + ")";
+            String t105s = (int) (totalPlus1) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
             if (totalPlus1/number < 0.5){
-                t105 = "ТM(" + String.valueOf(totalAverageFouls+1) + ")";
-                t105s = String.valueOf((int) (number - totalPlus1)) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
+                t105 = "ТM(" + (totalAverageFouls + 1) + ")";
+                t105s = (int) (number - totalPlus1) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
             }
 
             double total = homeAverageFouls + 1;
             String itbPlus1 = "Хозяева: ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (homePlus1)) + "/" + number + " (" + MyMath.round(homePlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (homePlus1) + "/" + number + " (" + MyMath.round(homePlus1 / number * 100, 1) + ")";
             if (homePlus1/number < 0.5){
                 itbPlus1 = "Хозяева: ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - homePlus1)) + "/" + number + " (" + MyMath.round((number - homePlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - homePlus1) + "/" + number + " (" + MyMath.round((number - homePlus1) / number * 100, 1) + ")";
             }
 
             total = homeAverageFouls;
             String itbSred = "Хозяева: ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (homeSred)) + "/" + number + " (" + MyMath.round(homeSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (homeSred) + "/" + number + " (" + MyMath.round(homeSred / number * 100, 1) + ")";
             if (homeSred/number < 0.5){
                 itbSred = "Хозяева: ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - homeSred)) + "/" + number + " (" + MyMath.round((number - homeSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - homeSred) + "/" + number + " (" + MyMath.round((number - homeSred) / number * 100, 1) + ")";
             }
 
             total = homeAverageFouls - 1;
             String itbMinus1 = "Хозяева: ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (homeMinus1)) + "/" + number + " (" + MyMath.round(homeMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (homeMinus1) + "/" + number + " (" + MyMath.round(homeMinus1 / number * 100, 1) + ")";
             if (homeMinus1/number < 0.5){
                 itbMinus1 = "Хозяева: ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - homeMinus1)) + "/" + number + " (" + MyMath.round((number - homeMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - homeMinus1) + "/" + number + " (" + MyMath.round((number - homeMinus1) / number * 100, 1) + ")";
             }
 
             total = awayAverageFouls + 1;
             String optbPlus1 = "Гости: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (awayPlus1)) + "/" + number + " (" + MyMath.round(awayPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (awayPlus1) + "/" + number + " (" + MyMath.round(awayPlus1 / number * 100, 1) + ")";
             if (awayPlus1/number < 0.5){
                 optbPlus1 = "Гости: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - awayPlus1)) + "/" + number + " (" + MyMath.round((number - awayPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - awayPlus1) + "/" + number + " (" + MyMath.round((number - awayPlus1) / number * 100, 1) + ")";
             }
 
             total = awayAverageFouls;
             String optbSred = "Гости: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (awaySred)) + "/" + number + " (" + MyMath.round(awaySred / number * 100, 1) + ")";
+            String opTBSred = (int) (awaySred) + "/" + number + " (" + MyMath.round(awaySred / number * 100, 1) + ")";
             if (awaySred/number < 0.5){
                 optbSred = "Гости: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - awaySred)) + "/" + number + " (" + MyMath.round((number - awaySred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - awaySred) + "/" + number + " (" + MyMath.round((number - awaySred) / number * 100, 1) + ")";
             }
 
             total = awayAverageFouls - 1;
             String optbMinus1 = "Гости: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (awayMinus1)) + "/" + number + " (" + MyMath.round(awayMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (awayMinus1) + "/" + number + " (" + MyMath.round(awayMinus1 / number * 100, 1) + ")";
             if (awayMinus1/number < 0.5){
                 optbMinus1 = "Гости: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - awayMinus1)) + "/" + number + " (" + MyMath.round((number - awayMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - awayMinus1) + "/" + number + " (" + MyMath.round((number - awayMinus1) / number * 100, 1) + ")";
             }
 
             String winS = "Ф1(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = "Ф1(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -4158,79 +4158,79 @@ public class TableMaker {
         Object[] colHeads;
         Object[][] data;
         if (number > 0){
-            String t85 = "ТБ(" + String.valueOf(totalAverageFouls-1) + ")";
-            String t85s = String.valueOf((int) (totalMinus1)) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
+            String t85 = "ТБ(" + (totalAverageFouls - 1) + ")";
+            String t85s = (int) (totalMinus1) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
             if (totalMinus1/number < 0.5){
-                t85 = "ТM(" + String.valueOf(totalAverageFouls-1) + ")";
-                t85s = String.valueOf((int) (number - totalMinus1)) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
+                t85 = "ТM(" + (totalAverageFouls - 1) + ")";
+                t85s = (int) (number - totalMinus1) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
             }
-            String t95 = "ТБ(" + String.valueOf(totalAverageFouls) + ")";
-            String t95s = String.valueOf((int) (totalSred)) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
+            String t95 = "ТБ(" + totalAverageFouls + ")";
+            String t95s = (int) (totalSred) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
             if (totalSred/number < 0.5){
-                t95 = "ТM(" + String.valueOf(totalAverageFouls) + ")";
-                t95s = String.valueOf((int) (number - totalSred)) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
+                t95 = "ТM(" + totalAverageFouls + ")";
+                t95s = (int) (number - totalSred) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
             }
 
-            String t105 = "ТБ(" + String.valueOf(totalAverageFouls+1) + ")";
-            String t105s = String.valueOf((int) (totalPlus1)) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
+            String t105 = "ТБ(" + (totalAverageFouls + 1) + ")";
+            String t105s = (int) (totalPlus1) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
             if (totalPlus1/number < 0.5){
-                t105 = "ТM(" + String.valueOf(totalAverageFouls+1) + ")";
-                t105s = String.valueOf((int) (number - totalPlus1)) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
+                t105 = "ТM(" + (totalAverageFouls + 1) + ")";
+                t105s = (int) (number - totalPlus1) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
             }
 
             double total = homeAverageFouls + 1;
             String itbPlus1 = "Хозяева: ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (homePlus1)) + "/" + number + " (" + MyMath.round(homePlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (homePlus1) + "/" + number + " (" + MyMath.round(homePlus1 / number * 100, 1) + ")";
             if (homePlus1/number < 0.5){
                 itbPlus1 = "Хозяева: ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - homePlus1)) + "/" + number + " (" + MyMath.round((number - homePlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - homePlus1) + "/" + number + " (" + MyMath.round((number - homePlus1) / number * 100, 1) + ")";
             }
 
             total = homeAverageFouls;
             String itbSred = "Хозяева: ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (homeSred)) + "/" + number + " (" + MyMath.round(homeSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (homeSred) + "/" + number + " (" + MyMath.round(homeSred / number * 100, 1) + ")";
             if (homeSred/number < 0.5){
                 itbSred = "Хозяева: ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - homeSred)) + "/" + number + " (" + MyMath.round((number - homeSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - homeSred) + "/" + number + " (" + MyMath.round((number - homeSred) / number * 100, 1) + ")";
             }
 
             total = homeAverageFouls - 1;
             String itbMinus1 = "Хозяева: ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (homeMinus1)) + "/" + number + " (" + MyMath.round(homeMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (homeMinus1) + "/" + number + " (" + MyMath.round(homeMinus1 / number * 100, 1) + ")";
             if (homeMinus1/number < 0.5){
                 itbMinus1 = "Хозяева: ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - homeMinus1)) + "/" + number + " (" + MyMath.round((number - homeMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - homeMinus1) + "/" + number + " (" + MyMath.round((number - homeMinus1) / number * 100, 1) + ")";
             }
 
             total = awayAverageFouls + 1;
             String optbPlus1 = "Гости: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (awayPlus1)) + "/" + number + " (" + MyMath.round(awayPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (awayPlus1) + "/" + number + " (" + MyMath.round(awayPlus1 / number * 100, 1) + ")";
             if (awayPlus1/number < 0.5){
                 optbPlus1 = "Гости: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - awayPlus1)) + "/" + number + " (" + MyMath.round((number - awayPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - awayPlus1) + "/" + number + " (" + MyMath.round((number - awayPlus1) / number * 100, 1) + ")";
             }
 
             total = awayAverageFouls;
             String optbSred = "Гости: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (awaySred)) + "/" + number + " (" + MyMath.round(awaySred / number * 100, 1) + ")";
+            String opTBSred = (int) (awaySred) + "/" + number + " (" + MyMath.round(awaySred / number * 100, 1) + ")";
             if (awaySred/number < 0.5){
                 optbSred = "Гости: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - awaySred)) + "/" + number + " (" + MyMath.round((number - awaySred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - awaySred) + "/" + number + " (" + MyMath.round((number - awaySred) / number * 100, 1) + ")";
             }
 
             total = awayAverageFouls - 1;
             String optbMinus1 = "Гости: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (awayMinus1)) + "/" + number + " (" + MyMath.round(awayMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (awayMinus1) + "/" + number + " (" + MyMath.round(awayMinus1 / number * 100, 1) + ")";
             if (awayMinus1/number < 0.5){
                 optbMinus1 = "Гости: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - awayMinus1)) + "/" + number + " (" + MyMath.round((number - awayMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - awayMinus1) + "/" + number + " (" + MyMath.round((number - awayMinus1) / number * 100, 1) + ")";
             }
 
             String winS = "Ф1(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = "Ф1(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -4343,79 +4343,79 @@ public class TableMaker {
         Object[] colHeads;
         Object[][] data;
         if (number > 0){
-            String t85 = "ТБ(" + String.valueOf(totalAverageFouls-1) + ")";
-            String t85s = String.valueOf((int) (totalMinus1)) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
+            String t85 = "ТБ(" + (totalAverageFouls - 1) + ")";
+            String t85s = (int) (totalMinus1) + "/" + number + " (" + MyMath.round(totalMinus1 / number * 100, 1) + ")";
             if (totalMinus1/number < 0.5){
-                t85 = "ТM(" + String.valueOf(totalAverageFouls-1) + ")";
-                t85s = String.valueOf((int) (number - totalMinus1)) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
+                t85 = "ТM(" + (totalAverageFouls - 1) + ")";
+                t85s = (int) (number - totalMinus1) + "/" + number + " (" + MyMath.round((number - totalMinus1) / number * 100, 1) + ")";
             }
-            String t95 = "ТБ(" + String.valueOf(totalAverageFouls) + ")";
-            String t95s = String.valueOf((int) (totalSred)) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
+            String t95 = "ТБ(" + totalAverageFouls + ")";
+            String t95s = (int) (totalSred) + "/" + number + " (" + MyMath.round(totalSred / number * 100, 1) + ")";
             if (totalSred/number < 0.5){
-                t95 = "ТM(" + String.valueOf(totalAverageFouls) + ")";
-                t95s = String.valueOf((int) (number - totalSred)) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
+                t95 = "ТM(" + totalAverageFouls + ")";
+                t95s = (int) (number - totalSred) + "/" + number + " (" + MyMath.round((number - totalSred) / number * 100, 1) + ")";
             }
 
-            String t105 = "ТБ(" + String.valueOf(totalAverageFouls+1) + ")";
-            String t105s = String.valueOf((int) (totalPlus1)) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
+            String t105 = "ТБ(" + (totalAverageFouls + 1) + ")";
+            String t105s = (int) (totalPlus1) + "/" + number + " (" + MyMath.round(totalPlus1 / number * 100, 1) + ")";
             if (totalPlus1/number < 0.5){
-                t105 = "ТM(" + String.valueOf(totalAverageFouls+1) + ")";
-                t105s = String.valueOf((int) (number - totalPlus1)) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
+                t105 = "ТM(" + (totalAverageFouls + 1) + ")";
+                t105s = (int) (number - totalPlus1) + "/" + number + " (" + MyMath.round((number - totalPlus1) / number * 100, 1) + ")";
             }
 
             double total = homeAverageFouls + 1;
             String itbPlus1 = "Хозяева: ТБ(" + total + ")";
-            String selfTBPlus1 = String.valueOf((int) (homePlus1)) + "/" + number + " (" + MyMath.round(homePlus1 / number * 100, 1) + ")";
+            String selfTBPlus1 = (int) (homePlus1) + "/" + number + " (" + MyMath.round(homePlus1 / number * 100, 1) + ")";
             if (homePlus1/number < 0.5){
                 itbPlus1 = "Хозяева: ТM(" + total + ")";
-                selfTBPlus1 = String.valueOf((int) (number - homePlus1)) + "/" + number + " (" + MyMath.round((number - homePlus1) / number * 100, 1) + ")";
+                selfTBPlus1 = (int) (number - homePlus1) + "/" + number + " (" + MyMath.round((number - homePlus1) / number * 100, 1) + ")";
             }
 
             total = homeAverageFouls;
             String itbSred = "Хозяева: ТБ(" + total + ")";
-            String selfTBSred = String.valueOf((int) (homeSred)) + "/" + number + " (" + MyMath.round(homeSred / number * 100, 1) + ")";
+            String selfTBSred = (int) (homeSred) + "/" + number + " (" + MyMath.round(homeSred / number * 100, 1) + ")";
             if (homeSred/number < 0.5){
                 itbSred = "Хозяева: ТM(" + total + ")";
-                selfTBSred = String.valueOf((int) (number - homeSred)) + "/" + number + " (" + MyMath.round((number - homeSred) / number * 100, 1) + ")";
+                selfTBSred = (int) (number - homeSred) + "/" + number + " (" + MyMath.round((number - homeSred) / number * 100, 1) + ")";
             }
 
             total = homeAverageFouls - 1;
             String itbMinus1 = "Хозяева: ТБ(" + total + ")";
-            String selfTBMinus1 = String.valueOf((int) (homeMinus1)) + "/" + number + " (" + MyMath.round(homeMinus1 / number * 100, 1) + ")";
+            String selfTBMinus1 = (int) (homeMinus1) + "/" + number + " (" + MyMath.round(homeMinus1 / number * 100, 1) + ")";
             if (homeMinus1/number < 0.5){
                 itbMinus1 = "Хозяева: ТM(" + total + ")";
-                selfTBMinus1 = String.valueOf((int) (number - homeMinus1)) + "/" + number + " (" + MyMath.round((number - homeMinus1) / number * 100, 1) + ")";
+                selfTBMinus1 = (int) (number - homeMinus1) + "/" + number + " (" + MyMath.round((number - homeMinus1) / number * 100, 1) + ")";
             }
 
             total = awayAverageFouls + 1;
             String optbPlus1 = "Гости: ТБ(" + total + ")";
-            String opTBPlus1 = String.valueOf((int) (awayPlus1)) + "/" + number + " (" + MyMath.round(awayPlus1 / number * 100, 1) + ")";
+            String opTBPlus1 = (int) (awayPlus1) + "/" + number + " (" + MyMath.round(awayPlus1 / number * 100, 1) + ")";
             if (awayPlus1/number < 0.5){
                 optbPlus1 = "Гости: ТM(" + total + ")";
-                opTBPlus1 = String.valueOf((int) (number - awayPlus1)) + "/" + number + " (" + MyMath.round((number - awayPlus1) / number * 100, 1) + ")";
+                opTBPlus1 = (int) (number - awayPlus1) + "/" + number + " (" + MyMath.round((number - awayPlus1) / number * 100, 1) + ")";
             }
 
             total = awayAverageFouls;
             String optbSred = "Гости: ТБ(" + total + ")";
-            String opTBSred = String.valueOf((int) (awaySred)) + "/" + number + " (" + MyMath.round(awaySred / number * 100, 1) + ")";
+            String opTBSred = (int) (awaySred) + "/" + number + " (" + MyMath.round(awaySred / number * 100, 1) + ")";
             if (awaySred/number < 0.5){
                 optbSred = "Гости: ТM(" + total + ")";
-                opTBSred = String.valueOf((int) (number - awaySred)) + "/" + number + " (" + MyMath.round((number - awaySred) / number * 100, 1) + ")";
+                opTBSred = (int) (number - awaySred) + "/" + number + " (" + MyMath.round((number - awaySred) / number * 100, 1) + ")";
             }
 
             total = awayAverageFouls - 1;
             String optbMinus1 = "Гости: ТБ(" + total + ")";
-            String opTBMinus1 = String.valueOf((int) (awayMinus1)) + "/" + number + " (" + MyMath.round(awayMinus1 / number * 100, 1) + ")";
+            String opTBMinus1 = (int) (awayMinus1) + "/" + number + " (" + MyMath.round(awayMinus1 / number * 100, 1) + ")";
             if (awayMinus1/number < 0.5){
                 optbMinus1 = "Гости: ТM(" + total + ")";
-                opTBMinus1 = String.valueOf((int) (number - awayMinus1)) + "/" + number + " (" + MyMath.round((number - awayMinus1) / number * 100, 1) + ")";
+                opTBMinus1 = (int) (number - awayMinus1) + "/" + number + " (" + MyMath.round((number - awayMinus1) / number * 100, 1) + ")";
             }
 
             String winS = "Ф1(-0.5)";
-            String winSS = String.valueOf((int) win) + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
+            String winSS = (int) win + "/" + number + " (" + MyMath.round(win / number * 100, 1) + ")";
 
             String winXS = "Ф1(+0.5)";
-            String winXSS = String.valueOf((int) winX) + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
+            String winXSS = (int) winX + "/" + number + " (" + MyMath.round(winX / number * 100, 1) + ")";
 
             colHeads = new Object[]{"Ставка", "Заход и %"};
             data = new Object[][]{
@@ -4518,79 +4518,79 @@ public class TableMaker {
                 winX++;
         }
 
-        String t85 = "ТБ(" + String.valueOf(totalAverageYellowCards-1) + ")";
-        String t85s = String.valueOf((int) (totalMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String t85 = "ТБ(" + (totalAverageYellowCards - 1) + ")";
+        String t85s = (int) (totalMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (totalMinus1/selector.listOfMatches.size() < 0.5){
-            t85 = "ТM(" + String.valueOf(totalAverageYellowCards-1) + ")";
-            t85s = String.valueOf((int) (selector.listOfMatches.size() - totalMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            t85 = "ТM(" + (totalAverageYellowCards - 1) + ")";
+            t85s = (int) (selector.listOfMatches.size() - totalMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
-        String t95 = "ТБ(" + String.valueOf(totalAverageYellowCards) + ")";
-        String t95s = String.valueOf((int) (totalSred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalSred / selector.listOfMatches.size() * 100, 1) + ")";
+        String t95 = "ТБ(" + totalAverageYellowCards + ")";
+        String t95s = (int) (totalSred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalSred / selector.listOfMatches.size() * 100, 1) + ")";
         if (totalSred/selector.listOfMatches.size() < 0.5){
-            t95 = "ТM(" + String.valueOf(totalAverageYellowCards) + ")";
-            t95s = String.valueOf((int) (selector.listOfMatches.size() - totalSred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalSred) / selector.listOfMatches.size() * 100, 1) + ")";
+            t95 = "ТM(" + totalAverageYellowCards + ")";
+            t95s = (int) (selector.listOfMatches.size() - totalSred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalSred) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
-        String t105 = "ТБ(" + String.valueOf(totalAverageYellowCards+1) + ")";
-        String t105s = String.valueOf((int) (totalPlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalPlus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String t105 = "ТБ(" + (totalAverageYellowCards + 1) + ")";
+        String t105s = (int) (totalPlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalPlus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (totalPlus1/selector.listOfMatches.size() < 0.5){
-            t105 = "ТM(" + String.valueOf(totalAverageYellowCards+1) + ")";
-            t105s = String.valueOf((int) (selector.listOfMatches.size() - totalPlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalPlus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            t105 = "ТM(" + (totalAverageYellowCards + 1) + ")";
+            t105s = (int) (selector.listOfMatches.size() - totalPlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalPlus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         double total = homeAverageYellowCards + 1;
         String itbPlus1 = "Хозяева: ТБ(" + total + ")";
-        String selfTBPlus1 = String.valueOf((int) (homePlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homePlus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String selfTBPlus1 = (int) (homePlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homePlus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (homePlus1/selector.listOfMatches.size() < 0.5){
             itbPlus1 = "Хозяева: ТM(" + total + ")";
-            selfTBPlus1 = String.valueOf((int) (selector.listOfMatches.size() - homePlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homePlus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            selfTBPlus1 = (int) (selector.listOfMatches.size() - homePlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homePlus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = homeAverageYellowCards;
         String itbSred = "Хозяева: ТБ(" + total + ")";
-        String selfTBSred = String.valueOf((int) (homeSred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homeSred / selector.listOfMatches.size() * 100, 1) + ")";
+        String selfTBSred = (int) (homeSred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homeSred / selector.listOfMatches.size() * 100, 1) + ")";
         if (homeSred/selector.listOfMatches.size() < 0.5){
             itbSred = "Хозяева: ТM(" + total + ")";
-            selfTBSred = String.valueOf((int) (selector.listOfMatches.size() - homeSred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homeSred) / selector.listOfMatches.size() * 100, 1) + ")";
+            selfTBSred = (int) (selector.listOfMatches.size() - homeSred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homeSred) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = homeAverageYellowCards - 1;
         String itbMinus1 = "Хозяева: ТБ(" + total + ")";
-        String selfTBMinus1 = String.valueOf((int) (homeMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homeMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String selfTBMinus1 = (int) (homeMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homeMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (homeMinus1/selector.listOfMatches.size() < 0.5){
             itbMinus1 = "Хозяева: ТM(" + total + ")";
-            selfTBMinus1 = String.valueOf((int) (selector.listOfMatches.size() - homeMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homeMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            selfTBMinus1 = (int) (selector.listOfMatches.size() - homeMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homeMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = awayAverageYellowCards + 1;
         String optbPlus1 = "Гости: ТБ(" + total + ")";
-        String opTBPlus1 = String.valueOf((int) (awayPlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awayPlus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String opTBPlus1 = (int) (awayPlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awayPlus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (awayPlus1/selector.listOfMatches.size() < 0.5){
             optbPlus1 = "Гости: ТM(" + total + ")";
-            opTBPlus1 = String.valueOf((int) (selector.listOfMatches.size() - awayPlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awayPlus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            opTBPlus1 = (int) (selector.listOfMatches.size() - awayPlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awayPlus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = awayAverageYellowCards;
         String optbSred = "Гости: ТБ(" + total + ")";
-        String opTBSred = String.valueOf((int) (awaySred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awaySred / selector.listOfMatches.size() * 100, 1) + ")";
+        String opTBSred = (int) (awaySred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awaySred / selector.listOfMatches.size() * 100, 1) + ")";
         if (awaySred/selector.listOfMatches.size() < 0.5){
             optbSred = "Гости: ТM(" + total + ")";
-            opTBSred = String.valueOf((int) (selector.listOfMatches.size() - awaySred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awaySred) / selector.listOfMatches.size() * 100, 1) + ")";
+            opTBSred = (int) (selector.listOfMatches.size() - awaySred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awaySred) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = awayAverageYellowCards - 1;
         String optbMinus1 = "Гости: ТБ(" + total + ")";
-        String opTBMinus1 = String.valueOf((int) (awayMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awayMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String opTBMinus1 = (int) (awayMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awayMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (awayMinus1/selector.listOfMatches.size() < 0.5){
             optbMinus1 = "Гости: ТM(" + total + ")";
-            opTBMinus1 = String.valueOf((int) (selector.listOfMatches.size() - awayMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awayMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            opTBMinus1 = (int) (selector.listOfMatches.size() - awayMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awayMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         String winS = "Ф1(-0.5)";
-        String winSS = String.valueOf((int) win) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(win / selector.listOfMatches.size() * 100, 1) + ")";
+        String winSS = (int) win + "/" + selector.listOfMatches.size() + " (" + MyMath.round(win / selector.listOfMatches.size() * 100, 1) + ")";
 
         String winXS = "Ф1(+0.5)";
-        String winXSS = String.valueOf((int) winX) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(winX / selector.listOfMatches.size() * 100, 1) + ")";
+        String winXSS = (int) winX + "/" + selector.listOfMatches.size() + " (" + MyMath.round(winX / selector.listOfMatches.size() * 100, 1) + ")";
 
         String[] colHeads = {"Ставка", "Заход и %"};
         Object[][] data = {
@@ -4687,79 +4687,79 @@ public class TableMaker {
                 winX++;
         }
 
-        String t85 = "ТБ(" + String.valueOf(totalAverageYellowCards-1) + ")";
-        String t85s = String.valueOf((int) (totalMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String t85 = "ТБ(" + (totalAverageYellowCards - 1) + ")";
+        String t85s = (int) (totalMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (totalMinus1/selector.listOfMatches.size() < 0.5){
-            t85 = "ТM(" + String.valueOf(totalAverageYellowCards-1) + ")";
-            t85s = String.valueOf((int) (selector.listOfMatches.size() - totalMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            t85 = "ТM(" + (totalAverageYellowCards - 1) + ")";
+            t85s = (int) (selector.listOfMatches.size() - totalMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
-        String t95 = "ТБ(" + String.valueOf(totalAverageYellowCards) + ")";
-        String t95s = String.valueOf((int) (totalSred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalSred / selector.listOfMatches.size() * 100, 1) + ")";
+        String t95 = "ТБ(" + totalAverageYellowCards + ")";
+        String t95s = (int) (totalSred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalSred / selector.listOfMatches.size() * 100, 1) + ")";
         if (totalSred/selector.listOfMatches.size() < 0.5){
-            t95 = "ТM(" + String.valueOf(totalAverageYellowCards) + ")";
-            t95s = String.valueOf((int) (selector.listOfMatches.size() - totalSred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalSred) / selector.listOfMatches.size() * 100, 1) + ")";
+            t95 = "ТM(" + totalAverageYellowCards + ")";
+            t95s = (int) (selector.listOfMatches.size() - totalSred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalSred) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
-        String t105 = "ТБ(" + String.valueOf(totalAverageYellowCards+1) + ")";
-        String t105s = String.valueOf((int) (totalPlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalPlus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String t105 = "ТБ(" + (totalAverageYellowCards + 1) + ")";
+        String t105s = (int) (totalPlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalPlus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (totalPlus1/selector.listOfMatches.size() < 0.5){
-            t105 = "ТM(" + String.valueOf(totalAverageYellowCards+1) + ")";
-            t105s = String.valueOf((int) (selector.listOfMatches.size() - totalPlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalPlus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            t105 = "ТM(" + (totalAverageYellowCards + 1) + ")";
+            t105s = (int) (selector.listOfMatches.size() - totalPlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalPlus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         double total = homeAverageYellowCards + 1;
         String itbPlus1 = "Хозяева: ТБ(" + total + ")";
-        String selfTBPlus1 = String.valueOf((int) (homePlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homePlus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String selfTBPlus1 = (int) (homePlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homePlus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (homePlus1/selector.listOfMatches.size() < 0.5){
             itbPlus1 = "Хозяева: ТM(" + total + ")";
-            selfTBPlus1 = String.valueOf((int) (selector.listOfMatches.size() - homePlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homePlus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            selfTBPlus1 = (int) (selector.listOfMatches.size() - homePlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homePlus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = homeAverageYellowCards;
         String itbSred = "Хозяева: ТБ(" + total + ")";
-        String selfTBSred = String.valueOf((int) (homeSred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homeSred / selector.listOfMatches.size() * 100, 1) + ")";
+        String selfTBSred = (int) (homeSred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homeSred / selector.listOfMatches.size() * 100, 1) + ")";
         if (homeSred/selector.listOfMatches.size() < 0.5){
             itbSred = "Хозяева: ТM(" + total + ")";
-            selfTBSred = String.valueOf((int) (selector.listOfMatches.size() - homeSred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homeSred) / selector.listOfMatches.size() * 100, 1) + ")";
+            selfTBSred = (int) (selector.listOfMatches.size() - homeSred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homeSred) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = homeAverageYellowCards - 1;
         String itbMinus1 = "Хозяева: ТБ(" + total + ")";
-        String selfTBMinus1 = String.valueOf((int) (homeMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homeMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String selfTBMinus1 = (int) (homeMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homeMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (homeMinus1/selector.listOfMatches.size() < 0.5){
             itbMinus1 = "Хозяева: ТM(" + total + ")";
-            selfTBMinus1 = String.valueOf((int) (selector.listOfMatches.size() - homeMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homeMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            selfTBMinus1 = (int) (selector.listOfMatches.size() - homeMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homeMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = awayAverageYellowCards + 1;
         String optbPlus1 = "Гости: ТБ(" + total + ")";
-        String opTBPlus1 = String.valueOf((int) (awayPlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awayPlus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String opTBPlus1 = (int) (awayPlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awayPlus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (awayPlus1/selector.listOfMatches.size() < 0.5){
             optbPlus1 = "Гости: ТM(" + total + ")";
-            opTBPlus1 = String.valueOf((int) (selector.listOfMatches.size() - awayPlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awayPlus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            opTBPlus1 = (int) (selector.listOfMatches.size() - awayPlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awayPlus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = awayAverageYellowCards;
         String optbSred = "Гости: ТБ(" + total + ")";
-        String opTBSred = String.valueOf((int) (awaySred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awaySred / selector.listOfMatches.size() * 100, 1) + ")";
+        String opTBSred = (int) (awaySred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awaySred / selector.listOfMatches.size() * 100, 1) + ")";
         if (awaySred/selector.listOfMatches.size() < 0.5){
             optbSred = "Гости: ТM(" + total + ")";
-            opTBSred = String.valueOf((int) (selector.listOfMatches.size() - awaySred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awaySred) / selector.listOfMatches.size() * 100, 1) + ")";
+            opTBSred = (int) (selector.listOfMatches.size() - awaySred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awaySred) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = awayAverageYellowCards - 1;
         String optbMinus1 = "Гости: ТБ(" + total + ")";
-        String opTBMinus1 = String.valueOf((int) (awayMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awayMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String opTBMinus1 = (int) (awayMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awayMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (awayMinus1/selector.listOfMatches.size() < 0.5){
             optbMinus1 = "Гости: ТM(" + total + ")";
-            opTBMinus1 = String.valueOf((int) (selector.listOfMatches.size() - awayMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awayMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            opTBMinus1 = (int) (selector.listOfMatches.size() - awayMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awayMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         String winS = "Ф1(-0.5)";
-        String winSS = String.valueOf((int) win) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(win / selector.listOfMatches.size() * 100, 1) + ")";
+        String winSS = (int) win + "/" + selector.listOfMatches.size() + " (" + MyMath.round(win / selector.listOfMatches.size() * 100, 1) + ")";
 
         String winXS = "Ф1(+0.5)";
-        String winXSS = String.valueOf((int) winX) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(winX / selector.listOfMatches.size() * 100, 1) + ")";
+        String winXSS = (int) winX + "/" + selector.listOfMatches.size() + " (" + MyMath.round(winX / selector.listOfMatches.size() * 100, 1) + ")";
 
         String[] colHeads = {"Ставка", "Заход и %"};
         Object[][] data = {
@@ -4856,79 +4856,79 @@ public class TableMaker {
                 winX++;
         }
 
-        String t85 = "ТБ(" + String.valueOf(totalAverageYellowCards-1) + ")";
-        String t85s = String.valueOf((int) (totalMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String t85 = "ТБ(" + (totalAverageYellowCards - 1) + ")";
+        String t85s = (int) (totalMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (totalMinus1/selector.listOfMatches.size() < 0.5){
-            t85 = "ТM(" + String.valueOf(totalAverageYellowCards-1) + ")";
-            t85s = String.valueOf((int) (selector.listOfMatches.size() - totalMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            t85 = "ТM(" + (totalAverageYellowCards - 1) + ")";
+            t85s = (int) (selector.listOfMatches.size() - totalMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
-        String t95 = "ТБ(" + String.valueOf(totalAverageYellowCards) + ")";
-        String t95s = String.valueOf((int) (totalSred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalSred / selector.listOfMatches.size() * 100, 1) + ")";
+        String t95 = "ТБ(" + totalAverageYellowCards + ")";
+        String t95s = (int) (totalSred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalSred / selector.listOfMatches.size() * 100, 1) + ")";
         if (totalSred/selector.listOfMatches.size() < 0.5){
-            t95 = "ТM(" + String.valueOf(totalAverageYellowCards) + ")";
-            t95s = String.valueOf((int) (selector.listOfMatches.size() - totalSred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalSred) / selector.listOfMatches.size() * 100, 1) + ")";
+            t95 = "ТM(" + totalAverageYellowCards + ")";
+            t95s = (int) (selector.listOfMatches.size() - totalSred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalSred) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
-        String t105 = "ТБ(" + String.valueOf(totalAverageYellowCards+1) + ")";
-        String t105s = String.valueOf((int) (totalPlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalPlus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String t105 = "ТБ(" + (totalAverageYellowCards + 1) + ")";
+        String t105s = (int) (totalPlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(totalPlus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (totalPlus1/selector.listOfMatches.size() < 0.5){
-            t105 = "ТM(" + String.valueOf(totalAverageYellowCards+1) + ")";
-            t105s = String.valueOf((int) (selector.listOfMatches.size() - totalPlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalPlus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            t105 = "ТM(" + (totalAverageYellowCards + 1) + ")";
+            t105s = (int) (selector.listOfMatches.size() - totalPlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - totalPlus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         double total = homeAverageYellowCards + 1;
         String itbPlus1 = "Хозяева: ТБ(" + total + ")";
-        String selfTBPlus1 = String.valueOf((int) (homePlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homePlus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String selfTBPlus1 = (int) (homePlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homePlus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (homePlus1/selector.listOfMatches.size() < 0.5){
             itbPlus1 = "Хозяева: ТM(" + total + ")";
-            selfTBPlus1 = String.valueOf((int) (selector.listOfMatches.size() - homePlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homePlus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            selfTBPlus1 = (int) (selector.listOfMatches.size() - homePlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homePlus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = homeAverageYellowCards;
         String itbSred = "Хозяева: ТБ(" + total + ")";
-        String selfTBSred = String.valueOf((int) (homeSred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homeSred / selector.listOfMatches.size() * 100, 1) + ")";
+        String selfTBSred = (int) (homeSred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homeSred / selector.listOfMatches.size() * 100, 1) + ")";
         if (homeSred/selector.listOfMatches.size() < 0.5){
             itbSred = "Хозяева: ТM(" + total + ")";
-            selfTBSred = String.valueOf((int) (selector.listOfMatches.size() - homeSred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homeSred) / selector.listOfMatches.size() * 100, 1) + ")";
+            selfTBSred = (int) (selector.listOfMatches.size() - homeSred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homeSred) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = homeAverageYellowCards - 1;
         String itbMinus1 = "Хозяева: ТБ(" + total + ")";
-        String selfTBMinus1 = String.valueOf((int) (homeMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homeMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String selfTBMinus1 = (int) (homeMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(homeMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (homeMinus1/selector.listOfMatches.size() < 0.5){
             itbMinus1 = "Хозяева: ТM(" + total + ")";
-            selfTBMinus1 = String.valueOf((int) (selector.listOfMatches.size() - homeMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homeMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            selfTBMinus1 = (int) (selector.listOfMatches.size() - homeMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - homeMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = awayAverageYellowCards + 1;
         String optbPlus1 = "Гости: ТБ(" + total + ")";
-        String opTBPlus1 = String.valueOf((int) (awayPlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awayPlus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String opTBPlus1 = (int) (awayPlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awayPlus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (awayPlus1/selector.listOfMatches.size() < 0.5){
             optbPlus1 = "Гости: ТM(" + total + ")";
-            opTBPlus1 = String.valueOf((int) (selector.listOfMatches.size() - awayPlus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awayPlus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            opTBPlus1 = (int) (selector.listOfMatches.size() - awayPlus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awayPlus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = awayAverageYellowCards;
         String optbSred = "Гости: ТБ(" + total + ")";
-        String opTBSred = String.valueOf((int) (awaySred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awaySred / selector.listOfMatches.size() * 100, 1) + ")";
+        String opTBSred = (int) (awaySred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awaySred / selector.listOfMatches.size() * 100, 1) + ")";
         if (awaySred/selector.listOfMatches.size() < 0.5){
             optbSred = "Гости: ТM(" + total + ")";
-            opTBSred = String.valueOf((int) (selector.listOfMatches.size() - awaySred)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awaySred) / selector.listOfMatches.size() * 100, 1) + ")";
+            opTBSred = (int) (selector.listOfMatches.size() - awaySred) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awaySred) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         total = awayAverageYellowCards - 1;
         String optbMinus1 = "Гости: ТБ(" + total + ")";
-        String opTBMinus1 = String.valueOf((int) (awayMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awayMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
+        String opTBMinus1 = (int) (awayMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(awayMinus1 / selector.listOfMatches.size() * 100, 1) + ")";
         if (awayMinus1/selector.listOfMatches.size() < 0.5){
             optbMinus1 = "Гости: ТM(" + total + ")";
-            opTBMinus1 = String.valueOf((int) (selector.listOfMatches.size() - awayMinus1)) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awayMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
+            opTBMinus1 = (int) (selector.listOfMatches.size() - awayMinus1) + "/" + selector.listOfMatches.size() + " (" + MyMath.round((selector.listOfMatches.size() - awayMinus1) / selector.listOfMatches.size() * 100, 1) + ")";
         }
 
         String winS = "Ф1(-0.5)";
-        String winSS = String.valueOf((int) win) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(win / selector.listOfMatches.size() * 100, 1) + ")";
+        String winSS = (int) win + "/" + selector.listOfMatches.size() + " (" + MyMath.round(win / selector.listOfMatches.size() * 100, 1) + ")";
 
         String winXS = "Ф1(+0.5)";
-        String winXSS = String.valueOf((int) winX) + "/" + selector.listOfMatches.size() + " (" + MyMath.round(winX / selector.listOfMatches.size() * 100, 1) + ")";
+        String winXSS = (int) winX + "/" + selector.listOfMatches.size() + " (" + MyMath.round(winX / selector.listOfMatches.size() * 100, 1) + ")";
 
         String[] colHeads = {"Ставка", "Заход и %"};
         Object[][] data = {

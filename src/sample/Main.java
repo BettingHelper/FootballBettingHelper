@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,15 +47,15 @@ public class Main extends JFrame {
                 sn = Settings.getSerialNumber();
                 System.out.println("My ID is: " + sn);
                 if (settings.ip == null || settings.ip.length() == 0){
-                    settings.downloadSettings(sn);
+                    Settings.downloadSettings(sn);
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (settings.checkKey(sn)){
+            if (Settings.checkKey(sn)){
                 if (new File("settings").list().length==0)
-                    settings.downloadSettings(sn);
+                    Settings.downloadSettings(sn);
 
                 //String ID = Settings.getIDBySerialNumber(sn);
                 //String user = Settings.getUserBySerialNumber(sn);
@@ -67,7 +68,7 @@ public class Main extends JFrame {
 
                 setBounds(0, 0, width, height);
                 super.setMinimumSize(new Dimension(1320, 720));
-                String tabs[] = {"О программе", "Сравнение команд", "Статистика команды", "Противостояние",
+                String[] tabs = {"О программе", "Сравнение команд", "Статистика команды", "Противостояние",
                             "Статистика судьи", "Таблицы по лиге", "Тренды", "Настройки", "Поддержка",
                             "Матч-центр", "До-после", "Калькулятор"};
 
@@ -90,7 +91,7 @@ public class Main extends JFrame {
                 windowWithProgressBar = new WindowWithProgressBar("  Подождите, выполняется синхронизация базы данных");
                 windowWithProgressBar.setVisible(true);
 
-                String resultOfSync = settings.toRefreshDatabase(windowWithProgressBar, numberOfAccount);
+                String resultOfSync = Settings.toRefreshDatabase(windowWithProgressBar, numberOfAccount);
 
                 if (resultOfSync.contains("Fail")){
                     windowWithProgressBar.setVisible(false);
@@ -142,7 +143,7 @@ public class Main extends JFrame {
                 jtp.addTab(tabs[11], panelCalculator);
                 add(jtp);
 
-                jtp.setSelectedIndex(0);
+                jtp.setSelectedIndex(11);
                 currentVersion = panelStart.currentVersion;
                 newestVersion = panelStart.newestVersion;
 
@@ -217,32 +218,16 @@ public class Main extends JFrame {
 
     }
 
-    void writeFile() throws FileNotFoundException {
-        try {
-            FileOutputStream fos = new FileOutputStream("");
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-            for (int i = 0; i < 10; i++) {
-                String str = String.valueOf(i);
-                bw.write(str);
-                bw.newLine();
-            }
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
     public static String[] readTxtFile(String fileName){
-        String resultS = "Выберите команду\n";
+        StringBuilder resultS = new StringBuilder("Выберите команду\n");
         try {
             File fileDir = new File(fileName);
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream(fileDir), "UTF-8"));
+                            new FileInputStream(fileDir), StandardCharsets.UTF_8));
             String str;
             while (((str = in.readLine()) != null)) {
-                resultS += str + "\n";
+                resultS.append(str).append("\n");
             }
             in.close();
         } catch (IOException e)
@@ -250,44 +235,44 @@ public class Main extends JFrame {
             System.out.println(e.getMessage());
         }
 
-        return resultS.split("\n");
+        return resultS.toString().split("\n");
     }
 
     public static String[] getListOfRefs(String fileName){
-        String resultS = "Выберите арбитра\n";
+        StringBuilder resultS = new StringBuilder("Выберите арбитра\n");
         try {
             File fileDir = new File(fileName);
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream(fileDir), "UTF-8"));
+                            new FileInputStream(fileDir), StandardCharsets.UTF_8));
             String str;
             while (((str = in.readLine()) != null)) {
-                resultS += str + "\n";
+                resultS.append(str).append("\n");
             }
             in.close();
         } catch (IOException e)
         {
             System.out.println(e.getMessage());
         }
-        return resultS.split("\n");
+        return resultS.toString().split("\n");
     }
 
     public static String[] readTxtFileForLeagues(String fileName){
-        String resultS = "Выберите лигу\n";
+        StringBuilder resultS = new StringBuilder("Выберите лигу\n");
         try {
             File fileDir = new File(fileName);
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream(fileDir), "UTF-8"));
+                            new FileInputStream(fileDir), StandardCharsets.UTF_8));
             String str;
             while (((str = in.readLine()) != null)) {
-                resultS += str + "\n";
+                resultS.append(str).append("\n");
             }
             in.close();
         } catch (IOException e)
         {
             System.out.println(e.getMessage());
         }
-        return resultS.split("\n");
+        return resultS.toString().split("\n");
     }
 }
