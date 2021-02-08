@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 public class Main extends JFrame {
     String currentVersion;
     String newestVersion;
+    boolean flagCheckKey = false;
 
     public Main() throws Exception{
         super("Football Betting Helper");
@@ -54,6 +55,7 @@ public class Main extends JFrame {
                 e.printStackTrace();
             }
             if (Settings.checkKey(sn)){
+                flagCheckKey = true;
                 if (new File("settings").list().length==0)
                     Settings.downloadSettings(sn);
 
@@ -174,14 +176,15 @@ public class Main extends JFrame {
                 }
                 String user = Settings.getUserBySerialNumber(sn);
                 int n = Settings.getNumberOfAccount();
-                if (!currentVersion.equals(newestVersion)){
-                    try {
-                        FTPLoader.downloadFile(Settings.getLogin(n), Settings.getPassword(n), "/versions/HockeyBettingHelper.exe", "HockeyBettingHelper.exe");
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                if (flagCheckKey){
+                    if (!currentVersion.equals(newestVersion)){
+                        try {
+                            FTPLoader.downloadFile(Settings.getLogin(n), Settings.getPassword(n), "/versions/HockeyBettingHelper.exe", "HockeyBettingHelper.exe");
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-
 
                 System.exit(0);
             }
