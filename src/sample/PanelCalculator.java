@@ -14,6 +14,7 @@ public class PanelCalculator extends JPanel{
     JComboBox<String> teamChooserHome;
     JComboBox<String> teamChooserAway;
     JButton buttonShow;
+    ArrayList<String> leagueList = new ArrayList<>();
 
     JPanel dataPanel;
 
@@ -120,9 +121,11 @@ public class PanelCalculator extends JPanel{
 
         final JFileChooser fileChooser = new JFileChooser(path + curSeason + "/leagues");
         String[] directoryList = fileChooser.getCurrentDirectory().list();
-        ArrayList<String> leagueList = new ArrayList<>();
         leagueList.add("Выберите лигу");
-        for (String aDirectoryList : directoryList) leagueList.add(aDirectoryList.replace(".txt", ""));
+        for (String aDirectoryList : directoryList) {
+            if (Settings.isWhoScoredLeague(aDirectoryList.replace(".txt", "")))
+                leagueList.add(aDirectoryList.replace(".txt", ""));
+        }
         String[] listOfLeagues = new String[leagueList.size()];
         for (int i = 0; i < listOfLeagues.length; i++)
             listOfLeagues[i] = leagueList.get(i);
@@ -403,13 +406,11 @@ public class PanelCalculator extends JPanel{
                 buttonShow.setEnabled(false);
                 season = seasonCB.getSelectedItem().toString().replace("Сезон ", "");
 
-                String pathToLeaguesList = path + seasonCB.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/";
-                JFileChooser fileChooser = new JFileChooser(pathToLeaguesList);
-                String[] directoryList = new String[fileChooser.getCurrentDirectory().list().length + 1];
-                directoryList[0] = "Выберите лигу";
-                for (int i = 1; i < directoryList.length; i++)
-                    directoryList[i] = fileChooser.getCurrentDirectory().list()[i - 1].replace(".txt", "");
-                DefaultComboBoxModel modelH = new DefaultComboBoxModel(directoryList);
+                String[] listOfLeagues = new String[leagueList.size()];
+                for (int i = 0; i < listOfLeagues.length; i++)
+                    listOfLeagues[i] = leagueList.get(i);
+
+                DefaultComboBoxModel modelH = new DefaultComboBoxModel(listOfLeagues);
                 leagueChooser.setModel(modelH);
 
                 String pathToTeamsList = path + seasonCB.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/" + leagueChooser.getSelectedItem() + ".txt";
@@ -432,14 +433,16 @@ public class PanelCalculator extends JPanel{
                 leagueName = (String) leagueChooser.getSelectedItem();
                 buttonShow.setEnabled(false);
                 int index = leagueChooser.getSelectedIndex();
-                String pathToLeaguesList = path + seasonCB.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/";
-                JFileChooser fileChooser = new JFileChooser(pathToLeaguesList);
-                String[] directoryList = new String[fileChooser.getCurrentDirectory().list().length+1];
-                directoryList[0] = "Выберите лигу";
-                for (int i=1; i<directoryList.length; i++)
-                    directoryList[i] = fileChooser.getCurrentDirectory().list()[i-1].replace(".txt", "");
-                DefaultComboBoxModel modelH = new DefaultComboBoxModel(directoryList);
+
+                String[] listOfLeagues = new String[leagueList.size()];
+                for (int i = 0; i < listOfLeagues.length; i++)
+                    listOfLeagues[i] = leagueList.get(i);
+
+                DefaultComboBoxModel modelH = new DefaultComboBoxModel(listOfLeagues);
+                leagueChooser.setModel(modelH);
+
                 DefaultComboBoxModel modelH2;
+
                 leagueChooser.setModel(modelH);
                 leagueChooser.setSelectedIndex(index);
                 leagueChooser.setFocusable(false);
