@@ -324,7 +324,7 @@ public class PanelReferee extends JPanel{
                     container.add(label3);
 
                     colHeads = new String[]{"Тотал фолов и тотал ЖК", "Фолы хозяев и ЖК хозяев", "Фолы гостей и ЖК гостей", "Фора по фолам и фора по ЖК"};
-                    data = new Object[][]{{selector.refList.get(11).get(1), selector.refList.get(11).get(2), selector.refList.get(11).get(3), selector.refList.get(12).get(1)}};
+                    data = new Object[][]{{selector.refList.get(13).get(1), selector.refList.get(13).get(2), selector.refList.get(13).get(3), selector.refList.get(14).get(1)}};
 
                     JTable tableCorr = new JTable(data, colHeads);
                     tableCorr.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

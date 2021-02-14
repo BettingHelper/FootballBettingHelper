@@ -17,14 +17,16 @@ public class TablesThread extends Thread{
     String seasonString;
     JFrame tw;
     PanelTablesByLeague pt;
+    String lastOrFull;
     JProgressBar jpb;
     int numberOfTeams;
 
-    public TablesThread(String leagueName, final String parameter, String seasonString, PanelTablesByLeague pt){
+    public TablesThread(String leagueName, final String parameter, String seasonString, String lastOrFull, PanelTablesByLeague pt){
         path = "database/";
         this.leagueName = leagueName;
         this.parameter = parameter;
         this.seasonString = seasonString;
+        this.lastOrFull = lastOrFull;
         this.pt = pt;
         numberOfTeams = Settings.getNumberOfTeamsInLeague(leagueName, seasonString);
 
@@ -49,7 +51,7 @@ public class TablesThread extends Thread{
 
     @Override
     public void run(){
-        JPanel arr = createTable(pt.leagueName, pt.parameter, pt.season);
+        JPanel arr = createTable(pt.leagueName, pt.parameter, pt.season, pt.lastOrFull);
         if (pt.panelWithTablesByLeague.getComponentCount() > 1) {
             pt.panelWithTablesByLeague.remove(1);
         }
@@ -61,7 +63,7 @@ public class TablesThread extends Thread{
 
     }
 
-    public JPanel createTable(String leagueName, final String parameter, String season){
+    public JPanel createTable(String leagueName, final String parameter, String season, String lastOrFull){
         JPanel result = new JPanel(new BorderLayout());
 
         if (parameter.contains("Выберите")){
@@ -76,6 +78,11 @@ public class TablesThread extends Thread{
         String[] directoryList = new JFileChooser(path + season + "/leagues").getCurrentDirectory().list();
 
         if (!leagueName.contains("Выберите") && directoryList.length > 0){
+            if (!lastOrFull.contains("Весь")){
+                if (!(pt.lastCalculatedLeague.equals(leagueName) && pt.lastCalculatedSeason.equals(season) && pt.lastCalculatedLastOrFull.equals(lastOrFull))){
+                    pt.league.resetTables(season, leagueName, lastOrFull, jpb);
+                }
+            }
 
             int indexOfParameter = 0;
             switch (parameter){
@@ -207,20 +214,20 @@ public class TablesThread extends Thread{
 
             ArrayList<ArrayList<Double>> data = new ArrayList<>();
             ArrayList<String> listOfTeams = new ArrayList<>();
-            League league = League.getLeagueFromFile(leagueName, season);
+//            League league = League.getLeagueFromFile(leagueName, season);
 
-            for (int i=0; i<league.overallStatsTable.size(); i++){
-                listOfTeams.add(league.overallStatsTable.get(i).split("\\*")[0]);
-                int matchesAll = Integer.parseInt(league.overallStatsTable.get(i).split("\\*")[1]);
-                int matchesHome = Integer.parseInt(league.homeStatsTable.get(i).split("\\*")[1]);
-                int matchesAway = Integer.parseInt(league.awayStatsTable.get(i).split("\\*")[1]);
+            for (int i=0; i<pt.league.overallStatsTable.size(); i++){
+                listOfTeams.add(pt.league.overallStatsTable.get(i).split("\\*")[0]);
+                int matchesAll = Integer.parseInt(pt.league.overallStatsTable.get(i).split("\\*")[1]);
+                int matchesHome = Integer.parseInt(pt.league.homeStatsTable.get(i).split("\\*")[1]);
+                int matchesAway = Integer.parseInt(pt.league.awayStatsTable.get(i).split("\\*")[1]);
                 ArrayList<Double> record = new ArrayList<>();
 
                 if (matchesAll > 0){
-                    record.add(MyMath.round(Double.parseDouble(league.overallStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[0]) / (double) matchesAll,2));
-                    record.add(MyMath.round(Double.parseDouble(league.overallStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[1]) / (double) matchesAll,2));
-                    record.add(MyMath.round(Double.parseDouble(league.overallStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[2]) / (double) matchesAll,2));
-                    record.add(MyMath.round(Double.parseDouble(league.overallStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[3]) / (double) matchesAll,2));
+                    record.add(MyMath.round(Double.parseDouble(pt.league.overallStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[0]) / (double) matchesAll,2));
+                    record.add(MyMath.round(Double.parseDouble(pt.league.overallStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[1]) / (double) matchesAll,2));
+                    record.add(MyMath.round(Double.parseDouble(pt.league.overallStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[2]) / (double) matchesAll,2));
+                    record.add(MyMath.round(Double.parseDouble(pt.league.overallStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[3]) / (double) matchesAll,2));
                 } else {
                     record.add(0.0);
                     record.add(0.0);
@@ -228,10 +235,10 @@ public class TablesThread extends Thread{
                     record.add(0.0);
                 }
                 if (matchesHome > 0){
-                    record.add(MyMath.round(Double.parseDouble(league.homeStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[0]) / (double) matchesHome,2));
-                    record.add(MyMath.round(Double.parseDouble(league.homeStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[1]) / (double) matchesHome,2));
-                    record.add(MyMath.round(Double.parseDouble(league.homeStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[2]) / (double) matchesHome,2));
-                    record.add(MyMath.round(Double.parseDouble(league.homeStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[3]) / (double) matchesHome,2));
+                    record.add(MyMath.round(Double.parseDouble(pt.league.homeStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[0]) / (double) matchesHome,2));
+                    record.add(MyMath.round(Double.parseDouble(pt.league.homeStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[1]) / (double) matchesHome,2));
+                    record.add(MyMath.round(Double.parseDouble(pt.league.homeStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[2]) / (double) matchesHome,2));
+                    record.add(MyMath.round(Double.parseDouble(pt.league.homeStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[3]) / (double) matchesHome,2));
                 } else {
                     record.add(0.0);
                     record.add(0.0);
@@ -239,10 +246,10 @@ public class TablesThread extends Thread{
                     record.add(0.0);
                 }
                 if (matchesAway > 0){
-                    record.add(MyMath.round(Double.parseDouble(league.awayStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[0]) / (double) matchesAway,2));
-                    record.add(MyMath.round(Double.parseDouble(league.awayStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[1]) / (double) matchesAway,2));
-                    record.add(MyMath.round(Double.parseDouble(league.awayStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[2]) / (double) matchesAway,2));
-                    record.add(MyMath.round(Double.parseDouble(league.awayStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[3]) / (double) matchesAway,2));
+                    record.add(MyMath.round(Double.parseDouble(pt.league.awayStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[0]) / (double) matchesAway,2));
+                    record.add(MyMath.round(Double.parseDouble(pt.league.awayStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[1]) / (double) matchesAway,2));
+                    record.add(MyMath.round(Double.parseDouble(pt.league.awayStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[2]) / (double) matchesAway,2));
+                    record.add(MyMath.round(Double.parseDouble(pt.league.awayStatsTable.get(i).split("\\*")[indexOfParameter].split("_")[3]) / (double) matchesAway,2));
                 } else {
                     record.add(0.0);
                     record.add(0.0);
@@ -358,6 +365,10 @@ public class TablesThread extends Thread{
 
 
             result.add(tablePanel);
+
+            pt.lastCalculatedLeague = leagueName;
+            pt.lastCalculatedSeason = season;
+            pt.lastCalculatedLastOrFull = lastOrFull;
         } else {
             result.setLayout(new VerticalLayout());
 

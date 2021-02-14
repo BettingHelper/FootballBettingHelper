@@ -556,7 +556,7 @@ public class Settings {
                     try {
                         br.close();
                         fr.close();
-                        FTPLoader.uploadFile(getLogin(numberOfAccount), getPassword(numberOfAccount), "/data/visit_log_HBH.txt", Settings.TMP_DIR + "/visit_log_HBH.txt");
+                        FTPLoader.uploadFile(getLogin(numberOfAccount), getPassword(numberOfAccount), "/data/visit_log_FBH.txt", Settings.TMP_DIR + "/visit_log_FBH.txt");
                     } catch (IOException e) {
                         e.printStackTrace();
                         PopupWindow window = new PopupWindow("<html>   Ошибка при синхронизации базы. Код ошибки 5<br>" +

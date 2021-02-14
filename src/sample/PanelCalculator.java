@@ -37,7 +37,6 @@ public class PanelCalculator extends JPanel{
     JSlider slider_AT_2 = new JSlider(0,20,0);
     JSlider slider_AT_3 = new JSlider(0,20,0);
     JSlider slider_AT_4 = new JSlider(0,20,0);
-    SliderSettings sliderSettings;
     CalculatorThread calculatorThread;
     String leagueName = "";
     String season = "";
@@ -103,7 +102,6 @@ public class PanelCalculator extends JPanel{
     public PanelCalculator(){
         this.setLayout(new BorderLayout());
         String curSeason = Settings.getDefaultSeason();
-        sliderSettings = SliderSettings.getSliderSettingsFromFile();
         final String path = "database/";
 
         ////////////////////////////////////////////ПАНЕЛЬ
@@ -165,10 +163,13 @@ public class PanelCalculator extends JPanel{
         TitledBorder border_homeTeamSlidersPanel = BorderFactory.createTitledBorder("Хозяева");
         border_homeTeamSlidersPanel.setTitleFont(font15);
         homeTeamSlidersPanel.setBorder(border_homeTeamSlidersPanel);
-        slider_HT_1.setValue(sliderSettings.slider_HT_1_Value);
+        slider_HT_1.setValue(10);
         slider_HT_1.setBorder(new EmptyBorder(5, 5, 5, 5));
-        slider_HT_1.setMajorTickSpacing(1);
         slider_HT_1.setPaintTicks(true);
+        slider_HT_1.setMajorTickSpacing(5);
+        slider_HT_1.setMinorTickSpacing(1);
+        slider_HT_1.setSnapToTicks(true);
+
         JPanel slider_HT_1_Panel = new JPanel(new BorderLayout());
         slider_HT_1_Panel.setBorder(BorderFactory.createLineBorder(new Color(50, 50, 50), 1));
         JLabel head_HT_1 = new JLabel("Приоритет 1");
@@ -191,10 +192,12 @@ public class PanelCalculator extends JPanel{
         slider_HT_1_Panel.add(right_HT_1, BorderLayout.EAST);
         homeTeamSlidersPanel.add(slider_HT_1_Panel);
 
-        slider_HT_2.setValue(sliderSettings.slider_HT_2_Value);
+        slider_HT_2.setValue(10);
         slider_HT_2.setBorder(new EmptyBorder(5, 5, 5, 5));
-        slider_HT_2.setMajorTickSpacing(1);
         slider_HT_2.setPaintTicks(true);
+        slider_HT_2.setMajorTickSpacing(5);
+        slider_HT_2.setMinorTickSpacing(1);
+        slider_HT_2.setSnapToTicks(true);
         JPanel slider_HT_2_Panel = new JPanel(new BorderLayout());
         slider_HT_2_Panel.setBorder(BorderFactory.createLineBorder(new Color(50, 50, 50), 1));
         JLabel head_HT_2 = new JLabel("Приоритет 2");
@@ -217,10 +220,12 @@ public class PanelCalculator extends JPanel{
         slider_HT_2_Panel.add(right_HT_2, BorderLayout.EAST);
         homeTeamSlidersPanel.add(slider_HT_2_Panel);
 
-        slider_HT_3.setValue(sliderSettings.slider_HT_3_Value);
+        slider_HT_3.setValue(10);
         slider_HT_3.setBorder(new EmptyBorder(5, 5, 5, 5));
-        slider_HT_3.setMajorTickSpacing(1);
         slider_HT_3.setPaintTicks(true);
+        slider_HT_3.setMajorTickSpacing(5);
+        slider_HT_3.setMinorTickSpacing(1);
+        slider_HT_3.setSnapToTicks(true);
         JPanel slider_HT_3_Panel = new JPanel(new BorderLayout());
         slider_HT_3_Panel.setBorder(BorderFactory.createLineBorder(new Color(50, 50, 50), 1));
         JLabel head_HT_3 = new JLabel("Приоритет 3");
@@ -243,10 +248,12 @@ public class PanelCalculator extends JPanel{
         slider_HT_3_Panel.add(right_HT_3, BorderLayout.EAST);
         homeTeamSlidersPanel.add(slider_HT_3_Panel);
 
-        slider_HT_4.setValue(sliderSettings.slider_HT_4_Value);
+        slider_HT_4.setValue(10);
         slider_HT_4.setBorder(new EmptyBorder(5, 5, 5, 5));
-        slider_HT_4.setMajorTickSpacing(1);
         slider_HT_4.setPaintTicks(true);
+        slider_HT_4.setMajorTickSpacing(5);
+        slider_HT_4.setMinorTickSpacing(1);
+        slider_HT_4.setSnapToTicks(true);
         JPanel slider_HT_4_Panel = new JPanel(new BorderLayout());
         slider_HT_4_Panel.setBorder(BorderFactory.createLineBorder(new Color(50, 50, 50), 1));
         JLabel head_HT_4 = new JLabel("Приоритет 4");
@@ -277,10 +284,12 @@ public class PanelCalculator extends JPanel{
         TitledBorder border_awayTeamSlidersPanel = BorderFactory.createTitledBorder("Гости");
         border_awayTeamSlidersPanel.setTitleFont(font15);
         awayTeamSlidersPanel.setBorder(border_awayTeamSlidersPanel);
-        slider_AT_1.setValue(sliderSettings.slider_AT_1_Value);
+        slider_AT_1.setValue(10);
         slider_AT_1.setBorder(new EmptyBorder(5, 5, 5, 5));
-        slider_AT_1.setMajorTickSpacing(1);
         slider_AT_1.setPaintTicks(true);
+        slider_AT_1.setMajorTickSpacing(5);
+        slider_AT_1.setMinorTickSpacing(1);
+        slider_AT_1.setSnapToTicks(true);
         JPanel slider_AT_1_Panel = new JPanel(new BorderLayout());
         slider_AT_1_Panel.setBorder(BorderFactory.createLineBorder(new Color(50, 50, 50), 1));
         JLabel head_AT_1 = new JLabel("Приоритет 1");
@@ -303,10 +312,12 @@ public class PanelCalculator extends JPanel{
         slider_AT_1_Panel.add(rigAT_AT_1, BorderLayout.EAST);
         awayTeamSlidersPanel.add(slider_AT_1_Panel);
 
-        slider_AT_2.setValue(sliderSettings.slider_AT_2_Value);
+        slider_AT_2.setValue(10);
         slider_AT_2.setBorder(new EmptyBorder(5, 5, 5, 5));
-        slider_AT_2.setMajorTickSpacing(1);
         slider_AT_2.setPaintTicks(true);
+        slider_AT_2.setMajorTickSpacing(5);
+        slider_AT_2.setMinorTickSpacing(1);
+        slider_AT_2.setSnapToTicks(true);
         JPanel slider_AT_2_Panel = new JPanel(new BorderLayout());
         slider_AT_2_Panel.setBorder(BorderFactory.createLineBorder(new Color(50, 50, 50), 1));
         JLabel head_AT_2 = new JLabel("Приоритет 2");
@@ -329,10 +340,12 @@ public class PanelCalculator extends JPanel{
         slider_AT_2_Panel.add(rigAT_AT_2, BorderLayout.EAST);
         awayTeamSlidersPanel.add(slider_AT_2_Panel);
 
-        slider_AT_3.setValue(sliderSettings.slider_AT_3_Value);
+        slider_AT_3.setValue(10);
         slider_AT_3.setBorder(new EmptyBorder(5, 5, 5, 5));
-        slider_AT_3.setMajorTickSpacing(1);
         slider_AT_3.setPaintTicks(true);
+        slider_AT_3.setMajorTickSpacing(5);
+        slider_AT_3.setMinorTickSpacing(1);
+        slider_AT_3.setSnapToTicks(true);
         JPanel slider_AT_3_Panel = new JPanel(new BorderLayout());
         slider_AT_3_Panel.setBorder(BorderFactory.createLineBorder(new Color(50, 50, 50), 1));
         JLabel head_AT_3 = new JLabel("Приоритет 3");
@@ -355,10 +368,12 @@ public class PanelCalculator extends JPanel{
         slider_AT_3_Panel.add(rigAT_AT_3, BorderLayout.EAST);
         awayTeamSlidersPanel.add(slider_AT_3_Panel);
 
-        slider_AT_4.setValue(sliderSettings.slider_AT_4_Value);
+        slider_AT_4.setValue(10);
         slider_AT_4.setBorder(new EmptyBorder(5, 5, 5, 5));
-        slider_AT_4.setMajorTickSpacing(1);
         slider_AT_4.setPaintTicks(true);
+        slider_AT_4.setMajorTickSpacing(5);
+        slider_AT_4.setMinorTickSpacing(1);
+        slider_AT_4.setSnapToTicks(true);
         JPanel slider_AT_4_Panel = new JPanel(new BorderLayout());
         slider_AT_4_Panel.setBorder(BorderFactory.createLineBorder(new Color(50, 50, 50), 1));
         JLabel head_AT_4 = new JLabel("Приоритет 4");

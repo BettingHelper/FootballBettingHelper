@@ -145,7 +145,7 @@ public class Main extends JFrame {
                 jtp.addTab(tabs[11], panelCalculator);
                 add(jtp);
 
-                jtp.setSelectedIndex(11);
+                jtp.setSelectedIndex(0);
                 currentVersion = panelStart.currentVersion;
                 newestVersion = panelStart.newestVersion;
 
@@ -179,7 +179,7 @@ public class Main extends JFrame {
                 if (flagCheckKey){
                     if (!currentVersion.equals(newestVersion)){
                         try {
-                            FTPLoader.downloadFile(Settings.getLogin(n), Settings.getPassword(n), "/versions/HockeyBettingHelper.exe", "HockeyBettingHelper.exe");
+                            FTPLoader.downloadFile(Settings.getLogin(n), Settings.getPassword(n), "/versions/FootballBettingHelper.exe", "FootballBettingHelper.exe");
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         }

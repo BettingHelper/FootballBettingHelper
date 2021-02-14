@@ -94,6 +94,7 @@ public class Graphic {
             MAX = 0;
             MIN = 100;
             IntervalXYDataset dataSet = null;
+            String localTitle = "";
             switch (index){
                 case 0:{
                     series1name = "Забитые голы";
@@ -103,18 +104,21 @@ public class Graphic {
                         dataSet = createDoubleDataSet(dataArrayThis, dataArrayOpponent, index, series1name, series2name);
                     else
                         dataSet = createTripleDataSet(dataArrayThis, dataArrayOpponent, dataArrayTotal, index, series1name, series2name, series3name);
+                    localTitle = "Забитые и пропущенные голы";
                     break;
                 }
                 case 1:{
                     series1name = "Забитые голы";
                     series2name = "xG";
                     dataSet = createDoubleDataSet(dataArrayThis, dataArrayOpponent, index, series1name, series2name);
+                    localTitle = "Забитые голы и xG";
                     break;
                 }
                 case 2:{
                     series1name = "Пропущенные голы";
                     series2name = "xGA";
                     dataSet = createDoubleDataSet(dataArrayThis, dataArrayOpponent, index, series1name, series2name);
+                    localTitle = "Пропущенные голы и xGA";
                     break;
                 }
                 case 3:{
@@ -125,6 +129,7 @@ public class Graphic {
                         dataSet = createDoubleDataSet(dataArrayThis, dataArrayOpponent, index, series1name, series2name);
                     else
                         dataSet = createTripleDataSet(dataArrayThis, dataArrayOpponent, dataArrayTotal, index, series1name, series2name, series3name);
+                    localTitle = "xG и xGA";
                     break;
                 }
             }
@@ -164,7 +169,7 @@ public class Graphic {
             if (allOrHomeOrAway.equals("Все матчи")) lastOrFull = " (" + lastOrFull + ")";
             if (allOrHomeOrAway.equals("Дома")) lastOrFull = " (" + lastOrFull + " дома)";
             if (allOrHomeOrAway.equals("На выезде")) lastOrFull = " (" + lastOrFull + " на выезде)";
-            String title = teamName+ ": " + titles[index] + lastOrFull;
+            String title = teamName+ ": " + localTitle + lastOrFull;
 
 
             //String whereIsMatch = " (Все игры)";

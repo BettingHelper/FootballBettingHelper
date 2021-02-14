@@ -25,18 +25,21 @@ import java.util.*;
 public class PanelTablesByLeague extends JPanel{
     JScrollPane scrollPane;
     final String path = "database/";
-    String lastCalculatedLeague = "";
-    String lastCalculatedSeason = "";
     ArrayList<Selector> arrayList = new ArrayList<>();
     //Renderer renderer = new Renderer();
     TablesThread tablesThread;
     String leagueName;
+    String lastOrFull;
+    String lastCalculatedLeague = "";
+    String lastCalculatedSeason = "";
+    String lastCalculatedLastOrFull = "";
     String season;
     String parameter;
     final JButton buttonShowInfo;
     JPanel panelWithTablesByLeague;
     JComboBox<String> seasonCB;
     JComboBox<String> leagueChooser;
+    League league;
 
     public PanelTablesByLeague(){
         this.setLayout(new BorderLayout());
@@ -101,7 +104,7 @@ public class PanelTablesByLeague extends JPanel{
                 seasonCB.setFocusable(false);
                 season = seasonCB.getSelectedItem().toString().replace("Сезон ", "");
 
-                String league = String.valueOf(leagueChooser.getSelectedItem());
+                String leagueName = String.valueOf(leagueChooser.getSelectedItem());
 
                 String pathToLeaguesList = path + season + "/leagues/";
                 JFileChooser fileChooser = new JFileChooser(pathToLeaguesList);
@@ -113,8 +116,8 @@ public class PanelTablesByLeague extends JPanel{
                 leagueChooser.setModel(modelH);
 
                 for (int i=0; i<directoryList.length; i++){
-                    if (directoryList[i].equals(league))
-                        leagueChooser.setSelectedItem(league);
+                    if (directoryList[i].equals(leagueName))
+                        leagueChooser.setSelectedItem(leagueName);
                 }
             }
         });
@@ -150,7 +153,7 @@ public class PanelTablesByLeague extends JPanel{
         season = seasonString.replace("Сезон ", "");
         this.leagueName = leagueName;
 
-        League league = League.getLeagueFromFile(leagueName, season);
+        league = League.getLeagueFromFile(leagueName, season);
 
         panelWithTablesByLeague = new JPanel(new BorderLayout());
         panelWithTablesByLeague.setBorder(BorderFactory.createTitledBorder("Таблица статистических показателей по командам"));
@@ -173,17 +176,23 @@ public class PanelTablesByLeague extends JPanel{
         }
 
 
-        JPanel panelParameter = new JPanel(new GridLayout(1, 3, 0, 0));
-        panelParameter.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
-        final JComboBox<String> paramChooser = new JComboBox<>(paramsForTables);
-        JLabel labelForTable = new JLabel("Выберите показатель для построения таблицы:  ");
+        JPanel panelParameter = new JPanel(new GridLayout(1, 3, 10, 10));
+        panelParameter.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        JLabel labelForTable = new JLabel("Выберите показатели для построения таблицы:  ");
         labelForTable.setFont(new Font("", Font.BOLD, 15));
         panelParameter.add(labelForTable);
+
+        String[] lastOrFullArr = new String[]{"Весь сезон", "Последние 3", "Последние 4", "Последние 5", "Последние 6", "Последние 7", "Последние 8", "Последние 9", "Последние 10", "Последние 15", "Последние 20"};
+        final JComboBox<String> lastOrFullChooser = new JComboBox<>(lastOrFullArr);
+        lastOrFull = lastOrFullArr[0];
+        panelParameter.add(lastOrFullChooser);
+
+        final JComboBox<String> paramChooser = new JComboBox<>(paramsForTables);
         panelParameter.add(paramChooser);
-        panelParameter.add(new JLabel(""));
+
         panelWithTablesByLeague.add(panelParameter, BorderLayout.NORTH);
         container.add(panelWithTablesByLeague);
-
 
         JLabel label = new JLabel("Матчей сыграно: " + league.matchesPlayed);
         Font fontLabel = new Font("Arial", Font.BOLD, 15);
@@ -1418,11 +1427,18 @@ public class PanelTablesByLeague extends JPanel{
 
         container.add(tablePanel);
 
+        lastOrFullChooser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lastOrFull = String.valueOf(lastOrFullChooser.getSelectedItem());
+            }
+        });
+
         paramChooser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 parameter = paramChooser.getSelectedItem().toString();
-                tablesThread = new TablesThread(leagueName, parameter, season, (PanelTablesByLeague) buttonShowInfo.getParent().getParent());
+                tablesThread = new TablesThread(leagueName, parameter, season, lastOrFull, (PanelTablesByLeague) buttonShowInfo.getParent().getParent());
                 tablesThread.start();
             }
         });

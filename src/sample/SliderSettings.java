@@ -44,7 +44,7 @@ public class SliderSettings {
 
     }
 
-    public static SliderSettings getSliderSettingsFromFile(){
+    /*public static SliderSettings getSliderSettingsFromFile(){
         String fileName = "settings/sliderSettings.xml";
         try {
             // создаем объект JAXBContext - точку входа для JAXB
@@ -61,7 +61,7 @@ public class SliderSettings {
 
         }
         return null;
-    }
+    }*/
 
     public void pushSliderSettingsToFile(){
         String fileName = "settings/sliderSettings.xml";
