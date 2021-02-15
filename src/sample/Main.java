@@ -118,7 +118,7 @@ public class Main extends JFrame {
                 PanelSupport panelSupport = new PanelSupport();
                 PanelBeforeAfter panelBeforeAfter = new PanelBeforeAfter();
                 PanelMatchCenter panelMatchCenter = new PanelMatchCenter(panelMatching, panelOneTeamStats, panelConfrontation, panelReferee, panelTablesByLeague, panelTrends, panelBeforeAfter);
-                PanelCalculator panelCalculator = new PanelCalculator();
+                //PanelCalculator panelCalculator = new PanelCalculator();
 
                 jtp.addTab(tabs[0], panelStart);
                 add(jtp);
@@ -142,8 +142,8 @@ public class Main extends JFrame {
                 add(jtp);
                 jtp.addTab(tabs[7], panelSettings);
                 add(jtp);
-                jtp.addTab(tabs[11], panelCalculator);
-                add(jtp);
+                /*jtp.addTab(tabs[11], panelCalculator);
+                add(jtp);*/
 
                 jtp.setSelectedIndex(0);
                 currentVersion = panelStart.currentVersion;

@@ -208,10 +208,6 @@ public class WindowWithID extends JFrame{
                 window.add(label);
 
                 JTextArea jtf = new JTextArea(
-                        "Контакты:\n" +
-                        "ВК: vk.com/id493869084\n" +
-                        "Telegram | WhatsApp: 8-916-477-81-33\n" +
-                        "\n" +
                         "Реквизиты для оплаты:\n" +
                         "1) Сбербанк: 4817 7600 1667 8447 (Михаил Романович Г.)\n" +
                         "2) Яндекс.Деньги: 410017025122373\n" +
@@ -226,5 +222,7 @@ public class WindowWithID extends JFrame{
                 window.pack();
             }
         });
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

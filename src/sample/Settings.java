@@ -7,6 +7,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Set;
@@ -268,7 +269,7 @@ public class Settings {
             File fileDir = new File("settings/allLeagues.txt");
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream(fileDir), "UTF-8"));
+                            new FileInputStream(fileDir), StandardCharsets.UTF_8));
             String str;
             while (((str = in.readLine()) != null)) {
                 if (str.split("=")[0].equals(leagueName)){
@@ -290,7 +291,7 @@ public class Settings {
             File fileDir = new File("database/seasons.txt");
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream(fileDir), "UTF-8"));
+                            new FileInputStream(fileDir), StandardCharsets.UTF_8));
             String str;
             result = in.readLine();
             in.close();
@@ -308,7 +309,7 @@ public class Settings {
             File fileDir = new File("database/seasons.txt");
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream(fileDir), "UTF-8"));
+                            new FileInputStream(fileDir), StandardCharsets.UTF_8));
             String str;
             while (((str = in.readLine()) != null)) {
                 result.add(str);
@@ -323,23 +324,23 @@ public class Settings {
 
     public static String getSerialNumber() throws Exception{
         String line;
-        String serial = "";
+        StringBuilder serial = new StringBuilder("F");
         Process process = Runtime.getRuntime().exec("cmd /c wmic path Win32_PhysicalMedia where \"tag like '%Drive0%'\" Get SerialNumber");
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(process.getInputStream()) );
         while ((line = in.readLine()) != null) {
             if ((!line.contains("erial"))&&(!line.equals("")))
-                serial = serial + line;
+                serial.append(line);
         }
         in.close();
-        serial = serial.replaceAll("\\s","");
-        if (serial.toUpperCase().contains("ERROR")){
+        serial = new StringBuilder(serial.toString().replaceAll("\\s", ""));
+        if (serial.toString().toUpperCase().contains("ERROR")){
             PopupWindow window = new PopupWindow("<html>   Ошибка при проверке ID. Код ошибки 1<br>" +
                     "Обратитесь к администратору</html>");
             window.setVisible(true);
             window.setAlwaysOnTop(true);
         }
-        return serial;
+        return serial.toString();
     }
 
     public static void setLastUpdate(String path){

@@ -580,7 +580,12 @@ public class PanelBeforeAfter extends JPanel{
 
             String teamSrednie = "";
             if (allOrHomeOrAway.contains("Все")){
-                teamSrednie = "Показатели игр " + teamName + " в сезоне " + season + ". ДО разделения";
+                if (range.split("-")[0].equals("0")){
+                    teamSrednie = "Показатели игр " + teamName + " в сезоне " + season + ". ДО разделения";
+                } else {
+                    teamSrednie = "Показатели игр " + teamName + " в сезоне " + season + ". ПОСЛЕ разделения";
+                }
+
             }
             if (allOrHomeOrAway.contains("Дома")){
                 teamSrednie = "Показатели домашних игр " + teamName + " в сезоне " + season + ". ДО разделения";
@@ -602,7 +607,8 @@ public class PanelBeforeAfter extends JPanel{
             String[] params = {"Голы (сред)", "xG (сред.)", "Реализация", "Голы в 1T и доля в %", "Голы в 2T и доля в %",
                     "Голы 1'-15' и доля в %", "Голы 16'-30' и доля в %", "Голы 31'-45+' и доля в %", "Голы 46'-60' и доля в %", "Голы 61'-75' и доля в %", "Голы 76'-90+' и доля в %",
                     "Владение", "Ударов всего", "Удары в створ", "Удары мимо", "Блокировано ударов",
-                    "Угловые", "Офсайды", "Фолы", "Желтые карточки", "Красные карточки"};
+                    "Угловые", "Офсайды", "Фолы", "Отборы", "Желтые карточки", "Красные карточки"};
+
             Object[][] data;
             int rowCount = params.length;
             double real = MyMath.round(Double.parseDouble(selector.pList.get(4).get(1)) / Double.parseDouble(selector.pList.get(5).get(1)), 2);
