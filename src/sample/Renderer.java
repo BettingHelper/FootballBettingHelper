@@ -200,7 +200,7 @@ public class Renderer extends DefaultTableCellRenderer {
                 cell.setBackground(new Color(238, 238, 238));
                 break;
             }
-            case 5:{ // referees Table
+            case 5:{ //all referees Table
                 if (column > 0){
                     double selfValue = Double.parseDouble(cellValue);
                     cell.setBackground(getColorBetweenRedAndGreen(selfValue, column, minMaxArray));
@@ -208,6 +208,37 @@ public class Renderer extends DefaultTableCellRenderer {
                     cell.setBackground(new Color(238, 238, 238));
                 }
 
+                break;
+            }
+            case 6:{ //
+                cell.setBackground(new Color(255, 255, 255));// refTable
+                if (column == 2 && row < table.getRowCount()){
+                    double homeValue = Double.parseDouble((table.getValueAt(row, 2)).toString().trim());
+                    double awayValue = Double.parseDouble((table.getValueAt(row, 3)).toString().trim());
+
+                    if (homeValue == awayValue){
+                        cell.setBackground(new Color(250, 210, 10, 150));
+                    } else {
+                        if (homeValue > awayValue) {
+                            cell.setBackground(new Color(30, 240, 40, 150));
+                        } else {
+                            cell.setBackground(new Color(250, 70, 70, 150));
+                        }
+                    }
+                }
+                if (column == 3 && row < table.getRowCount()){
+                    double homeValue = Double.parseDouble((table.getValueAt(row, 2)).toString().trim());
+                    double awayValue = Double.parseDouble((table.getValueAt(row, 3)).toString().trim());
+                    if (homeValue == awayValue){
+                        cell.setBackground(new Color(250, 210, 10, 150));
+                    } else {
+                        if (homeValue > awayValue) {
+                            cell.setBackground(new Color(250, 70, 70, 150));
+                        } else {
+                            cell.setBackground(new Color(30, 240, 40, 150));
+                        }
+                    }
+                }
                 break;
             }
         }
