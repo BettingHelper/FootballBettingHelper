@@ -27,7 +27,6 @@ public class PanelBeforeAfter extends JPanel{
     JComboBox<String> leagueChooser;
     JComboBox<String> teamChooser;
     JComboBox<String> teamAllOrHomeOrAway;
-    JComboBox<String> teamLastOrFullSeason;
     JButton buttonShowInfo;
     JPanel leftTeamPanel;
     JPanel rightTeamPanel;
@@ -1102,6 +1101,5 @@ public class PanelBeforeAfter extends JPanel{
         seasonChooser.setSelectedItem("Сезон " + season);
         leagueChooser.setSelectedItem(league);
         teamAllOrHomeOrAway.setSelectedItem("Дома");
-        teamLastOrFullSeason.setSelectedItem("Весь сезон");
     }
 }

@@ -185,17 +185,20 @@ public class PanelReferee extends JPanel{
     public JScrollPane refreshRefData(final String leagueName, final String refName, final String season, final String lastOrFullSeason){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         JScrollPane scrollPane;
+        String seasonLocal = season.replace("Сезон ", "");
+        final Settings settings = Settings.getSettingsFromFile();
         if ((!leagueName.contains("Выберите"))&&(!refName.contains("Выберите"))){
 
+            ArrayList<String> tournamentTable = League.getLeagueFromFile(leagueName, seasonLocal).tournamentTable;
             final Selector selector = new Selector();
-            selector.getRefListOfMatches(leagueName, refName, season.replace("Сезон ", ""), lastOrFullSeason);
+            selector.getRefListOfMatches(leagueName, refName, seasonLocal, lastOrFullSeason);
 
             if (selector.listOfMatches.size()>0){
                 JPanel allInfoPanel = new JPanel(new BorderLayout());
 
                 JPanel container = new JPanel(new VerticalLayout());
                 int matches = selector.listOfMatches.size();
-                League league = League.getLeagueFromFile(leagueName, season.replace("Сезон ", ""));
+                League league = League.getLeagueFromFile(leagueName, seasonLocal);
                 double averageYC = MyMath.round((league.homeYellowCards + league.awayYellowCards) / (double) league.matchesPlayed, 2);
                 double averageYC1T = MyMath.round((league.homeYellowCards1T + league.awayYellowCards1T) / (double) league.matchesPlayed, 2);
                 double averageYC2T = MyMath.round((league.homeYellowCards2T + league.awayYellowCards2T) / (double) league.matchesPlayed, 2);
@@ -220,9 +223,9 @@ public class PanelReferee extends JPanel{
                 String sAverageFoulsTackles = MyMath.round(averageFouls/averageTackles ,2 ) + "   -   " + MyMath.round(averageHomeFouls/averageHomeTackles ,2 ) + "   -   " + MyMath.round(averageAwayFouls/averageAwayTackles ,2 );
 
 
-                String labelRef = "   Статистика арбитра " + refName + " в сезоне " + season.replace("Сезон ", "");
+                String labelRef = "   Статистика арбитра " + refName + " в сезоне " + seasonLocal;
                 if (lastOrFullSeason.contains("Последние")){
-                    labelRef = "   Статистика последних " + selector.listOfMatches.size() + " матчей арбитра " + refName + " в сезоне " + season.replace("Сезон ", "");
+                    labelRef = "   Статистика последних " + selector.listOfMatches.size() + " матчей арбитра " + refName + " в сезоне " + seasonLocal;
                 }
                 final JLabel label = new JLabel(labelRef);
                 label.setBorder(new EmptyBorder(10, 10, 0, 0));
@@ -489,13 +492,20 @@ public class PanelReferee extends JPanel{
                 ////////////////////////ГРАФИКИ И ТАБЛИЦЫ ВСТАВЛЯЮ ТУТ
                 JPanel graphAndTables = new JPanel(new BorderLayout());
 
-                Graphic graphic = new Graphic(0, refName);
-                JPanel panelGraphics = graphic.getRefGraphics(refName, selector);
-                graphAndTables.add(panelGraphics, BorderLayout.CENTER);
+                final Graphic graphic;
+                if (settings.showGraphics){
+                    graphic = new Graphic(0, refName);
+                    JPanel panelGraphics = graphic.getRefGraphics(refName, lastOrFullSeason, selector);
+                    allInfoPanel.add(panelGraphics);
+                } else {
+                    graphic = new Graphic(0, refName);
+                    JPanel panelTables = graphic.getRefTablesWithStats(refName, lastOrFullSeason, selector, tournamentTable);
+                    allInfoPanel.add(panelTables);
+                }
 
 
                 ////////////////////////ГРАФИКИ И ТАБЛИЦЫ БОЛЬШЕ НЕ ВСТАВЛЯЮ
-                allInfoPanel.add(graphAndTables, BorderLayout.CENTER);
+                //allInfoPanel.add(graphAndTables, BorderLayout.CENTER);
 
                 scrollPane = new JScrollPane(allInfoPanel);
                 scrollPane.setVerticalScrollBar( new JScrollBar() {

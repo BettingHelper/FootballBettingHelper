@@ -266,7 +266,7 @@ public class Graphic {
         double[][] dataArrayOpponent = new double[titles.length][listOfMatches.size()];
         double[][] dataArrayTotal = new double[titles.length][listOfMatches.size()];
         String[] arrayOpponents = new String[listOfMatches.size()];
-        selector.getArraysWithStats(teamName ,dataArrayThis, dataArrayOpponent, dataArrayTotal, arrayOpponents, tournamentTable);
+        selector.getArraysWithStats(teamName, dataArrayThis, dataArrayOpponent, dataArrayTotal, arrayOpponents, tournamentTable);
 
         for (int i=0; i<4; i++){
             switch (i){
@@ -483,7 +483,7 @@ public class Graphic {
         return result;
     }
 
-    public JPanel getRefGraphics(String refName, Selector selector){
+    public JPanel getRefGraphics(String refName, String lastOrFull, Selector selector){
         File fileI = new File("images/FBH.png");
         BufferedImage bimg = null;
         try {
@@ -585,7 +585,7 @@ public class Graphic {
             ValueAxis rangeAxis = plot.getRangeAxis();
             rangeAxis.setRange(MIN/1.05-0.2, MAX*1.05+0.2);
 
-            JFreeChart chart = new JFreeChart(refName+ ": " + titlesRef[index], JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+            JFreeChart chart = new JFreeChart(refName + ": " + titlesRef[index] + " (" + lastOrFull + ")", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
             chart.setBackgroundPaint(Color.white);
             JPanel panelWithGraphicAndTable = new JPanel(new BorderLayout());
             ChartPanel chartPanel = new ChartPanel(chart);
@@ -598,6 +598,141 @@ public class Graphic {
         addTablesToRefGraphics(result, selector);
         result.setPreferredSize(new Dimension(300, numberOfGraphics*graphicHeight)); //300 - словное значение. Он все равно растягивает ее шире, но это и хорошо
 
+
+        return result;
+    }
+
+    public JPanel getRefTablesWithStats(String refName, String lastOrFull, Selector selector, ArrayList<String> tournamentTable){
+        JPanel result = new JPanel(new VerticalLayout());
+
+        ArrayList<Match> listOfMatches = selector.listOfMatches;
+        int numberOfMatchesLimit = 12;
+        int numberOfGraphics = 0;
+
+        this.settings = Settings.getSettingsFromFile();
+        String[] titlesRef = {"Желтые карточки", "Фолы", "Желтые карточки 1 тайм", "Желтые карточки 2 тайм",
+                "Фолы 1 тайм", "Фолы 2 тайм", "Минута первой желтой карточки", "Минута последней желтой карточки",
+                "ЖК --> КК", "Прямые красные карточки", "Назначенные пенальти"};
+
+        double[][] dataArrayHome = new double[titlesRef.length][listOfMatches.size()];
+        double[][] dataArrayAway = new double[titlesRef.length][listOfMatches.size()];
+        double[][] dataArrayTotal = new double[titlesRef.length][listOfMatches.size()];
+        String[] arrayHomeTeams = new String[listOfMatches.size()];
+        String[] arrayAwayTeams = new String[listOfMatches.size()];
+        for (int i=0; i<listOfMatches.size(); i++){
+            dataArrayHome[0][i] = listOfMatches.get(i).homeYellowCards;
+            dataArrayHome[1][i] = listOfMatches.get(i).homeFouls;
+            dataArrayHome[2][i] = listOfMatches.get(i).homeYellowCards1T;
+            dataArrayHome[3][i] = listOfMatches.get(i).homeYellowCards2T;
+            dataArrayHome[4][i] = listOfMatches.get(i).homeFouls1T;
+            dataArrayHome[5][i] = listOfMatches.get(i).homeFouls2T;
+            dataArrayHome[6][i] = listOfMatches.get(i).firstYCMinute;
+            dataArrayHome[7][i] = listOfMatches.get(i).lastYCMinute;
+            dataArrayHome[8][i] = listOfMatches.get(i).homeSecondYellowCards;
+            dataArrayHome[9][i] = listOfMatches.get(i).homeDirectRedCards;
+            dataArrayHome[10][i] = listOfMatches.get(i).homePen;
+
+            dataArrayAway[0][i] = listOfMatches.get(i).awayYellowCards;
+            dataArrayAway[1][i] = listOfMatches.get(i).awayFouls;
+            dataArrayAway[2][i] = listOfMatches.get(i).awayYellowCards1T;
+            dataArrayAway[3][i] = listOfMatches.get(i).awayYellowCards2T;
+            dataArrayAway[4][i] = listOfMatches.get(i).awayFouls1T;
+            dataArrayAway[5][i] = listOfMatches.get(i).awayFouls2T;
+            dataArrayAway[6][i] = 0;
+            dataArrayAway[7][i] = 0;
+            dataArrayAway[8][i] = listOfMatches.get(i).awaySecondYellowCards;
+            dataArrayAway[9][i] = listOfMatches.get(i).awayDirectRedCards;
+            dataArrayAway[10][i] = listOfMatches.get(i).awayPen;
+
+            dataArrayTotal[0][i] = listOfMatches.get(i).homeYellowCards + listOfMatches.get(i).awayYellowCards;
+            dataArrayTotal[1][i] = listOfMatches.get(i).homeFouls + listOfMatches.get(i).awayFouls;
+            dataArrayTotal[2][i] = listOfMatches.get(i).homeYellowCards1T + listOfMatches.get(i).awayYellowCards1T;
+            dataArrayTotal[3][i] = listOfMatches.get(i).homeYellowCards2T + listOfMatches.get(i).awayYellowCards2T;
+            dataArrayTotal[4][i] = listOfMatches.get(i).homeFouls1T + listOfMatches.get(i).awayFouls1T;
+            dataArrayTotal[5][i] = listOfMatches.get(i).homeFouls2T + listOfMatches.get(i).awayFouls2T;
+            dataArrayTotal[6][i] = 0;
+            dataArrayTotal[7][i] = 0;
+            dataArrayTotal[8][i] = listOfMatches.get(i).homeSecondYellowCards + listOfMatches.get(i).awaySecondYellowCards;
+            dataArrayTotal[9][i] = listOfMatches.get(i).homeDirectRedCards + listOfMatches.get(i).awayDirectRedCards;
+            dataArrayTotal[10][i] = listOfMatches.get(i).homePen + listOfMatches.get(i).awayPen;
+
+            arrayHomeTeams[i] = listOfMatches.get(i).homeTeam;
+            arrayAwayTeams[i] = listOfMatches.get(i).awayTeam;
+        }
+        int index;
+
+        for (int i=0; i<titlesRef.length; i++){
+            String title = refName + ": " + titlesRef[i] + " (" + lastOrFull + ")";
+            JPanel panelWithTable = getRefPanelWithTable(dataArrayHome, dataArrayAway, dataArrayTotal, i, title, tournamentTable, arrayHomeTeams, arrayAwayTeams);
+            result.add(panelWithTable);
+        }
+
+        addTablesToRefGraphics(result, selector);
+        //result.setPreferredSize(new Dimension(300, numberOfGraphics*graphicHeight)); //300 - словное значение. Он все равно растягивает ее шире, но это и хорошо
+
+
+        return result;
+    }
+
+    public JPanel getRefPanelWithTable(double[][] dataArrayHome, double[][] dataArrayAway, double[][] dataArrayTotal,
+                                    int index, String title, ArrayList<String> tournamentTable, String[] arrayHomeTeams, String[] arrayAwayTeams){
+        JPanel result = new JPanel(new BorderLayout());
+
+        JLabel headerText = new JLabel(title);
+        headerText.setFont(new Font("", 0, 18));
+        headerText.setHorizontalAlignment(SwingConstants.CENTER);
+        result.add(headerText, BorderLayout.NORTH);
+
+        Object[] colHeads = new Object[]{"Номер", "Хозяева", "Счет", "Гости"};
+        Object[][] data = new Object[arrayHomeTeams.length][4];
+
+        switch (index){
+            case 6:
+            case 7: {
+                for (int i=0; i<arrayHomeTeams.length; i++){
+                    data[i] = new Object[]{
+                            i+1,
+                            arrayHomeTeams[i],
+                            (int) dataArrayHome[index][i],
+                            arrayAwayTeams[i],
+                    };
+                }
+                break;
+            }
+            default:{
+                for (int i=0; i<arrayHomeTeams.length; i++){
+                    data[i] = new Object[]{
+                            i+1,
+                            arrayHomeTeams[i],
+                            (int) dataArrayHome[index][i] + " : " + ((int) dataArrayAway[index][i]),
+                            arrayAwayTeams[i],
+                    };
+                }
+                break;
+            }
+        }
+
+
+
+
+        final Font fontLabel = new Font("Arial", Font.BOLD, 15);
+        JTable table = new JTable(data, colHeads);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.setEnabled(false);
+        table.getTableHeader().setFont(fontLabel);
+        table.setFont(fontLabel);
+        table.setRowHeight(25);
+        table.setBackground(new Color(238, 238, 238));
+        table.setBorder(BorderFactory.createLineBorder(new Color(50,50,50), 1));
+        Renderer renderer = new Renderer(7);
+        for (int t=0; t<table.getColumnCount(); t++){
+            table.getColumnModel().getColumn(t).setCellRenderer(renderer);
+        }
+        JPanel tablePanel = new JPanel();
+        tablePanel.setLayout(new BorderLayout());
+        tablePanel.add(table);
+        tablePanel.add(table.getTableHeader(), BorderLayout.NORTH);
+        result.add(tablePanel);
 
         return result;
     }

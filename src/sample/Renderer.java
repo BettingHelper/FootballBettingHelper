@@ -241,6 +241,24 @@ public class Renderer extends DefaultTableCellRenderer {
                 }
                 break;
             }
+            case 7:{ // refereeTables (instead Graphics)
+                cell.setBackground(new Color(255, 255, 255));
+                if (column == 2 && cellValue.contains(":")){
+                    double homeValue = Double.parseDouble(cellValue.split(":")[0].trim());
+                    double awayValue = Double.parseDouble(cellValue.split(":")[1].trim());
+
+                    if (homeValue == awayValue) {
+                        cell.setBackground(new Color(250, 210, 10, 150));
+                    }
+                    if (homeValue > awayValue) {
+                        cell.setBackground(new Color(30, 240, 40, 150));
+                    }
+                    if (homeValue < awayValue) {
+                        cell.setBackground(new Color(250, 70, 70, 150));
+                    }
+                }
+                break;
+            }
         }
 
         setHorizontalAlignment(JLabel.CENTER);

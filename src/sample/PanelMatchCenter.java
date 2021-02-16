@@ -72,13 +72,10 @@ public class PanelMatchCenter extends JPanel{
 
         int n = Settings.getNumberOfAccount();
         int nextDay = Settings.getNextDayCode(dayCode);
-        String nameOfFile = String.valueOf(nextDay) + ".txt";
+        String nameOfFile = nextDay + ".txt";
         File file = Settings.downloadDayFile(n, nameOfFile);
 
-        if (!file.exists() || file.length()==0)
-            buttonRight.setEnabled(false);
-        else
-            buttonRight.setEnabled(true);
+        buttonRight.setEnabled(file.exists() && file.length() != 0);
 
         panelHeader.add(buttonRight, BorderLayout.EAST);
         this.add(panelHeader, BorderLayout.NORTH);
@@ -89,58 +86,37 @@ public class PanelMatchCenter extends JPanel{
 
 
 
-        buttonLeft.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int newDayCode = Settings.getPreviousDayCode(dayCode);
-                String day = String.valueOf(newDayCode).substring(6,8);
-                String month = String.valueOf(newDayCode).substring(4,6);
-                String year = String.valueOf(newDayCode).substring(0,4);
+        buttonLeft.addActionListener(e -> {
+            int newDayCode = Settings.getPreviousDayCode(dayCode);
+            String day1 = String.valueOf(newDayCode).substring(6,8);
+            String month1 = String.valueOf(newDayCode).substring(4,6);
+            String year1 = String.valueOf(newDayCode).substring(0,4);
 
-                File file = Settings.downloadDayFile(Settings.getNumberOfAccount(), Settings.getPreviousDayCode(newDayCode) + ".txt");
-                if (!file.exists() || file.length()==0)
-                    buttonLeft.setEnabled(false);
-                else
-                    buttonLeft.setEnabled(true);
-                labelDate.setText(day + "." + month + "." + year);
-                dayCode = Integer.parseInt(year)*10000 + Integer.parseInt(month)*100 + Integer.parseInt(day);
+            File file1 = Settings.downloadDayFile(Settings.getNumberOfAccount(), Settings.getPreviousDayCode(newDayCode) + ".txt");
+            buttonLeft.setEnabled(file1.exists() && file1.length() != 0);
+            labelDate.setText(day1 + "." + month1 + "." + year1);
+            dayCode = Integer.parseInt(year1)*10000 + Integer.parseInt(month1)*100 + Integer.parseInt(day1);
 
-                file = Settings.downloadDayFile(Settings.getNumberOfAccount(), Settings.getNextDayCode(newDayCode) + ".txt");
-                if (!file.exists() || file.length()==0)
-                    buttonRight.setEnabled(false);
-                else
-                    buttonRight.setEnabled(true);
+            file1 = Settings.downloadDayFile(Settings.getNumberOfAccount(), Settings.getNextDayCode(newDayCode) + ".txt");
+            buttonRight.setEnabled(file1.exists() && file1.length() != 0);
 
-                fillData(dayCode, hourDifference);
+            fillData(dayCode, hourDifference);
 
-            }
         });
 
-        buttonRight.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int newDayCode = Settings.getNextDayCode(dayCode);
-                String day = String.valueOf(newDayCode).substring(6, 8);
-                String month = String.valueOf(newDayCode).substring(4,6);
-                String year = String.valueOf(newDayCode).substring(0,4);
-                File file = Settings.downloadDayFile(Settings.getNumberOfAccount(), Settings.getNextDayCode(newDayCode) + ".txt");
-                if (!file.exists() || file.length()==0){
-                    buttonRight.setEnabled(false);
-                } else{
-                    buttonRight.setEnabled(true);
-                }
-                labelDate.setText(day + "." + month + "." + year);
-                dayCode = Integer.parseInt(year)*10000 + Integer.parseInt(month)*100 + Integer.parseInt(day);
-                file = Settings.downloadDayFile(Settings.getNumberOfAccount(), Settings.getPreviousDayCode(newDayCode) + ".txt");
-                if (!file.exists() || file.length()==0){
-                    buttonLeft.setEnabled(false);
-                }
-                else{
-                    buttonLeft.setEnabled(true);
-                }
-                fillData(dayCode, hourDifference);
+        buttonRight.addActionListener(e -> {
+            int newDayCode = Settings.getNextDayCode(dayCode);
+            String day12 = String.valueOf(newDayCode).substring(6, 8);
+            String month12 = String.valueOf(newDayCode).substring(4,6);
+            String year12 = String.valueOf(newDayCode).substring(0,4);
+            File file12 = Settings.downloadDayFile(Settings.getNumberOfAccount(), Settings.getNextDayCode(newDayCode) + ".txt");
+            buttonRight.setEnabled(file12.exists() && file12.length() != 0);
+            labelDate.setText(day12 + "." + month12 + "." + year12);
+            dayCode = Integer.parseInt(year12)*10000 + Integer.parseInt(month12)*100 + Integer.parseInt(day12);
+            file12 = Settings.downloadDayFile(Settings.getNumberOfAccount(), Settings.getPreviousDayCode(newDayCode) + ".txt");
+            buttonLeft.setEnabled(file12.exists() && file12.length() != 0);
+            fillData(dayCode, hourDifference);
 
-            }
         });
 
     }
@@ -180,53 +156,58 @@ public class PanelMatchCenter extends JPanel{
                 panelButtons.setBorder(BorderFactory.createEmptyBorder(3, 0, 3, 3));
                 panelMatch.add(panelButtons, BorderLayout.EAST);
 
-                buttonStats.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
+                /*buttonStats.addActionListener(e -> {
 
-                    }
-                });
+                });*/
 
                 final String finalCurrentLeague = currentLeague;
-                buttonTrends.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        Settings settings = Settings.getSettingsFromFile();
+                buttonTrends.addActionListener(e -> {
+                    Settings settings = Settings.getSettingsFromFile();
 
-                        Selector selectorHT = new Selector();
-                        Selector selectorAT = new Selector();
-                        String allOrHA = "Все матчи";
+                    Selector selectorHT = new Selector();
+                    Selector selectorAT = new Selector();
+                    String allOrHA = "Все матчи";
 
-                        if (settings.trendsHA){
-                            selectorHT.getListOfMatches(finalCurrentLeague, homeTeam, "Дома", Settings.getCurrentSeasonInLeague(finalCurrentLeague), "Весь сезон");
-                            selectorAT.getListOfMatches(finalCurrentLeague, awayTeam, "На выезде", Settings.getCurrentSeasonInLeague(finalCurrentLeague), "Весь сезон");
-                            allOrHA = "Дом - выезд";
-                        } else {
-                            selectorHT.getListOfMatches(finalCurrentLeague, homeTeam, "Все матчи", Settings.getCurrentSeasonInLeague(finalCurrentLeague), "Весь сезон");
-                            selectorAT.getListOfMatches(finalCurrentLeague, awayTeam, "Все матчи", Settings.getCurrentSeasonInLeague(finalCurrentLeague), "Весь сезон");
-                        }
-
-                        selectorHT.getPList(selectorHT.listOfMatches, homeTeam);
-                        selectorAT.getPList(selectorAT.listOfMatches, awayTeam);
-
-                        WindowTrendsForTwoTeams wttt = new WindowTrendsForTwoTeams(homeTeam, awayTeam, Settings.getCurrentSeasonInLeague(finalCurrentLeague),
-                                allOrHA, "Весь сезон", selectorHT, selectorAT);
-                        wttt.setVisible(true);
+                    if (settings.trendsHA){
+                        selectorHT.getListOfMatches(finalCurrentLeague, homeTeam, "Дома", Settings.getCurrentSeasonInLeague(finalCurrentLeague), "Весь сезон");
+                        selectorAT.getListOfMatches(finalCurrentLeague, awayTeam, "На выезде", Settings.getCurrentSeasonInLeague(finalCurrentLeague), "Весь сезон");
+                        allOrHA = "Дом - выезд";
+                    } else {
+                        selectorHT.getListOfMatches(finalCurrentLeague, homeTeam, "Все матчи", Settings.getCurrentSeasonInLeague(finalCurrentLeague), "Весь сезон");
+                        selectorAT.getListOfMatches(finalCurrentLeague, awayTeam, "Все матчи", Settings.getCurrentSeasonInLeague(finalCurrentLeague), "Весь сезон");
                     }
+
+                    selectorHT.getPList(selectorHT.listOfMatches, homeTeam);
+                    selectorAT.getPList(selectorAT.listOfMatches, awayTeam);
+
+                    WindowTrendsForTwoTeams wttt = new WindowTrendsForTwoTeams(homeTeam, awayTeam, Settings.getCurrentSeasonInLeague(finalCurrentLeague),
+                            allOrHA, "Весь сезон", selectorHT, selectorAT);
+                    wttt.setVisible(true);
                 });
 
-                buttonStats.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        panelMatching.setFilters(finalCurrentLeague, homeTeam, awayTeam);
-                        panelOneTeamStats.setFilters(finalCurrentLeague);
-                        panelConfrontation.setFilters(finalCurrentLeague, homeTeam, awayTeam);
-                        panelReferee.setFilters(finalCurrentLeague);
-                        panelTablesByLeague.setFilters(finalCurrentLeague);
-                        panelTrends.setFilters(finalCurrentLeague);
-                        panelBeforeAfter.setFilters(finalCurrentLeague);
-                    }
+                buttonStats.addActionListener(e -> {
+                    FiltersThread filtersThread = new FiltersThread(panelMatching, panelOneTeamStats, panelConfrontation, panelReferee, panelTablesByLeague,
+                            panelTrends, panelBeforeAfter, finalCurrentLeague, homeTeam, awayTeam);
+                    filtersThread.start();
+
+//                    panelMatching.setFilters(finalCurrentLeague, homeTeam, awayTeam);
+//                    panelOneTeamStats.setFilters(finalCurrentLeague);
+//                    panelConfrontation.setFilters(finalCurrentLeague, homeTeam, awayTeam);
+//                    panelReferee.setFilters(finalCurrentLeague);
+//                    panelTablesByLeague.setFilters(finalCurrentLeague);
+//                    panelTrends.setFilters(finalCurrentLeague);
+//                    panelBeforeAfter.setFilters(finalCurrentLeague);
                 });
+
+                /*buttonStats.addActionListener(e -> {
+                    panelMatching.setFilters(finalCurrentLeague, homeTeam, awayTeam);
+                    panelOneTeamStats.setFilters(finalCurrentLeague);
+                    panelConfrontation.setFilters(finalCurrentLeague, homeTeam, awayTeam);
+                    panelReferee.setFilters(finalCurrentLeague);
+                    panelTablesByLeague.setFilters(finalCurrentLeague);
+                    panelTrends.setFilters(finalCurrentLeague);
+                    panelBeforeAfter.setFilters(finalCurrentLeague);
+                });*/
 
                 panelMatch.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
