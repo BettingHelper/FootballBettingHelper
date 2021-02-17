@@ -94,7 +94,7 @@ public class PanelTablesByLeague extends JPanel{
                 leagueChooser.setModel(modelH);
                 leagueChooser.setSelectedIndex(index);
                 leagueChooser.setFocusable(false);
-                leagueName = leagueChooser.getSelectedItem().toString();
+                String leagueName = leagueChooser.getSelectedItem().toString();
 
             }
         });
@@ -102,7 +102,7 @@ public class PanelTablesByLeague extends JPanel{
         seasonCB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 seasonCB.setFocusable(false);
-                season = seasonCB.getSelectedItem().toString().replace("Сезон ", "");
+                String season = seasonCB.getSelectedItem().toString().replace("Сезон ", "");
 
                 String leagueName = String.valueOf(leagueChooser.getSelectedItem());
 
@@ -147,13 +147,13 @@ public class PanelTablesByLeague extends JPanel{
     public JScrollPane refreshLeagueData(final String leagueName, String seasonString){
         JScrollPane scrollPane = null;
 //        JScrollPane scrollPane = new JScrollPane();
+        Settings settings = Settings.getSettingsFromFile();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
 
         JPanel container = new JPanel(new VerticalLayout());
-        season = seasonString.replace("Сезон ", "");
+        this.season = seasonString.replace("Сезон ", "");
         this.leagueName = leagueName;
-
-        league = League.getLeagueFromFile(leagueName, season);
+        this.league = League.getLeagueFromFile(leagueName, season);
 
         panelWithTablesByLeague = new JPanel(new BorderLayout());
         panelWithTablesByLeague.setBorder(BorderFactory.createTitledBorder("Таблица статистических показателей по командам"));
@@ -284,6 +284,18 @@ public class PanelTablesByLeague extends JPanel{
         tablePanel.add(table.getTableHeader(), BorderLayout.NORTH);
 
         container.add(tablePanel);
+
+        JButton buttonShowBubble = new JButton("Отобразить графики перекрестных показателей");
+        buttonShowBubble.setFont(fontLabel);
+        buttonShowBubble.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        container.add(buttonShowBubble);
+
+        int colCount = 1;
+        if (settings.bubbleChartsHA){
+            colCount = 2;
+        }
+        JPanel bubbleChartsPanel = new JPanel(new BorderLayout());
+        bubbleChartsPanel.add(getBubbleCharts(colCount));
 
 
 
@@ -1460,6 +1472,23 @@ public class PanelTablesByLeague extends JPanel{
         seasonCB.setSelectedItem("Сезон " + season);
         leagueChooser.setSelectedItem(league);
 
+    }
+
+    public JPanel getBubbleCharts(int colCount){
+        JPanel result = new JPanel(new GridLayout(0, colCount, 5, 5));
+
+        if (colCount == 1){
+            for (int i=0; i<league.overallStatsTable.size(); i++){
+
+
+            }
+
+        }
+        if (colCount == 2){
+
+        }
+
+        return result;
     }
 
 }

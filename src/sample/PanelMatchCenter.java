@@ -190,24 +190,7 @@ public class PanelMatchCenter extends JPanel{
                             panelTrends, panelBeforeAfter, finalCurrentLeague, homeTeam, awayTeam);
                     filtersThread.start();
 
-//                    panelMatching.setFilters(finalCurrentLeague, homeTeam, awayTeam);
-//                    panelOneTeamStats.setFilters(finalCurrentLeague);
-//                    panelConfrontation.setFilters(finalCurrentLeague, homeTeam, awayTeam);
-//                    panelReferee.setFilters(finalCurrentLeague);
-//                    panelTablesByLeague.setFilters(finalCurrentLeague);
-//                    panelTrends.setFilters(finalCurrentLeague);
-//                    panelBeforeAfter.setFilters(finalCurrentLeague);
                 });
-
-                /*buttonStats.addActionListener(e -> {
-                    panelMatching.setFilters(finalCurrentLeague, homeTeam, awayTeam);
-                    panelOneTeamStats.setFilters(finalCurrentLeague);
-                    panelConfrontation.setFilters(finalCurrentLeague, homeTeam, awayTeam);
-                    panelReferee.setFilters(finalCurrentLeague);
-                    panelTablesByLeague.setFilters(finalCurrentLeague);
-                    panelTrends.setFilters(finalCurrentLeague);
-                    panelBeforeAfter.setFilters(finalCurrentLeague);
-                });*/
 
                 panelMatch.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 

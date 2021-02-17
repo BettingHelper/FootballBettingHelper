@@ -5042,7 +5042,7 @@ public class TableMaker {
                 averageOppStats[7] += selector.listOfMatches.get(i).homeYellowCards;
             }
         }
-        for (int i=0; i<2; i++){
+        for (int i=0; i<=2; i++){
             averageSelfStats[i] = MyMath.round(averageSelfStats[i] / selector.listOfMatches.size(), 2);
             averageOppStats[i]  = MyMath.round(averageOppStats[i]  / selector.listOfMatches.size(), 2);
         }
