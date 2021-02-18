@@ -145,7 +145,7 @@ public class Main extends JFrame {
                 /*jtp.addTab(tabs[11], panelCalculator);
                 add(jtp);*/
 
-                jtp.setSelectedIndex(0);
+                jtp.setSelectedIndex(6);
                 currentVersion = panelStart.currentVersion;
                 newestVersion = panelStart.newestVersion;
 

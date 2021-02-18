@@ -3,16 +3,26 @@ package sample;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.annotations.XYAnnotation;
+import org.jfree.chart.annotations.XYImageAnnotation;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.SubCategoryAxis;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.labels.StandardXYItemLabelGenerator;
+import org.jfree.chart.labels.XYItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.tabbedui.VerticalLayout;
+import org.jfree.util.ShapeUtilities;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -20,6 +30,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Ellipse2D;
 import java.util.*;
 
 public class PanelTablesByLeague extends JPanel{
@@ -285,18 +296,17 @@ public class PanelTablesByLeague extends JPanel{
 
         container.add(tablePanel);
 
+        JPanel panelButton = new JPanel(new BorderLayout());
         JButton buttonShowBubble = new JButton("Отобразить графики перекрестных показателей");
         buttonShowBubble.setFont(fontLabel);
-        buttonShowBubble.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        container.add(buttonShowBubble);
+        panelButton.setBorder(BorderFactory.createEmptyBorder(5, 300, 5, 300));
+        panelButton.add(buttonShowBubble);
 
-        int colCount = 1;
-        if (settings.bubbleChartsHA){
-            colCount = 2;
-        }
+
+        container.add(panelButton);
+
         JPanel bubbleChartsPanel = new JPanel(new BorderLayout());
-        bubbleChartsPanel.add(getBubbleCharts(colCount));
-
+        container.add(bubbleChartsPanel);
 
 
         jtf = new JLabel("Диаграммы голов в " + leagueName);
@@ -1446,13 +1456,21 @@ public class PanelTablesByLeague extends JPanel{
             }
         });
 
-        paramChooser.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                parameter = paramChooser.getSelectedItem().toString();
-                tablesThread = new TablesThread(leagueName, parameter, season, lastOrFull, (PanelTablesByLeague) buttonShowInfo.getParent().getParent());
-                tablesThread.start();
+        paramChooser.addActionListener(e -> {
+            parameter = paramChooser.getSelectedItem().toString();
+            tablesThread = new TablesThread(leagueName, parameter, season, lastOrFull, (PanelTablesByLeague) buttonShowInfo.getParent().getParent());
+            tablesThread.start();
+        });
+
+        buttonShowBubble.addActionListener(e -> {
+            if ( bubbleChartsPanel.getComponentCount() == 0){
+                bubbleChartsPanel.add(getBubbleCharts(settings.bubbleChartsHA));
+                buttonShowBubble.setText("Скрыть графики перекрестных показателей");
+            } else {
+                bubbleChartsPanel.removeAll();
+                buttonShowBubble.setText("Отобразить графики перекрестных показателей");
             }
+
         });
 
 
@@ -1474,21 +1492,190 @@ public class PanelTablesByLeague extends JPanel{
 
     }
 
-    public JPanel getBubbleCharts(int colCount){
-        JPanel result = new JPanel(new GridLayout(0, colCount, 5, 5));
+    public JPanel getBubbleCharts(boolean bubbleChartsHA){
+        JPanel result = new JPanel(new GridLayout(0, 2, 0, 0));
 
-        if (colCount == 1){
-            for (int i=0; i<league.overallStatsTable.size(); i++){
+        ArrayList<String> table1; // основная / домашняя таблица
+        ArrayList<String> table2; // основная / выездная таблица
+        int numberOfCharts = 4;
+        int totalCharts = 4;
+
+        ArrayList<String> graphicTitles = new ArrayList<>();
+
+        if (bubbleChartsHA){
+            table1 = league.homeStatsTable;
+            table2 = league.awayStatsTable;
+            numberOfCharts *= 2;
+
+            graphicTitles.add("Дома: Ударов/гол + Средний xG удара");
+            graphicTitles.add("На выезде: Ударов/гол + Средний xG удара");
+            graphicTitles.add("Дома: Ударов в среднем + Средний xG удара");
+            graphicTitles.add("На выезде: Ударов в среднем + Средний xG удара");
+            graphicTitles.add("Дома: Фолы + ЖК");
+            graphicTitles.add("На выезде: Фолы + ЖК");
+            graphicTitles.add("Дома: Ударов всего + Ударов от ворот");
+            graphicTitles.add("На выезде: Ударов всего + Ударов от ворот");
+
+        } else {
+            table1 = league.overallStatsTable;
+            table2 = league.overallStatsTable;
+
+            graphicTitles.add("Весь сезон: Ударов/гол + Средний xG удара");
+            graphicTitles.add("Весь сезон: Ударов в среднем + Средний xG удара");
+            graphicTitles.add("Весь сезон: Фолы + ЖК");
+            graphicTitles.add("Весь сезон: Ударов всего + Ударов от ворот");
+        }
+
+
+
+
+        int numberOfTeams = league.overallStatsTable.size();
+        ArrayList<String> teamsList = new ArrayList<>();
+        double [][][] data = new double[numberOfCharts][numberOfTeams][2];
+
+        for (int i=0; i<numberOfTeams; i++){
+            int index = 0;
+            int matches1 = Integer.parseInt(table1.get(i).split("\\*")[1]);
+            int matches2 = Integer.parseInt(table2.get(i).split("\\*")[1]);
+            teamsList.add(table1.get(i).split("\\*")[0]);
+
+            for(int j=0; j<totalCharts; j++){
+                double par1_Team1 = 0;
+                double par2_Team1 = 0;
+
+                double par1_Team2 = 0;
+                double par2_Team2 = 0;
+
+                switch (j){
+                    case 0:{ // Ударов на гол + Средний xG удара
+                        par1_Team1 = MyMath.round(Double.parseDouble(table1.get(i).split("\\*")[7].split("_")[0]) / Double.parseDouble(table1.get(i).split("\\*")[2].split("_")[0]),4);
+                        par2_Team1 = MyMath.round(Double.parseDouble(table1.get(i).split("\\*")[5].split("_")[0]) / Double.parseDouble(table1.get(i).split("\\*")[7].split("_")[0]),4);
+
+                        par1_Team2 = MyMath.round(Double.parseDouble(table2.get(i).split("\\*")[7].split("_")[0]) / Double.parseDouble(table2.get(i).split("\\*")[2].split("_")[0]),4);
+                        par2_Team2 = MyMath.round(Double.parseDouble(table2.get(i).split("\\*")[5].split("_")[0]) / Double.parseDouble(table2.get(i).split("\\*")[7].split("_")[0]),4);
+                        break;
+                    }
+                    case 1:{// Ударов в среднем + Средний xG удара
+                        par1_Team1 = MyMath.round(Double.parseDouble(table1.get(i).split("\\*")[7].split("_")[0]) / matches1,4);
+                        par2_Team1 = MyMath.round(Double.parseDouble(table1.get(i).split("\\*")[5].split("_")[0]) / Double.parseDouble(table1.get(i).split("\\*")[7].split("_")[0]),4);
+
+                        par1_Team2 = MyMath.round(Double.parseDouble(table2.get(i).split("\\*")[7].split("_")[0]) / matches2,4);
+                        par2_Team2 = MyMath.round(Double.parseDouble(table2.get(i).split("\\*")[5].split("_")[0]) / Double.parseDouble(table2.get(i).split("\\*")[7].split("_")[0]),4);
+
+                        break;
+                    }
+                    case 2:{// Фолы + ЖК
+                        par1_Team1 = MyMath.round(Double.parseDouble(table1.get(i).split("\\*")[15].split("_")[0]) / matches1,4);
+                        par2_Team1 = MyMath.round(Double.parseDouble(table1.get(i).split("\\*")[16].split("_")[0]) / matches1,4);
+
+                        par1_Team2 = MyMath.round(Double.parseDouble(table2.get(i).split("\\*")[15].split("_")[0]) / matches2,4);
+                        par2_Team2 = MyMath.round(Double.parseDouble(table2.get(i).split("\\*")[16].split("_")[0]) / matches2,4);
+
+                        break;
+                    }
+                    case 3:{ // Ударов всего / Ударов от ворот
+                        par1_Team1 = MyMath.round(Double.parseDouble(table1.get(i).split("\\*")[7].split("_")[0]) / matches1,4);
+                        par2_Team1 = MyMath.round(Double.parseDouble(table1.get(i).split("\\*")[22].split("_")[0]) / matches1,4);
+
+                        par1_Team2 = MyMath.round(Double.parseDouble(table2.get(i).split("\\*")[7].split("_")[0]) / matches2,4);
+                        par2_Team2 = MyMath.round(Double.parseDouble(table2.get(i).split("\\*")[22].split("_")[0]) / matches2,4);
+
+                        break;
+                    }
+                    /*case 4:{
+
+                        break;
+                    }
+                    case 5:{
+
+                        break;
+                    }
+                    case 6:{
+
+                        break;
+                    }
+                    case 7:{
+
+                        break;
+                    }
+                    case 8:{
+
+                        break;
+                    }
+                    case 9:{
+
+                        break;
+                    }*/
+                }
+
+
+                if (bubbleChartsHA){
+                    data[index][i][0] = par1_Team1;
+                    data[index][i][1] = par2_Team1;
+
+                    data[index+1][i][0] = par1_Team2;
+                    data[index+1][i][1] = par2_Team2;
+
+                    index += 2;
+                } else {
+                    data[index][i][0] = par1_Team1;
+                    data[index][i][1] = par2_Team1;
+
+                    index ++;
+                }
 
 
             }
 
-        }
-        if (colCount == 2){
+
+
 
         }
+
+        for (int k=0; k<data.length; k++){
+            XYDataset dataset = createDataset(k, data, teamsList);
+            JFreeChart chart = ChartFactory.createScatterPlot(
+                    graphicTitles.get(k),
+                    graphicTitles.get(k).split(":")[1].split("\\+")[0].trim(),
+                    graphicTitles.get(k).split(":")[1].split("\\+")[1].trim(),
+                    dataset);
+
+            XYPlot plot = (XYPlot)chart.getPlot();
+            plot.setBackgroundPaint(new Color(230, 230, 230));
+            XYItemRenderer renderer;
+            renderer = plot.getRenderer();
+
+            for (int i=0; i<numberOfTeams; i++){
+                renderer.setSeriesShape(i, new Ellipse2D.Double(-5, -5, 10, 10));
+            }
+
+            XYItemLabelGenerator generator =
+                    new StandardXYItemLabelGenerator("{0}");
+            renderer.setBaseItemLabelGenerator(generator);
+            renderer.setBaseItemLabelsVisible(true);
+
+            chart.setBackgroundPaint(Color.white);
+            chart.getLegend().setVisible(false);
+            ChartPanel panel = new ChartPanel(chart);
+            panel.setBorder(BorderFactory.createLineBorder(new Color(50,50,50), 1));
+            result.add(panel);
+        }
+
+
 
         return result;
+    }
+
+    private XYDataset createDataset(int index, double[][][] data, ArrayList<String> teamsList) {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+
+        for (int i=0; i<teamsList.size(); i++){
+            XYSeries series = new XYSeries(teamsList.get(i));
+            series.add(data[index][i][0], data[index][i][1]);
+            dataset.addSeries(series);
+        }
+
+        return dataset;
     }
 
 }
