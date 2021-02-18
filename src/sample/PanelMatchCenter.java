@@ -27,9 +27,10 @@ public class PanelMatchCenter extends JPanel{
     PanelTablesByLeague panelTablesByLeague;
     PanelTrends panelTrends;
     PanelBeforeAfter panelBeforeAfter;
+    PanelCalculator panelCalculator;
 
     public PanelMatchCenter(PanelMatching panelMatching, PanelOneTeamStats panelOneTeamStats, PanelConfrontation panelConfrontation, PanelReferee panelReferee,
-                            PanelTablesByLeague panelTablesByLeague, PanelTrends panelTrends, PanelBeforeAfter panelBeforeAfter){
+                            PanelTablesByLeague panelTablesByLeague, PanelTrends panelTrends, PanelBeforeAfter panelBeforeAfter, PanelCalculator panelCalculator){
         this.setLayout(new BorderLayout());
 
         this.panelMatching = panelMatching;
@@ -39,6 +40,7 @@ public class PanelMatchCenter extends JPanel{
         this.panelTablesByLeague = panelTablesByLeague;
         this.panelTrends = panelTrends;
         this.panelBeforeAfter = panelBeforeAfter;
+        this.panelCalculator = panelCalculator;
 
         Settings settings = Settings.getSettingsFromFile();
 
@@ -187,7 +189,7 @@ public class PanelMatchCenter extends JPanel{
 
                 buttonStats.addActionListener(e -> {
                     FiltersThread filtersThread = new FiltersThread(panelMatching, panelOneTeamStats, panelConfrontation, panelReferee, panelTablesByLeague,
-                            panelTrends, panelBeforeAfter, finalCurrentLeague, homeTeam, awayTeam);
+                            panelTrends, panelBeforeAfter, panelCalculator, finalCurrentLeague, homeTeam, awayTeam);
                     filtersThread.start();
 
                 });
