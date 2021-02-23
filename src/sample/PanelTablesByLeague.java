@@ -51,6 +51,7 @@ public class PanelTablesByLeague extends JPanel{
     JComboBox<String> seasonCB;
     JComboBox<String> leagueChooser;
     League league;
+    Settings settings;
 
     public PanelTablesByLeague(){
         this.setLayout(new BorderLayout());
@@ -92,73 +93,65 @@ public class PanelTablesByLeague extends JPanel{
 
         this.add(infoPanel);
 
-        leagueChooser.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                int index = leagueChooser.getSelectedIndex();
-                String pathToLeaguesList = path + seasonCB.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/";
-                JFileChooser rightFileChooser = new JFileChooser(pathToLeaguesList);
-                String[] rightDirectoryList = new String[rightFileChooser.getCurrentDirectory().list().length+1];
-                rightDirectoryList[0] = "Выберите лигу";
-                for (int i=1; i<rightDirectoryList.length; i++)
-                    rightDirectoryList[i] = rightFileChooser.getCurrentDirectory().list()[i-1].replace(".txt", "");
-                DefaultComboBoxModel modelH = new DefaultComboBoxModel(rightDirectoryList);
-                leagueChooser.setModel(modelH);
-                leagueChooser.setSelectedIndex(index);
-                leagueChooser.setFocusable(false);
-                String leagueName = leagueChooser.getSelectedItem().toString();
+        leagueChooser.addActionListener(e -> {
+            int index = leagueChooser.getSelectedIndex();
+            String pathToLeaguesList = path + seasonCB.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/";
+            JFileChooser rightFileChooser = new JFileChooser(pathToLeaguesList);
+            String[] rightDirectoryList = new String[rightFileChooser.getCurrentDirectory().list().length+1];
+            rightDirectoryList[0] = "Выберите лигу";
+            for (int i=1; i<rightDirectoryList.length; i++)
+                rightDirectoryList[i] = rightFileChooser.getCurrentDirectory().list()[i-1].replace(".txt", "");
+            DefaultComboBoxModel modelH = new DefaultComboBoxModel(rightDirectoryList);
+            leagueChooser.setModel(modelH);
+            leagueChooser.setSelectedIndex(index);
+            leagueChooser.setFocusable(false);
+            String leagueName = leagueChooser.getSelectedItem().toString();
 
+        });
+
+        seasonCB.addActionListener(e -> {
+            seasonCB.setFocusable(false);
+            String season = seasonCB.getSelectedItem().toString().replace("Сезон ", "");
+
+            String leagueName = String.valueOf(leagueChooser.getSelectedItem());
+
+            String pathToLeaguesList = path + season + "/leagues/";
+            JFileChooser fileChooser1 = new JFileChooser(pathToLeaguesList);
+            String[] directoryList1 = new String[fileChooser1.getCurrentDirectory().list().length+1];
+            directoryList1[0] = "Выберите лигу";
+            for (int i = 1; i< directoryList1.length; i++)
+                directoryList1[i] = fileChooser1.getCurrentDirectory().list()[i-1].replace(".txt", "");
+            DefaultComboBoxModel modelH = new DefaultComboBoxModel(directoryList1);
+            leagueChooser.setModel(modelH);
+
+            for (int i = 0; i< directoryList1.length; i++){
+                if (directoryList1[i].equals(leagueName))
+                    leagueChooser.setSelectedItem(leagueName);
             }
         });
 
-        seasonCB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                seasonCB.setFocusable(false);
-                String season = seasonCB.getSelectedItem().toString().replace("Сезон ", "");
+        buttonShowInfo.addActionListener(e -> {
+            infoPanel.removeAll();
 
-                String leagueName = String.valueOf(leagueChooser.getSelectedItem());
-
-                String pathToLeaguesList = path + season + "/leagues/";
-                JFileChooser fileChooser = new JFileChooser(pathToLeaguesList);
-                String[] directoryList = new String[fileChooser.getCurrentDirectory().list().length+1];
-                directoryList[0] = "Выберите лигу";
-                for (int i=1; i<directoryList.length; i++)
-                    directoryList[i] = fileChooser.getCurrentDirectory().list()[i-1].replace(".txt", "");
-                DefaultComboBoxModel modelH = new DefaultComboBoxModel(directoryList);
-                leagueChooser.setModel(modelH);
-
-                for (int i=0; i<directoryList.length; i++){
-                    if (directoryList[i].equals(leagueName))
-                        leagueChooser.setSelectedItem(leagueName);
-                }
+            if (!((String) leagueChooser.getSelectedItem()).contains("Выберите")){
+                JScrollPane panel = refreshLeagueData((String) leagueChooser.getSelectedItem(),
+                        (String) seasonCB.getSelectedItem()
+                );
+                infoPanel.add(panel);
+                infoPanel.revalidate();
+            } else {
+                infoPanel.add(new JLabel("  Не выбрана лига"), BorderLayout.NORTH);
+                infoPanel.revalidate();
             }
-        });
+            buttonShowInfo.setFocusable(false);
 
-        buttonShowInfo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                infoPanel.removeAll();
-
-                if (!((String) leagueChooser.getSelectedItem()).contains("Выберите")){
-                    JScrollPane panel = refreshLeagueData((String) leagueChooser.getSelectedItem(),
-                            (String) seasonCB.getSelectedItem()
-                    );
-                    infoPanel.add(panel);
-                    infoPanel.revalidate();
-                } else {
-                    infoPanel.add(new JLabel("  Не выбрана лига"), BorderLayout.NORTH);
-                    infoPanel.revalidate();
-                }
-                buttonShowInfo.setFocusable(false);
-
-            }
         });
 
     }
 
     public JScrollPane refreshLeagueData(final String leagueName, String seasonString){
         JScrollPane scrollPane = null;
-//        JScrollPane scrollPane = new JScrollPane();
-        Settings settings = Settings.getSettingsFromFile();
+        settings = Settings.getSettingsFromFile();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
 
         JPanel container = new JPanel(new VerticalLayout());
@@ -281,11 +274,11 @@ public class PanelTablesByLeague extends JPanel{
         table.getColumnModel().getColumn(2).setPreferredWidth(100);
         table.getColumnModel().getColumn(3).setPreferredWidth(100);
         table.getColumnModel().getColumn(4).setPreferredWidth(100);
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        Renderer tableRenderer = new Renderer(6);
+        tableRenderer.setHorizontalAlignment(JLabel.CENTER);
 //        renderer.setHorizontalAlignment(JLabel.CENTER);
         for (int r=1; r<colHeads.length; r++)
-            table.getColumnModel().getColumn(r).setCellRenderer(centerRenderer);
+            table.getColumnModel().getColumn(r).setCellRenderer(tableRenderer);
 //            table.getColumnModel().getColumn(r).setCellRenderer(renderer);
 
 
@@ -300,6 +293,10 @@ public class PanelTablesByLeague extends JPanel{
         JButton buttonShowBubble = new JButton("Отобразить графики перекрестных показателей");
         buttonShowBubble.setFont(fontLabel);
         panelButton.setBorder(BorderFactory.createEmptyBorder(5, 300, 5, 300));
+
+        if (!Settings.isTop6League(leagueName)){
+            buttonShowBubble.setEnabled(false);
+        }
         panelButton.add(buttonShowBubble);
 
 
@@ -608,10 +605,12 @@ public class PanelTablesByLeague extends JPanel{
         table.getColumnModel().getColumn(2).setPreferredWidth(100);
         table.getColumnModel().getColumn(3).setPreferredWidth(100);
         table.getColumnModel().getColumn(4).setPreferredWidth(100);
-        centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+
+        tableRenderer = new Renderer(6);
+        tableRenderer.setHorizontalAlignment(JLabel.CENTER);
         for (int r=1; r<colHeads.length; r++)
-            table.getColumnModel().getColumn(r).setCellRenderer(centerRenderer);
+            table.getColumnModel().getColumn(r).setCellRenderer(tableRenderer);
 
         tablePanel = new JPanel();
         tablePanel.setLayout(new BorderLayout());
@@ -972,10 +971,11 @@ public class PanelTablesByLeague extends JPanel{
         table.getColumnModel().getColumn(2).setPreferredWidth(100);
         table.getColumnModel().getColumn(3).setPreferredWidth(100);
         table.getColumnModel().getColumn(4).setPreferredWidth(100);
-        centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        tableRenderer = new Renderer(6);
+        tableRenderer.setHorizontalAlignment(JLabel.CENTER);
         for (int r=1; r<colHeads.length; r++)
-            table.getColumnModel().getColumn(r).setCellRenderer(centerRenderer);
+            table.getColumnModel().getColumn(r).setCellRenderer(tableRenderer);
 
         tablePanel = new JPanel();
         tablePanel.setLayout(new BorderLayout());
@@ -1365,10 +1365,11 @@ public class PanelTablesByLeague extends JPanel{
         table.getColumnModel().getColumn(2).setPreferredWidth(100);
         table.getColumnModel().getColumn(3).setPreferredWidth(100);
         table.getColumnModel().getColumn(4).setPreferredWidth(100);
-        centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        tableRenderer = new Renderer(6);
+        tableRenderer.setHorizontalAlignment(JLabel.CENTER);
         for (int r=1; r<colHeads.length; r++)
-            table.getColumnModel().getColumn(r).setCellRenderer(centerRenderer);
+            table.getColumnModel().getColumn(r).setCellRenderer(tableRenderer);
 
         tablePanel = new JPanel();
         tablePanel.setLayout(new BorderLayout());
@@ -1437,10 +1438,11 @@ public class PanelTablesByLeague extends JPanel{
         table.getColumnModel().getColumn(2).setPreferredWidth(100);
         table.getColumnModel().getColumn(3).setPreferredWidth(100);
         table.getColumnModel().getColumn(4).setPreferredWidth(100);
-        centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        tableRenderer = new Renderer(6);
+        tableRenderer.setHorizontalAlignment(JLabel.CENTER);
         for (int r=1; r<colHeads.length; r++)
-            table.getColumnModel().getColumn(r).setCellRenderer(centerRenderer);
+            table.getColumnModel().getColumn(r).setCellRenderer(tableRenderer);
 
         tablePanel = new JPanel();
         tablePanel.setLayout(new BorderLayout());
@@ -1449,12 +1451,9 @@ public class PanelTablesByLeague extends JPanel{
 
         container.add(tablePanel);
 
-        lastOrFullChooser.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                lastOrFull = String.valueOf(lastOrFullChooser.getSelectedItem());
-            }
-        });
+        lastOrFullChooser.addActionListener(e ->
+                lastOrFull = String.valueOf(lastOrFullChooser.getSelectedItem())
+        );
 
         paramChooser.addActionListener(e -> {
             parameter = paramChooser.getSelectedItem().toString();
@@ -1464,7 +1463,7 @@ public class PanelTablesByLeague extends JPanel{
 
         buttonShowBubble.addActionListener(e -> {
             if ( bubbleChartsPanel.getComponentCount() == 0){
-                bubbleChartsPanel.add(getBubbleCharts(settings.bubbleChartsHA));
+                bubbleChartsPanel.add(getBubbleCharts());
                 buttonShowBubble.setText("Скрыть графики перекрестных показателей");
             } else {
                 bubbleChartsPanel.removeAll();
@@ -1492,7 +1491,7 @@ public class PanelTablesByLeague extends JPanel{
 
     }
 
-    public JPanel getBubbleCharts(boolean bubbleChartsHA){
+    public JPanel getBubbleCharts(){
         JPanel result = new JPanel(new GridLayout(0, 2, 0, 0));
 
         ArrayList<String> table1; // основная / домашняя таблица
@@ -1502,7 +1501,7 @@ public class PanelTablesByLeague extends JPanel{
 
         ArrayList<String> graphicTitles = new ArrayList<>();
 
-        if (bubbleChartsHA){
+        if (settings.bubbleChartsHA){
             table1 = league.homeStatsTable;
             table2 = league.awayStatsTable;
             numberOfCharts *= 2;
@@ -1609,7 +1608,7 @@ public class PanelTablesByLeague extends JPanel{
                 }
 
 
-                if (bubbleChartsHA){
+                if (settings.bubbleChartsHA){
                     data[index][i][0] = par1_Team1;
                     data[index][i][1] = par2_Team1;
 

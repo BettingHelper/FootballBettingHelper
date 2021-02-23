@@ -415,96 +415,85 @@ public class PanelCalculator extends JPanel{
 
         this.add(dataPanel);
 
-        seasonCB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                seasonCB.setFocusable(false);
-                buttonShow.setEnabled(false);
-                season = seasonCB.getSelectedItem().toString().replace("Сезон ", "");
+        seasonCB.addActionListener(e -> {
+            seasonCB.setFocusable(false);
+            buttonShow.setEnabled(false);
+            season = seasonCB.getSelectedItem().toString().replace("Сезон ", "");
 
-                String[] listOfLeagues = new String[leagueList.size()];
-                for (int i = 0; i < listOfLeagues.length; i++)
-                    listOfLeagues[i] = leagueList.get(i);
+            String[] listOfLeagues1 = new String[leagueList.size()];
+            for (int i = 0; i < listOfLeagues1.length; i++)
+                listOfLeagues1[i] = leagueList.get(i);
 
-                DefaultComboBoxModel modelH = new DefaultComboBoxModel(listOfLeagues);
-                leagueChooser.setModel(modelH);
+            DefaultComboBoxModel modelH = new DefaultComboBoxModel(listOfLeagues1);
+            leagueChooser.setModel(modelH);
 
-                String pathToTeamsList = path + seasonCB.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/" + leagueChooser.getSelectedItem() + ".txt";
-                String[] listRight = {"Выберите команду"};
-                if (!pathToTeamsList.contains("ыберите")) {
-                    listRight = Main.readTxtFile(pathToTeamsList);
-                }
-
-                DefaultComboBoxModel modelH2;
-                modelH = new DefaultComboBoxModel(listRight);
-                modelH2 = new DefaultComboBoxModel(listRight);
-                teamChooserHome.setModel(modelH);
-                teamChooserAway.setModel(modelH2);
-                leagueChooser.setFocusable(true);
+            String pathToTeamsList = path + seasonCB.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/" + leagueChooser.getSelectedItem() + ".txt";
+            String[] listRight = {"Выберите команду"};
+            if (!pathToTeamsList.contains("ыберите")) {
+                listRight = Main.readTxtFile(pathToTeamsList);
             }
+
+            DefaultComboBoxModel modelH2;
+            modelH = new DefaultComboBoxModel(listRight);
+            modelH2 = new DefaultComboBoxModel(listRight);
+            teamChooserHome.setModel(modelH);
+            teamChooserAway.setModel(modelH2);
+            leagueChooser.setFocusable(true);
         });
 
-        leagueChooser.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                leagueName = (String) leagueChooser.getSelectedItem();
-                buttonShow.setEnabled(false);
-                int index = leagueChooser.getSelectedIndex();
+        leagueChooser.addActionListener(e -> {
+            leagueName = (String) leagueChooser.getSelectedItem();
+            buttonShow.setEnabled(false);
+            int index = leagueChooser.getSelectedIndex();
 
-                String[] listOfLeagues = new String[leagueList.size()];
-                for (int i = 0; i < listOfLeagues.length; i++)
-                    listOfLeagues[i] = leagueList.get(i);
+            String[] listOfLeagues12 = new String[leagueList.size()];
+            for (int i = 0; i < listOfLeagues12.length; i++)
+                listOfLeagues12[i] = leagueList.get(i);
 
-                DefaultComboBoxModel modelH = new DefaultComboBoxModel(listOfLeagues);
-                leagueChooser.setModel(modelH);
+            DefaultComboBoxModel modelH = new DefaultComboBoxModel(listOfLeagues12);
+            leagueChooser.setModel(modelH);
 
-                DefaultComboBoxModel modelH2;
+            DefaultComboBoxModel modelH2;
 
-                leagueChooser.setModel(modelH);
-                leagueChooser.setSelectedIndex(index);
-                leagueChooser.setFocusable(false);
+            leagueChooser.setModel(modelH);
+            leagueChooser.setSelectedIndex(index);
+            leagueChooser.setFocusable(false);
 
-                teamChooserHome.setEnabled(true);
-                teamChooserAway.setEnabled(true);
-                String pathToTeamsList = path + seasonCB.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/" + leagueChooser.getSelectedItem() + ".txt";
-                String[] listRight = {"Выберите команду"};
-                if (!pathToTeamsList.contains("ыберите")) {
-                    listRight = Main.readTxtFile(pathToTeamsList);
-                }
-                modelH = new DefaultComboBoxModel(listRight);
-                modelH2 = new DefaultComboBoxModel(listRight);
-                teamChooserHome.setModel(modelH);
-                teamChooserAway.setModel(modelH2);
-
+            teamChooserHome.setEnabled(true);
+            teamChooserAway.setEnabled(true);
+            String pathToTeamsList = path + seasonCB.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/" + leagueChooser.getSelectedItem() + ".txt";
+            String[] listRight = {"Выберите команду"};
+            if (!pathToTeamsList.contains("ыберите")) {
+                listRight = Main.readTxtFile(pathToTeamsList);
             }
+            modelH = new DefaultComboBoxModel(listRight);
+            modelH2 = new DefaultComboBoxModel(listRight);
+            teamChooserHome.setModel(modelH);
+            teamChooserAway.setModel(modelH2);
+
         });
 
-        teamChooserHome.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                teamChooserHome.setFocusable(false);
-                homeTeam = (String) teamChooserHome.getSelectedItem();
-                awayTeam = (String) teamChooserAway.getSelectedItem();
-                checkFilters();
-            }
+        teamChooserHome.addActionListener(e -> {
+            teamChooserHome.setFocusable(false);
+            homeTeam = (String) teamChooserHome.getSelectedItem();
+            awayTeam = (String) teamChooserAway.getSelectedItem();
+            checkFilters();
         });
 
-        teamChooserAway.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                teamChooserAway.setFocusable(false);
-                homeTeam = (String) teamChooserHome.getSelectedItem();
-                awayTeam = (String) teamChooserAway.getSelectedItem();
-                checkFilters();
-            }
+        teamChooserAway.addActionListener(e -> {
+            teamChooserAway.setFocusable(false);
+            homeTeam = (String) teamChooserHome.getSelectedItem();
+            awayTeam = (String) teamChooserAway.getSelectedItem();
+            checkFilters();
         });
 
-        buttonShow.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                calculatorThread = new CalculatorThread(season, leagueName, homeTeam, awayTeam,
-                        (PanelCalculator) buttonShow.getParent().getParent(),
-                        slider_HT_1.getValue(), slider_HT_2.getValue(), slider_HT_3.getValue(), slider_HT_4.getValue(),
-                        slider_AT_1.getValue(), slider_AT_2.getValue(), slider_AT_3.getValue(), slider_AT_4.getValue());
-                calculatorThread.start();
+        buttonShow.addActionListener(e -> {
+            calculatorThread = new CalculatorThread(season, leagueName, homeTeam, awayTeam,
+                    (PanelCalculator) buttonShow.getParent().getParent(),
+                    slider_HT_1.getValue(), slider_HT_2.getValue(), slider_HT_3.getValue(), slider_HT_4.getValue(),
+                    slider_AT_1.getValue(), slider_AT_2.getValue(), slider_AT_3.getValue(), slider_AT_4.getValue());
+            calculatorThread.start();
 
-            }
         });
     }
 
@@ -517,12 +506,12 @@ public class PanelCalculator extends JPanel{
     }
 
     public void checkFilters(){
-        if (leagueName != null && !leagueName.contains("Выберите")
+        buttonShow.setEnabled(
+                leagueName != null && !leagueName.contains("Выберите")
                 && homeTeam != null && !homeTeam.contains("Выберите")
                 && awayTeam != null && !awayTeam.contains("Выберите")
-                && !homeTeam.equals(awayTeam)){
-            buttonShow.setEnabled(true);
-        }
+                && !homeTeam.equals(awayTeam)
+        );
     }
 }
 

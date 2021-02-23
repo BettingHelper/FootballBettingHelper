@@ -74,7 +74,7 @@ public class Graphic {
         }
         //Image scaled = bimg.getScaledInstance((int) (750*procWIDTH), graphicHeight, Image.SCALE_FAST);
 
-        int numberOfMatchesLimit = 15;
+        int numberOfMatchesLimit = 8;
         /*if (procWIDTH == 1)
             numberOfMatchesLimit = 20;*/
 
@@ -606,7 +606,6 @@ public class Graphic {
         JPanel result = new JPanel(new VerticalLayout());
 
         ArrayList<Match> listOfMatches = selector.listOfMatches;
-        int numberOfMatchesLimit = 12;
         int numberOfGraphics = 0;
 
         this.settings = Settings.getSettingsFromFile();

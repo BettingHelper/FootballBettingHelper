@@ -382,14 +382,14 @@ public class PanelMatching extends JPanel{
                 int otstup = 0;
 
                 if (!Settings.isWhoScoredLeague(leagueName)){
-                    JLabel labelAttention = new JLabel("ВНИМАНИЕ! Данные по данной лиге могут быть не в полном объеме.");
+                    JLabel labelAttention = new JLabel("ВНИМАНИЕ! Данные по этой лиге могут быть не в полном объеме.");
                     labelAttention.setFont(font18);
                     labelAttention.setForeground(Color.RED);
                     labelAttention.setLocation(10, otstup);
+                    labelAttention.setSize(new Dimension(650, 25));
                     otstup += 30;
                     container.add(labelAttention);
                 }
-
 
                 int matches = selector.listOfMatches.size();
                 int wins = (int) Double.parseDouble(selector.pList.get(0).get(1));
@@ -445,7 +445,7 @@ public class PanelMatching extends JPanel{
                     }
                     forma = s.toString();
                 }
-                final Dimension defFormaLocation = new Dimension(70,78);
+                final Dimension defFormaLocation = new Dimension(70,otstup);
                 for (int i=0; i<forma.length(); i++){
                     JLabel imageLabel = null;
                     if (forma.charAt(i) == 'W'){
@@ -508,6 +508,7 @@ public class PanelMatching extends JPanel{
                 String sources = "Сайт / Твиттер / Травмы / Погода / Transfermarkt:";
                 final JLabel labelSources = new JLabel(sources);
                 labelSources.setLocation(10,otstup);
+                int localOtstup = otstup;
                 otstup += 35;
                 labelSources.setSize(new Dimension(600, 25));
                 labelSources.setFont(font15);
@@ -517,35 +518,35 @@ public class PanelMatching extends JPanel{
                 final JButton buttonSite = new JButton(new ImageIcon("images/www.png"));
                 if (Team.getWebsite(teamName).equals("website"))
                     buttonSite.setEnabled(false);
-                buttonSite.setLocation(horAlignment, 100);
+                buttonSite.setLocation(horAlignment, localOtstup - 5);
                 buttonSite.setSize(32,32);
                 container.add(buttonSite);
 
                 JButton buttonTwitter = new JButton(new ImageIcon("images/twitter.png"));
                 if (Team.getTwitter(teamName).equals("twitter"))
                     buttonTwitter.setEnabled(false);
-                buttonTwitter.setLocation(horAlignment + 32 + 5, 100);
+                buttonTwitter.setLocation(horAlignment + 32 + 5, localOtstup - 5);
                 buttonTwitter.setSize(32,32);
                 container.add(buttonTwitter);
 
                 JButton buttonMedicine = new JButton(new ImageIcon("images/medicine.png"));
                 if (Team.getTransferMarkt(teamName).equals("medicine"))
                     buttonMedicine.setEnabled(false);
-                buttonMedicine.setLocation(horAlignment + (32 + 5) * 2, 100);
+                buttonMedicine.setLocation(horAlignment + (32 + 5) * 2, localOtstup - 5);
                 buttonMedicine.setSize(32,32);
                 container.add(buttonMedicine);
 
                 JButton buttonWeather = new JButton(new ImageIcon("images/weather.png"));
                 if (Team.getWeather(teamName).equals("weather"))
                     buttonWeather.setEnabled(false);
-                buttonWeather.setLocation(horAlignment + (32 + 5) * 3, 100);
+                buttonWeather.setLocation(horAlignment + (32 + 5) * 3, localOtstup - 5);
                 buttonWeather.setSize(32, 32);
                 container.add(buttonWeather);
 
                 JButton buttonTransferMarkt = new JButton(new ImageIcon("images/transfermarkt.png"));
                 if (Team.getTransferMarkt(teamName).equals("transferMarkt"))
                     buttonTransferMarkt.setEnabled(false);
-                buttonTransferMarkt.setLocation(horAlignment + (32 + 5)*4, 100);
+                buttonTransferMarkt.setLocation(horAlignment + (32 + 5)*4, localOtstup - 5);
                 buttonTransferMarkt.setSize(32,32);
                 container.add(buttonTransferMarkt);
 
@@ -1035,14 +1036,7 @@ public class PanelMatching extends JPanel{
                                     break;
                                 }
                             }
-                            int resHeight;
-                            if (settings.showGraphics){
-                                resHeight = containerHeight + indexOfFoundGraphic*graphic.graphicHeight;
-                            } else {
-                                heightOfTable = panelG.getHeight() / graphic.graphicTitles.size();
-                                resHeight = containerHeight + indexOfFoundGraphic*heightOfTable;
-                            }
-
+                            int resHeight =(int) (containerHeight + (double) indexOfFoundGraphic / (double) graphic.graphicTitles.size() * (scrollPane.getVerticalScrollBar().getMaximum() - containerHeight));
                             scrollPane.getVerticalScrollBar().setValue(resHeight);
                         }
 

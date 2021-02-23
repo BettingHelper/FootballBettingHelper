@@ -14,6 +14,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class PanelOneTeamStats extends JPanel{
@@ -97,108 +98,95 @@ public class PanelOneTeamStats extends JPanel{
 
         this.add(infoPanel);
 
-        seasonChooser.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                seasonChooser.setFocusable(false);
+        seasonChooser.addActionListener(e -> {
+            seasonChooser.setFocusable(false);
 
-                String team = String.valueOf(teamChooser.getSelectedItem());
-                String league = String.valueOf(leagueChooser.getSelectedItem());
+            String team = String.valueOf(teamChooser.getSelectedItem());
+            String league = String.valueOf(leagueChooser.getSelectedItem());
 
-                String pathToLeaguesList = path + seasonChooser.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/";
-                JFileChooser fileChooser = new JFileChooser(pathToLeaguesList);
-                String[] directoryList = new String[fileChooser.getCurrentDirectory().list().length + 1];
-                directoryList[0] = "Выберите лигу";
-                for (int i = 1; i < directoryList.length; i++)
-                    directoryList[i] = fileChooser.getCurrentDirectory().list()[i - 1].replace(".txt", "");
-                DefaultComboBoxModel modelH = new DefaultComboBoxModel(directoryList);
-                leagueChooser.setModel(modelH);
+            String pathToLeaguesList = path + seasonChooser.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/";
+            JFileChooser fileChooser1 = new JFileChooser(pathToLeaguesList);
+            String[] directoryList1 = new String[fileChooser1.getCurrentDirectory().list().length + 1];
+            directoryList1[0] = "Выберите лигу";
+            for (int i = 1; i < directoryList1.length; i++)
+                directoryList1[i] = fileChooser1.getCurrentDirectory().list()[i - 1].replace(".txt", "");
+            DefaultComboBoxModel modelH = new DefaultComboBoxModel(directoryList1);
+            leagueChooser.setModel(modelH);
 
-                for (int i = 0; i < directoryList.length; i++) {
-                    if (directoryList[i].equals(league))
-                        leagueChooser.setSelectedItem(league);
-                }
-
-                String pathToTeamsList = path + seasonChooser.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/" + leagueChooser.getSelectedItem() + ".txt";
-                String[] list = {"Выберите команду"};
-                if (!pathToTeamsList.contains("ыберите")) {
-                    list = Main.readTxtFile(pathToTeamsList);
-                }
-                modelH = new DefaultComboBoxModel(list);
-                teamChooser.setModel(modelH);
-                teamChooser.setEnabled(false);
-
-                pathToTeamsList = path + seasonChooser.getSelectedItem().toString().replace("Сезон ", "") + "/" + league + "/Teams/";
-                fileChooser = new JFileChooser(pathToTeamsList);
-                directoryList = new String[fileChooser.getCurrentDirectory().list().length + 1];
-                directoryList[0] = "Выберите команду";
-                for (int i = 1; i < directoryList.length; i++)
-                    directoryList[i] = fileChooser.getCurrentDirectory().list()[i - 1].replace(".xml", "");
-                for (int i = 0; i < directoryList.length; i++) {
-                    if (directoryList[i].equals(team)) {
-                        teamChooser.setSelectedItem(team);
-                        teamChooser.setEnabled(true);
-                    }
-                }
-                leagueChooser.setFocusable(true);
+            for (int i = 0; i < directoryList1.length; i++) {
+                if (directoryList1[i].equals(league))
+                    leagueChooser.setSelectedItem(league);
             }
+
+            String pathToTeamsList = path + seasonChooser.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/" + leagueChooser.getSelectedItem() + ".txt";
+            String[] list1 = {"Выберите команду"};
+            if (!pathToTeamsList.contains("ыберите")) {
+                list1 = Main.readTxtFile(pathToTeamsList);
+            }
+            modelH = new DefaultComboBoxModel(list1);
+            teamChooser.setModel(modelH);
+            teamChooser.setEnabled(false);
+
+            pathToTeamsList = path + seasonChooser.getSelectedItem().toString().replace("Сезон ", "") + "/" + league + "/Teams/";
+            fileChooser1 = new JFileChooser(pathToTeamsList);
+            directoryList1 = new String[fileChooser1.getCurrentDirectory().list().length + 1];
+            directoryList1[0] = "Выберите команду";
+            for (int i = 1; i < directoryList1.length; i++)
+                directoryList1[i] = fileChooser1.getCurrentDirectory().list()[i - 1].replace(".xml", "");
+            for (int i = 0; i < directoryList1.length; i++) {
+                if (directoryList1[i].equals(team)) {
+                    teamChooser.setSelectedItem(team);
+                    teamChooser.setEnabled(true);
+                }
+            }
+            leagueChooser.setFocusable(true);
         });
 
-        leagueChooser.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int index = leagueChooser.getSelectedIndex();
-                String pathToLeaguesList = path + seasonChooser.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/";
-                JFileChooser leftFileChooser = new JFileChooser(pathToLeaguesList);
-                String[] leftDirectoryList = new String[leftFileChooser.getCurrentDirectory().list().length+1];
-                leftDirectoryList[0] = "Выберите лигу";
-                for (int i=1; i<leftDirectoryList.length; i++)
-                    leftDirectoryList[i] = leftFileChooser.getCurrentDirectory().list()[i-1].replace(".txt", "");
-                DefaultComboBoxModel modelH = new DefaultComboBoxModel(leftDirectoryList);
-                leagueChooser.setModel(modelH);
-                leagueChooser.setSelectedIndex(index);
-                leagueChooser.setFocusable(false);
+        leagueChooser.addActionListener(e -> {
+            int index = leagueChooser.getSelectedIndex();
+            String pathToLeaguesList = path + seasonChooser.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/";
+            JFileChooser leftFileChooser = new JFileChooser(pathToLeaguesList);
+            String[] leftDirectoryList = new String[leftFileChooser.getCurrentDirectory().list().length+1];
+            leftDirectoryList[0] = "Выберите лигу";
+            for (int i=1; i<leftDirectoryList.length; i++)
+                leftDirectoryList[i] = leftFileChooser.getCurrentDirectory().list()[i-1].replace(".txt", "");
+            DefaultComboBoxModel modelH = new DefaultComboBoxModel(leftDirectoryList);
+            leagueChooser.setModel(modelH);
+            leagueChooser.setSelectedIndex(index);
+            leagueChooser.setFocusable(false);
 
-                teamChooser.setEnabled(true);
-                String pathToTeamsList = path + seasonChooser.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/" + leagueChooser.getSelectedItem() + ".txt";
-                String[] listRight = {"Выберите команду"};
-                if (!pathToTeamsList.contains("ыберите")) {
-                    listRight = Main.readTxtFile(pathToTeamsList);
-                }
-                modelH = new DefaultComboBoxModel(listRight);
-                teamChooser.setModel(modelH);
-                teamAllOrHomeOrAway.setFocusable(false);
-
+            teamChooser.setEnabled(true);
+            String pathToTeamsList = path + seasonChooser.getSelectedItem().toString().replace("Сезон ", "") + "/leagues/" + leagueChooser.getSelectedItem() + ".txt";
+            String[] listRight = {"Выберите команду"};
+            if (!pathToTeamsList.contains("ыберите")) {
+                listRight = Main.readTxtFile(pathToTeamsList);
             }
+            modelH = new DefaultComboBoxModel(listRight);
+            teamChooser.setModel(modelH);
+            teamAllOrHomeOrAway.setFocusable(false);
+
         });
 
-        teamChooser.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                teamChooser.setFocusable(false);
-                teamAllOrHomeOrAway.setFocusable(true);
-            }
+        teamChooser.addActionListener(e -> {
+            teamChooser.setFocusable(false);
+            teamAllOrHomeOrAway.setFocusable(true);
         });
 
-        teamAllOrHomeOrAway.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                teamAllOrHomeOrAway.setFocusable(false);
-            }
-        });
+        teamAllOrHomeOrAway.addActionListener(e -> teamAllOrHomeOrAway.setFocusable(false));
 
-        buttonShowInfo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (teamPanel != null) {
-                    infoPanel.remove(teamPanel);
-                }
-                teamPanel = refreshData((String) leagueChooser.getSelectedItem(),
-                        (String) teamChooser.getSelectedItem(),
-                        (String) teamAllOrHomeOrAway.getSelectedItem(),
-                        (String) seasonChooser.getSelectedItem(),
-                        (String) lastOrFullSeason.getSelectedItem()
-                );
-                infoPanel.add(teamPanel);
-                infoPanel.revalidate();
-                buttonShowInfo.setFocusable(false);
+        buttonShowInfo.addActionListener(e -> {
+            if (teamPanel != null) {
+                infoPanel.remove(teamPanel);
             }
+            teamPanel = refreshData((String) leagueChooser.getSelectedItem(),
+                    (String) teamChooser.getSelectedItem(),
+                    (String) teamAllOrHomeOrAway.getSelectedItem(),
+                    (String) seasonChooser.getSelectedItem(),
+                    (String) lastOrFullSeason.getSelectedItem()
+            );
+            infoPanel.add(teamPanel);
+            infoPanel.revalidate();
+            buttonShowInfo.setFocusable(false);
         });
 
     }
@@ -222,13 +210,24 @@ public class PanelOneTeamStats extends JPanel{
                 final JPanel container = new JPanel();
                 container.setLayout(null);
                 int otstup = 0;
+
+                if (!Settings.isWhoScoredLeague(leagueName)){
+                    JLabel labelAttention = new JLabel("ВНИМАНИЕ! Данные по этой лиге могут быть не в полном объеме.");
+                    labelAttention.setFont(font18);
+                    labelAttention.setForeground(Color.RED);
+                    labelAttention.setLocation(10, otstup);
+                    labelAttention.setSize(new Dimension(650, 25));
+                    otstup += 30;
+                    container.add(labelAttention);
+                }
+
                 int matches = selector.listOfMatches.size();
                 int wins = (int) Double.parseDouble(selector.pList.get(0).get(1));
                 int draws = (int) Double.parseDouble(selector.pList.get(1).get(1));
                 int loses = (int) Double.parseDouble(selector.pList.get(2).get(1));
                 int points = (int) Double.parseDouble(selector.pList.get(3).get(1));
-                String teamStats = "Матчей: " + String.valueOf(matches) + ";    Побед: " + String.valueOf(wins) + ";    Ничьих: "
-                        + String.valueOf(draws) + ";    Поражений: " + String.valueOf(loses) +";    Набрано очков: " + String.valueOf(points) + ";";
+                String teamStats = "Матчей: " + matches + ";    Побед: " + wins + ";    Ничьих: "
+                        + draws + ";    Поражений: " + loses +";    Набрано очков: " + points + ";";
                 final JLabel label = new JLabel(teamStats);
                 label.setBackground(new Color(238, 238, 238));
                 label.setBorder(BorderFactory.createEmptyBorder());
@@ -244,8 +243,8 @@ public class PanelOneTeamStats extends JPanel{
                 double xDraws = Double.parseDouble(selector.pList.get(19).get(1));
                 double xLoses = Double.parseDouble(selector.pList.get(20).get(1));
                 double xPoints = MyMath.round(Double.parseDouble(selector.pList.get(21).get(1)), 3);
-                String teamStatsxG = "xGMatches: " + String.valueOf(xGmatches) + ";   xWins: " + String.valueOf(xWins) + ";   wDraws: "
-                        + String.valueOf(xDraws) + ";   xLoses: " + String.valueOf(xLoses) +";   xPoints: " + String.valueOf(xPoints) + ";";
+                String teamStatsxG = "xGMatches: " + xGmatches + ";   xWins: " + xWins + ";   wDraws: "
+                        + xDraws + ";   xLoses: " + xLoses +";   xPoints: " + xPoints + ";";
                 final JLabel label2 = new JLabel(teamStatsxG);
                 label2.setBackground(new Color(238, 238, 238));
                 label2.setBorder(BorderFactory.createEmptyBorder());
@@ -259,8 +258,8 @@ public class PanelOneTeamStats extends JPanel{
                 int goalsS = (int) Math.round(selector.listOfMatches.size() * Double.parseDouble(selector.pList.get(4).get(1)));
                 int goalsC = (int) Math.round(selector.listOfMatches.size() * Double.parseDouble(selector.pList.get(4).get(2)));
                 int diff = goalsS - goalsC;
-                String teamGoals = "Голов забито:   " + String.valueOf(goalsS) + ";                 Голов пропущено:   " + String.valueOf(goalsC) +
-                        ";                   Разница:   " + String.valueOf(diff) + ";";
+                String teamGoals = "Голов забито:   " + goalsS + ";                 Голов пропущено:   " + goalsC +
+                        ";                   Разница:   " + diff + ";";
                 final JLabel label3 = new JLabel(teamGoals);
                 label3.setBackground(new Color(238, 238, 238));
                 label3.setBorder(BorderFactory.createEmptyBorder());
@@ -272,22 +271,22 @@ public class PanelOneTeamStats extends JPanel{
                 container.add(label3);
                 String forma = selector.pList.get(16).get(1);
                 if (settings.form.equals("rightToLeft")){
-                    String s = "";
+                    StringBuilder s = new StringBuilder();
                     for (int j=forma.length()-1; j>=0; j--){
-                        s = s + forma.charAt(j);
+                        s.append(forma.charAt(j));
                     }
-                    forma = s;
+                    forma = s.toString();
                 }
-                final Dimension defFormaLocation = new Dimension(65,78);
+                final Dimension defFormaLocation = new Dimension(65,otstup);
                 for (int i=0; i<forma.length(); i++){
                     JLabel imageLabel = null;
-                    if (forma.substring(i, i+1).equals("W")){
+                    if (forma.charAt(i) == 'W'){
                         imageLabel = new JLabel(new ImageIcon("images/win.png"));
                     }
-                    if (forma.substring(i, i+1).equals("D")){
+                    if (forma.charAt(i) == 'D'){
                         imageLabel = new JLabel(new ImageIcon("images/draw.png"));
                     }
-                    if (forma.substring(i, i+1).equals("L")){
+                    if (forma.charAt(i) == 'L'){
                         imageLabel = new JLabel(new ImageIcon("images/lose.png"));
                     }
                     imageLabel.setLocation(defFormaLocation.width + 25*i, defFormaLocation.height);
@@ -536,27 +535,24 @@ public class PanelOneTeamStats extends JPanel{
                     buttonCorrInfo.setSize(20, 20);
                     container.add(buttonCorrInfo);
 
-                    buttonCorrInfo.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            String textCorr = "<html>    В таблице выводятся коэффициенты корреляции Пирсона (линейные коэффициенты корреляции). <br>" +
-                                    "   Они лежат в пределах [-1; 1] и показывают статистическую зависимость одной величины от другой,<br>" +
-                                    "   то есть, проще говоря, насколько один параметр зависит от другого.<br>" +
-                                    "<br>" +
-                                    "   Например: Если значение коэффициента корреляции между владением и угловыми высоко,<br>" +
-                                    "   то при невысоком показателе владения команда подает меньше угловых, а при высоком - больше.<br>" +
-                                    "   Если же значение коэффициента отрицательное, то при невысоком показателе владения<br>" +
-                                    "   команда подает больше угловых.<br>" +
-                                    "<br>" +
-                                    "   Данная информация может помочь вам при анализе показателей команд.<br>" +
-                                    "</html>";
+                    buttonCorrInfo.addActionListener(e -> {
+                        String textCorr = "<html>    В таблице выводятся коэффициенты корреляции Пирсона (линейные коэффициенты корреляции). <br>" +
+                                "   Они лежат в пределах [-1; 1] и показывают статистическую зависимость одной величины от другой,<br>" +
+                                "   то есть, проще говоря, насколько один параметр зависит от другого.<br>" +
+                                "<br>" +
+                                "   Например: Если значение коэффициента корреляции между владением и угловыми высоко,<br>" +
+                                "   то при невысоком показателе владения команда подает меньше угловых, а при высоком - больше.<br>" +
+                                "   Если же значение коэффициента отрицательное, то при невысоком показателе владения<br>" +
+                                "   команда подает больше угловых.<br>" +
+                                "<br>" +
+                                "   Данная информация может помочь вам при анализе показателей команд.<br>" +
+                                "</html>";
 
 
-                            PopupWindow windowCorr = new PopupWindow(textCorr);
-                            windowCorr.setSize(900, 300);
-                            windowCorr.setLocation(500, 120);
-                            windowCorr.setVisible(true);
-                        }
+                        PopupWindow windowCorr = new PopupWindow(textCorr);
+                        windowCorr.setSize(900, 300);
+                        windowCorr.setLocation(500, 120);
+                        windowCorr.setVisible(true);
                     });
 
                     JPanel panelCorrSP = new JPanel(new BorderLayout());
@@ -642,8 +638,6 @@ public class PanelOneTeamStats extends JPanel{
                 }
 
                 ////////////////////////ГРАФИКИ И ТАБЛИЦЫ ВСТАВЛЯЮ ТУТ
-                //JPanel graphAndTables = new JPanel(new BorderLayout());
-
                 final Graphic graphic;
                 if (settings.showGraphics){
                     graphic = new Graphic(1, teamName);
@@ -670,7 +664,7 @@ public class PanelOneTeamStats extends JPanel{
                     stepSlider = sliderParams[2];
                     leftValue.setText(String.valueOf(sliderParams[0]));
                     rightValue.setText(String.valueOf(sliderParams[1]));
-                    bottomValue.setText("Выбрано значение: " + String.valueOf(valueForSlider));
+                    bottomValue.setText("Выбрано значение: " + valueForSlider);
                     getParamsPanel(paramsPanel, teamName, selector, paramsChooser, indexChooser, valueForSlider);
                     slider.setMajorTickSpacing(1);
                     slider.setPaintTicks(true);
@@ -688,325 +682,283 @@ public class PanelOneTeamStats extends JPanel{
                 } );
 
 
-                paramsChooser.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        indexForParameterChooser = paramsChooser.getSelectedIndex();
-                        String[] list = Parameters.getIndex((String) paramsChooser.getSelectedItem());
-                        DefaultComboBoxModel modelH = new DefaultComboBoxModel(list);
-                        indexChooser.setModel(modelH);
-                        indexForIndexChooser = indexChooser.getSelectedIndex();
-                        slider.setEnabled(false);
-                        slider.setValue(0);
-                        indexForValueChooser = 0;
-                        bottomValue.setText("");
-                        leftValue.setText("");
-                        rightValue.setText("");
+                paramsChooser.addActionListener(e -> {
+                    indexForParameterChooser = paramsChooser.getSelectedIndex();
+                    String[] list1 = Parameters.getIndex((String) paramsChooser.getSelectedItem());
+                    DefaultComboBoxModel modelH1 = new DefaultComboBoxModel(list1);
+                    indexChooser.setModel(modelH1);
+                    indexForIndexChooser = indexChooser.getSelectedIndex();
+                    slider.setEnabled(false);
+                    slider.setValue(0);
+                    indexForValueChooser = 0;
+                    bottomValue.setText("");
+                    leftValue.setText("");
+                    rightValue.setText("");
 
-                        paramsChooser.setFocusable(false);
+                    paramsChooser.setFocusable(false);
+                });
+
+                indexChooser.addActionListener(e -> {
+                    indexForIndexChooser = indexChooser.getSelectedIndex();
+                    double[] sliderParams1 = Parameters.getValues((String) paramsChooser.getSelectedItem(), (String) indexChooser.getSelectedItem());
+                    minSliderValue = sliderParams1[0];
+                    valueForSlider = sliderParams1[0];
+                    stepSlider = sliderParams1[2];
+                    slider.setEnabled(true);
+                    slider.setValue(0);
+                    indexForValueChooser = 0;
+                    int numberOfVariants = (int) ((sliderParams1[1] - sliderParams1[0]) / sliderParams1[2] + 1);
+                    slider.setMaximum(numberOfVariants-1);
+                    leftValue.setText(String.valueOf(sliderParams1[0]));
+                    rightValue.setText(String.valueOf(sliderParams1[1]));
+                    bottomValue.setText("Выбрано значение: " + valueForSlider);
+
+                    getParamsPanel(paramsPanel, teamName, selector, paramsChooser, indexChooser, valueForSlider);
+                    indexChooser.setFocusable(false);
+                });
+
+                slider.addChangeListener(e -> {
+                    valueForSlider = minSliderValue + stepSlider*slider.getValue();
+                    bottomValue.setText("Выбрано значение: " + valueForSlider);
+                    indexForValueChooser = slider.getValue();
+                    getParamsPanel(paramsPanel, teamName, selector, paramsChooser, indexChooser, valueForSlider);
+                });
+
+                buttonSite.addActionListener(e -> {
+                    String website = Team.getWebsite(teamName);
+
+                    Desktop desktop = Desktop.getDesktop();
+                    URI uri = null;
+                    try {
+                        uri = new URI("https://www." + website);
+                    } catch (URISyntaxException e1) {
+                        e1.printStackTrace();
+                    }
+                    try {
+                        desktop.browse(uri);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
                     }
                 });
 
-                indexChooser.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        indexForIndexChooser = indexChooser.getSelectedIndex();
-                        double[] sliderParams = Parameters.getValues((String) paramsChooser.getSelectedItem(), (String) indexChooser.getSelectedItem());
-                        minSliderValue = sliderParams[0];
-                        valueForSlider = sliderParams[0];
-                        stepSlider = sliderParams[2];
-                        slider.setEnabled(true);
-                        slider.setValue(0);
-                        indexForValueChooser = 0;
-                        int numberOfVariants = (int) ((sliderParams[1] - sliderParams[0]) / sliderParams[2] + 1);
-                        slider.setMaximum(numberOfVariants-1);
-                        leftValue.setText(String.valueOf(sliderParams[0]));
-                        rightValue.setText(String.valueOf(sliderParams[1]));
-                        bottomValue.setText("Выбрано значение: " + String.valueOf(valueForSlider));
+                buttonTwitter.addActionListener(e -> {
+                    String twitter = Team.getTwitter(teamName);
 
-                        getParamsPanel(paramsPanel, teamName, selector, paramsChooser, indexChooser, valueForSlider);
-                        indexChooser.setFocusable(false);
+                    Desktop desktop = Desktop.getDesktop();
+                    URI uri = null;
+                    try {
+                        uri = new URI("https://www.twitter.com/" + twitter);
+                    } catch (URISyntaxException e1) {
+                        e1.printStackTrace();
+                    }
+                    try {
+                        desktop.browse(uri);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
                     }
                 });
 
-                slider.addChangeListener(new ChangeListener() {
-                    @Override
-                    public void stateChanged(ChangeEvent e) {
-                        valueForSlider = minSliderValue + stepSlider*slider.getValue();
-                        bottomValue.setText("Выбрано значение: " + String.valueOf(valueForSlider));
-                        indexForValueChooser = slider.getValue();
-                        getParamsPanel(paramsPanel, teamName, selector, paramsChooser, indexChooser, valueForSlider);
+                buttonMedicine.addActionListener(e -> {
+                    String tm = Team.getMedicine(teamName);
+
+                    Desktop desktop = Desktop.getDesktop();
+                    URI uri = null;
+                    try {
+                        uri = new URI("https://www.transfermarkt.ru/" + tm + "/sperrenundverletzungen/verein/" + tm);
+                    } catch (URISyntaxException e1) {
+                        e1.printStackTrace();
+                    }
+                    try {
+                        desktop.browse(uri);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
                     }
                 });
 
-                buttonSite.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        String website = Team.getWebsite(teamName);
+                buttonWeather.addActionListener(e -> {
+                    String city = Team.getWeather(teamName);
 
-                        Desktop desktop = java.awt.Desktop.getDesktop();
-                        URI uri = null;
-                        try {
-                            uri = new URI("https://www." + website);
-                        } catch (URISyntaxException e1) {
-                            e1.printStackTrace();
-                        }
-                        try {
-                            desktop.browse(uri);
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
+                    Desktop desktop = Desktop.getDesktop();
+                    URI uri = null;
+                    try {
+                        uri = new URI("https://www.gismeteo.ru/" + city);
+                    } catch (URISyntaxException e1) {
+                        e1.printStackTrace();
+                    }
+                    try {
+                        desktop.browse(uri);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
                     }
                 });
 
-                buttonTwitter.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        String twitter = Team.getTwitter(teamName);
+                buttonTransferMarkt.addActionListener(e -> {
+                    String tm = Team.getTransferMarkt(teamName);
 
-                        Desktop desktop = java.awt.Desktop.getDesktop();
-                        URI uri = null;
-                        try {
-                            uri = new URI("https://www.twitter.com/" + twitter);
-                        } catch (URISyntaxException e1) {
-                            e1.printStackTrace();
-                        }
-                        try {
-                            desktop.browse(uri);
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
+                    Desktop desktop = Desktop.getDesktop();
+                    URI uri = null;
+                    try {
+                        uri = new URI("https://www.transfermarkt.ru/jumplist/spielplan/verein/" + tm);
+                    } catch (URISyntaxException e1) {
+                        e1.printStackTrace();
                     }
-                });
-
-                buttonMedicine.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        String tm = Team.getMedicine(teamName);
-
-                        Desktop desktop = java.awt.Desktop.getDesktop();
-                        URI uri = null;
-                        try {
-                            uri = new URI("https://www.transfermarkt.ru/" + tm + "/sperrenundverletzungen/verein/" + tm);
-                        } catch (URISyntaxException e1) {
-                            e1.printStackTrace();
-                        }
-                        try {
-                            desktop.browse(uri);
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
-                });
-
-                buttonWeather.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        String city = Team.getWeather(teamName);
-
-                        Desktop desktop = java.awt.Desktop.getDesktop();
-                        URI uri = null;
-                        try {
-                            uri = new URI("https://www.gismeteo.ru/" + city);
-                        } catch (URISyntaxException e1) {
-                            e1.printStackTrace();
-                        }
-                        try {
-                            desktop.browse(uri);
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
-                });
-
-                buttonTransferMarkt.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        String tm = Team.getTransferMarkt(teamName);
-
-                        Desktop desktop = java.awt.Desktop.getDesktop();
-                        URI uri = null;
-                        try {
-                            uri = new URI("https://www.transfermarkt.ru/jumplist/spielplan/verein/" + tm);
-                        } catch (URISyntaxException e1) {
-                            e1.printStackTrace();
-                        }
-                        try {
-                            desktop.browse(uri);
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
+                    try {
+                        desktop.browse(uri);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
                     }
                 });
 
 
 
                 final String finalSeason = season;
-                buttonTrends.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        WindowTrendsOfTeam wtt = new WindowTrendsOfTeam(teamName, allOrHomeOrAway, finalSeason, lastOrFullSeason, selector);
-                        wtt.setVisible(true);
-                    }
+                buttonTrends.addActionListener(e -> {
+                    WindowTrendsOfTeam wtt = new WindowTrendsOfTeam(teamName, allOrHomeOrAway, finalSeason, lastOrFullSeason, selector);
+                    wtt.setVisible(true);
                 });
 
-                buttonStatsByTimes.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        WindowWithDiagrams wwd = new WindowWithDiagrams(teamName, allOrHomeOrAway, finalSeason, lastOrFullSeason, selector);
-                        wwd.setVisible(true);
-                    }
+                buttonStatsByTimes.addActionListener(e -> {
+                    WindowWithDiagrams wwd = new WindowWithDiagrams(teamName, allOrHomeOrAway, finalSeason, lastOrFullSeason, selector);
+                    wwd.setVisible(true);
                 });
 
-                buttonNotice.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        String resultS = "";
-                        try {
-                            File fileDir = new File("notices/" + teamName + ".txt");
+                buttonNotice.addActionListener(e -> {
+                    StringBuilder resultS = new StringBuilder();
+                    try {
+                        File fileDir = new File("notices/" + teamName + ".txt");
 
-                            BufferedReader in = new BufferedReader(
-                                    new InputStreamReader(
-                                            new FileInputStream(fileDir), "UTF-8"));
-                            String str;
-                            while (((str = in.readLine()) != null)) {
-                                resultS += str + "\n";
-                            }
-                            in.close();
-
-                        } catch (IOException ignored){
+                        BufferedReader in = new BufferedReader(
+                                new InputStreamReader(
+                                        new FileInputStream(fileDir), StandardCharsets.UTF_8));
+                        String str;
+                        while (((str = in.readLine()) != null)) {
+                            resultS.append(str).append("\n");
                         }
-                        final JFrame windowNotice = new JFrame("Заметка о команде " + teamName);
-                        windowNotice.setLayout(new BorderLayout());
-                        windowNotice.setSize(400, 300);
-                        windowNotice.setLocation(100, 100);
+                        in.close();
 
-                        final JTextArea textArea = new JTextArea(resultS);
-                        textArea.setFont(font15);
-                        textArea.setLineWrap(true);
-                        textArea.setWrapStyleWord(true);
-                        ScrollPane scrollPane = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
-                        scrollPane.add(textArea);
-                        windowNotice.add(scrollPane);
-
-                        final JButton saveNotice = new JButton("Сохранить!");
-                        saveNotice.setFont(font15);
-                        saveNotice.setEnabled(false);
-                        windowNotice.add(saveNotice, BorderLayout.SOUTH);
-
-                        windowNotice.setVisible(true);
-
-                        textArea.getDocument().addDocumentListener(new DocumentListener() {
-                            @Override
-                            public void insertUpdate(DocumentEvent e) {
-                                saveNotice.setEnabled(true);
-                                saveNotice.setText("Сохранить!");
-                            }
-                            @Override
-                            public void removeUpdate(DocumentEvent e) {
-                                saveNotice.setEnabled(true);
-                                saveNotice.setText("Сохранить!");
-                            }
-                            @Override
-                            public void changedUpdate(DocumentEvent e) {
-                            }
-                        });
-
-                        saveNotice.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                FileWriter fr;
-                                BufferedWriter br;
-                                File file = new File("notices/" + teamName + ".txt");
-                                try {
-                                    //для обновления файла нужно инициализировать FileWriter с помощью этого конструктора
-                                    fr = new FileWriter(file,false);
-                                    br = new BufferedWriter(fr);
-                                    //теперь мы можем использовать метод write или метод append
-                                    br.write(textArea.getText());
-
-                                    br.close();
-                                    fr.close();
-                                    saveNotice.setText("Данные сохранены!");
-                                    saveNotice.setEnabled(false);
-                                } catch (IOException e2) {
-                                    e2.printStackTrace();
-                                }
-                            }
-                        });
-
-                        windowNotice.addWindowListener(new WindowListener() {
-                            @Override
-                            public void windowOpened(WindowEvent e) {
-
-                            }
-                            @Override
-                            public void windowClosing(WindowEvent e) {
-                                if (saveNotice.isEnabled()){
-                                    final JFrame windowExit = new JFrame("Внимание!");
-                                    windowExit.setLayout(new BorderLayout());
-                                    windowExit.setSize(500, 500);
-                                    windowExit.setLocation(100, 100);
-
-                                    JLabel label = new JLabel("Сохранить внесенные изменения?");
-                                    label.setFont(font15);
-                                    windowExit.add(label, BorderLayout.NORTH);
-
-                                    JPanel panelButtons = new JPanel(new GridLayout(1,2,3,0));
-                                    JButton buttonYes = new JButton("ДА");
-                                    buttonYes.setFont(font15);
-                                    panelButtons.add(buttonYes);
-                                    JButton buttonNo = new JButton("НЕТ");
-                                    buttonNo.setFont(font15);
-                                    panelButtons.add(buttonNo);
-                                    windowExit.add(panelButtons);
-                                    windowExit.setVisible(true);
-                                    windowExit.pack();
-
-                                    buttonYes.addActionListener(new ActionListener() {
-                                        @Override
-                                        public void actionPerformed(ActionEvent e) {
-                                            saveNotice.doClick();
-                                            windowNotice.dispose();
-                                            windowExit.dispose();
-                                        }
-                                    });
-
-                                    buttonNo.addActionListener(new ActionListener() {
-                                        @Override
-                                        public void actionPerformed(ActionEvent e) {
-                                            windowNotice.dispose();
-                                            windowExit.dispose();
-                                        }
-                                    });
-
-                                } else {
-
-                                }
-                            }
-                            @Override
-                            public void windowClosed(WindowEvent e) {
-
-                            }
-                            @Override
-                            public void windowIconified(WindowEvent e) {
-
-                            }
-                            @Override
-                            public void windowDeiconified(WindowEvent e) {
-
-                            }
-                            @Override
-                            public void windowActivated(WindowEvent e) {
-
-                            }
-                            @Override
-                            public void windowDeactivated(WindowEvent e) {
-
-                            }
-                        });
-
+                    } catch (IOException ignored){
                     }
+                    final JFrame windowNotice = new JFrame("Заметка о команде " + teamName);
+                    windowNotice.setLayout(new BorderLayout());
+                    windowNotice.setSize(400, 300);
+                    windowNotice.setLocation(100, 100);
+
+                    final JTextArea textArea = new JTextArea(resultS.toString());
+                    textArea.setFont(font15);
+                    textArea.setLineWrap(true);
+                    textArea.setWrapStyleWord(true);
+                    ScrollPane scrollPane1 = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
+                    scrollPane1.add(textArea);
+                    windowNotice.add(scrollPane1);
+
+                    final JButton saveNotice = new JButton("Сохранить!");
+                    saveNotice.setFont(font15);
+                    saveNotice.setEnabled(false);
+                    windowNotice.add(saveNotice, BorderLayout.SOUTH);
+
+                    windowNotice.setVisible(true);
+
+                    textArea.getDocument().addDocumentListener(new DocumentListener() {
+                        @Override
+                        public void insertUpdate(DocumentEvent e) {
+                            saveNotice.setEnabled(true);
+                            saveNotice.setText("Сохранить!");
+                        }
+                        @Override
+                        public void removeUpdate(DocumentEvent e) {
+                            saveNotice.setEnabled(true);
+                            saveNotice.setText("Сохранить!");
+                        }
+                        @Override
+                        public void changedUpdate(DocumentEvent e) {
+                        }
+                    });
+
+                    saveNotice.addActionListener(e12 -> {
+                        FileWriter fr;
+                        BufferedWriter br;
+                        File file = new File("notices/" + teamName + ".txt");
+                        try {
+                            //для обновления файла нужно инициализировать FileWriter с помощью этого конструктора
+                            fr = new FileWriter(file,false);
+                            br = new BufferedWriter(fr);
+                            //теперь мы можем использовать метод write или метод append
+                            br.write(textArea.getText());
+
+                            br.close();
+                            fr.close();
+                            saveNotice.setText("Данные сохранены!");
+                            saveNotice.setEnabled(false);
+                        } catch (IOException e2) {
+                            e2.printStackTrace();
+                        }
+                    });
+
+                    windowNotice.addWindowListener(new WindowListener() {
+                        @Override
+                        public void windowOpened(WindowEvent e) {
+
+                        }
+                        @Override
+                        public void windowClosing(WindowEvent e) {
+                            if (saveNotice.isEnabled()){
+                                final JFrame windowExit = new JFrame("Внимание!");
+                                windowExit.setLayout(new BorderLayout());
+                                windowExit.setSize(500, 500);
+                                windowExit.setLocation(100, 100);
+
+                                JLabel label1 = new JLabel("Сохранить внесенные изменения?");
+                                label1.setFont(font15);
+                                windowExit.add(label1, BorderLayout.NORTH);
+
+                                JPanel panelButtons = new JPanel(new GridLayout(1,2,3,0));
+                                JButton buttonYes = new JButton("ДА");
+                                buttonYes.setFont(font15);
+                                panelButtons.add(buttonYes);
+                                JButton buttonNo = new JButton("НЕТ");
+                                buttonNo.setFont(font15);
+                                panelButtons.add(buttonNo);
+                                windowExit.add(panelButtons);
+                                windowExit.setVisible(true);
+                                windowExit.pack();
+
+                                buttonYes.addActionListener(e13 -> {
+                                    saveNotice.doClick();
+                                    windowNotice.dispose();
+                                    windowExit.dispose();
+                                });
+
+                                buttonNo.addActionListener(e14 -> {
+                                    windowNotice.dispose();
+                                    windowExit.dispose();
+                                });
+
+                            } else {
+
+                            }
+                        }
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+
+                        }
+                        @Override
+                        public void windowIconified(WindowEvent e) {
+
+                        }
+                        @Override
+                        public void windowDeiconified(WindowEvent e) {
+
+                        }
+                        @Override
+                        public void windowActivated(WindowEvent e) {
+
+                        }
+                        @Override
+                        public void windowDeactivated(WindowEvent e) {
+
+                        }
+                    });
+
                 });
 
                 JPanel searchPanel = new JPanel(new GridLayout(1, 3, 5, 5));
@@ -1025,19 +977,9 @@ public class PanelOneTeamStats extends JPanel{
                 searchPanel.setEnabled(false);
                 result.add(searchPanel, BorderLayout.SOUTH);
 
-                buttonUp.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMinimum());
-                    }
-                });
+                buttonUp.addActionListener(e -> scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMinimum()));
 
-                buttonDown.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
-                    }
-                });
+                buttonDown.addActionListener(e -> scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum()));
 
                 DocumentListener dl = new DocumentListener() {
                     public void insertUpdate(DocumentEvent e) {
@@ -1052,14 +994,7 @@ public class PanelOneTeamStats extends JPanel{
                                     break;
                                 }
                             }
-                            int resHeight;
-                            if (settings.showGraphics){
-                                resHeight = containerHeight + indexOfFoundGraphic*graphic.graphicHeight;
-                            } else {
-                                resHeight = containerHeight;
-                                for (int i=0; i< indexOfFoundGraphic; i++)
-                                    resHeight += graphic.heights.get(i);
-                            }
+                            int resHeight =(int) (containerHeight + (double) indexOfFoundGraphic / (double) graphic.graphicTitles.size() * (scrollPane.getVerticalScrollBar().getMaximum() - containerHeight));
                             scrollPane.getVerticalScrollBar().setValue(resHeight);
                         }
 

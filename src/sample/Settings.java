@@ -740,6 +740,23 @@ public class Settings {
         }
     }
 
+    public static boolean isTop6League(String leagueName){
+        switch (leagueName){
+            case "ENG.PrLeague":
+            case "FRA.Ligue1":
+            case "GER.1-Bundesliga":
+            case "ITA.SerieA":
+            case "RUS.RrLeague":
+            case "SPA.LaLiga":{
+                return true;
+            }
+            default: {
+                return false;
+            }
+        }
+
+    }
+
     public static void getDataFromDatabase(String dataName, WindowWithProgressBar windowWithProgressBar, int numberOfAccount){
         String command = "";
         String argument = "";
@@ -1108,7 +1125,7 @@ public class Settings {
             File fileDir = new File("settings/allLeagues.txt");
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream(fileDir), "UTF-8"));
+                            new FileInputStream(fileDir), StandardCharsets.UTF_8));
             String str;
             while (((str = in.readLine()) != null)) {
                 if (str.split("=")[0].equals(leagueName)){
@@ -1128,7 +1145,14 @@ public class Settings {
 
     public static int getLastDayInMonth(int month, int year){
         switch (month){
-            case 1: {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                {
                 return 31;
             }
             case 2: {
@@ -1137,35 +1161,12 @@ public class Settings {
                 else
                     return 28;
             }
-            case 3: {
-                return 31;
-            }
-            case 4: {
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                {
                 return 30;
-            }
-            case 5: {
-                return 31;
-            }
-            case 6: {
-                return 30;
-            }
-            case 7: {
-                return 31;
-            }
-            case 8: {
-                return 31;
-            }
-            case 9: {
-                return 30;
-            }
-            case 10: {
-                return 31;
-            }
-            case 11: {
-                return 30;
-            }
-            case 12: {
-                return 31;
             }
 
         }
@@ -1201,10 +1202,8 @@ public class Settings {
         if (hourDifference < 0){
             fullFileName = Settings.TMP_DIR + String.valueOf(getNextDayCode(Integer.parseInt(dayCode))) + ".txt";
             try {
-                File fileDir = new File(fullFileName);
-                if (!fileDir.exists()){
-                    fileDir = downloadDayFile(Settings.getNumberOfAccount(), String.valueOf(getNextDayCode(Integer.parseInt(dayCode))) + ".txt");
-                }
+//                File fileDir = new File(fullFileName);
+                File fileDir = downloadDayFile(Settings.getNumberOfAccount(), getNextDayCode(Integer.parseInt(dayCode)) + ".txt");
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(
                                 new FileInputStream(fileDir), "UTF-8"));

@@ -59,12 +59,6 @@ public class Main extends JFrame {
                 if (new File("settings").list().length==0)
                     Settings.downloadSettings(sn);
 
-                //String ID = Settings.getIDBySerialNumber(sn);
-                //String user = Settings.getUserBySerialNumber(sn);
-
-                /*if(Files.isWritable(path)){
-                    flagPath = true;
-                }*/
                 int width = Integer.parseInt(settings.getWindowResolution().split("x")[0]);
                 int height = Integer.parseInt(settings.getWindowResolution().split("x")[1]);
 
@@ -130,6 +124,8 @@ public class Main extends JFrame {
                 add(jtp);
                 jtp.addTab(tabs[3], panelConfrontation);
                 add(jtp);
+                jtp.addTab(tabs[11], panelCalculator);
+                add(jtp);
                 jtp.addTab(tabs[4], panelReferee);
                 add(jtp);
                 jtp.addTab(tabs[5], panelTablesByLeague);
@@ -142,10 +138,8 @@ public class Main extends JFrame {
                 add(jtp);
                 jtp.addTab(tabs[7], panelSettings);
                 add(jtp);
-                jtp.addTab(tabs[11], panelCalculator);
-                add(jtp);
 
-                jtp.setSelectedIndex(6);
+                jtp.setSelectedIndex(0);
                 currentVersion = panelStart.currentVersion;
                 newestVersion = panelStart.newestVersion;
 
@@ -174,7 +168,6 @@ public class Main extends JFrame {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                String user = Settings.getUserBySerialNumber(sn);
                 int n = Settings.getNumberOfAccount();
                 if (flagCheckKey){
                     if (!currentVersion.equals(newestVersion)){

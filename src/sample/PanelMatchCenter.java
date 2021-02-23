@@ -48,7 +48,7 @@ public class PanelMatchCenter extends JPanel{
         panelHeader = new JPanel(new BorderLayout());
 
         buttonLeft = new JButton(new ImageIcon("images/left-arrow.png"));
-        buttonLeft.setEnabled(false);
+//        buttonLeft.setEnabled(false);
         panelHeader.add(buttonLeft, BorderLayout.WEST);
 
         LocalDateTime ldt = LocalDateTime.now(ZoneId.of("GMT"));
