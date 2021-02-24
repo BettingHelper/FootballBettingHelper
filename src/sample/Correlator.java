@@ -273,7 +273,7 @@ public class Correlator {
 
         if ( (param1.equals("Владение")) && (param2.equals("Ауты")) ){
             MO1 = Double.parseDouble(paramsList.get(6).get(1));
-            MO2 = Double.parseDouble(paramsList.get(81).get(1));
+            MO2 = Double.parseDouble(paramsList.get(81).get(1))/(double)listOfMatches.size();
 
             for (int i=0; i<listOfMatches.size(); i++){
                 if (teamName.equals(listOfMatches.get(i).homeTeam)){
@@ -290,7 +290,7 @@ public class Correlator {
 
         if ( (param1.equals("ВладениеПротивника")) && (param2.equals("АутыПротивника")) ){
             MO1 = Double.parseDouble(paramsList.get(6).get(2));
-            MO2 = Double.parseDouble(paramsList.get(81).get(2));
+            MO2 = Double.parseDouble(paramsList.get(81).get(2))/(double)listOfMatches.size();
 
             for (int i=0; i<listOfMatches.size(); i++){
                 if (teamName.equals(listOfMatches.get(i).homeTeam)){
@@ -307,7 +307,7 @@ public class Correlator {
 
         if ( (param1.equals("Владение")) && (param2.equals("АутыФора")) ){
             MO1 = Double.parseDouble(paramsList.get(6).get(1));
-            MO2 = Double.parseDouble(paramsList.get(81).get(1)) - Double.parseDouble(paramsList.get(81).get(2));
+            MO2 = (Double.parseDouble(paramsList.get(81).get(1)) - Double.parseDouble(paramsList.get(81).get(2)))/(double)listOfMatches.size();;
 
             for (int i=0; i<listOfMatches.size(); i++){
                 if (teamName.equals(listOfMatches.get(i).homeTeam)){
@@ -324,7 +324,7 @@ public class Correlator {
 
         if ( (param1.equals("Владение")) && (param2.equals("УдарыОтВорот")) ){
             MO1 = Double.parseDouble(paramsList.get(6).get(1));
-            MO2 = Double.parseDouble(paramsList.get(78).get(1));
+            MO2 = Double.parseDouble(paramsList.get(78).get(1))/(double)listOfMatches.size();
 
             for (int i=0; i<listOfMatches.size(); i++){
                 if (teamName.equals(listOfMatches.get(i).homeTeam)){
@@ -341,7 +341,7 @@ public class Correlator {
 
         if ( (param1.equals("ВладениеПротивника")) && (param2.equals("УдарыОтВоротПротивника")) ){
             MO1 = Double.parseDouble(paramsList.get(6).get(2));
-            MO2 = Double.parseDouble(paramsList.get(78).get(2));
+            MO2 = Double.parseDouble(paramsList.get(78).get(2))/(double)listOfMatches.size();
 
             for (int i=0; i<listOfMatches.size(); i++){
                 if (teamName.equals(listOfMatches.get(i).homeTeam)){
@@ -358,7 +358,7 @@ public class Correlator {
 
         if ( (param1.equals("Владение")) && (param2.equals("УдарыОтВоротФора")) ){
             MO1 = Double.parseDouble(paramsList.get(6).get(1));
-            MO2 = Double.parseDouble(paramsList.get(78).get(1)) - Double.parseDouble(paramsList.get(78).get(2));
+            MO2 = (Double.parseDouble(paramsList.get(78).get(1)) - Double.parseDouble(paramsList.get(78).get(2)))/(double)listOfMatches.size();;
 
             for (int i=0; i<listOfMatches.size(); i++){
                 if (teamName.equals(listOfMatches.get(i).homeTeam)){

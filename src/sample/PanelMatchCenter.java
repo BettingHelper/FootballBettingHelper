@@ -164,27 +164,9 @@ public class PanelMatchCenter extends JPanel{
 
                 final String finalCurrentLeague = currentLeague;
                 buttonTrends.addActionListener(e -> {
-                    Settings settings = Settings.getSettingsFromFile();
+                    WindowTrendsThread wtt = new WindowTrendsThread(finalCurrentLeague, homeTeam, awayTeam);
+                    wtt.start();
 
-                    Selector selectorHT = new Selector();
-                    Selector selectorAT = new Selector();
-                    String allOrHA = "Все матчи";
-
-                    if (settings.trendsHA){
-                        selectorHT.getListOfMatches(finalCurrentLeague, homeTeam, "Дома", Settings.getCurrentSeasonInLeague(finalCurrentLeague), "Весь сезон");
-                        selectorAT.getListOfMatches(finalCurrentLeague, awayTeam, "На выезде", Settings.getCurrentSeasonInLeague(finalCurrentLeague), "Весь сезон");
-                        allOrHA = "Дом - выезд";
-                    } else {
-                        selectorHT.getListOfMatches(finalCurrentLeague, homeTeam, "Все матчи", Settings.getCurrentSeasonInLeague(finalCurrentLeague), "Весь сезон");
-                        selectorAT.getListOfMatches(finalCurrentLeague, awayTeam, "Все матчи", Settings.getCurrentSeasonInLeague(finalCurrentLeague), "Весь сезон");
-                    }
-
-                    selectorHT.getPList(selectorHT.listOfMatches, homeTeam);
-                    selectorAT.getPList(selectorAT.listOfMatches, awayTeam);
-
-                    WindowTrendsForTwoTeams wttt = new WindowTrendsForTwoTeams(homeTeam, awayTeam, Settings.getCurrentSeasonInLeague(finalCurrentLeague),
-                            allOrHA, "Весь сезон", selectorHT, selectorAT);
-                    wttt.setVisible(true);
                 });
 
                 buttonStats.addActionListener(e -> {

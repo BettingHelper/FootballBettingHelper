@@ -448,5 +448,24 @@ public class PanelSettings extends JPanel{
                 settings.pushSettingsToFile();
             }
         });
+
+        JPanel panelReloadDatabase = new JPanel(new VerticalLayout());
+        panelReloadDatabase.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        JButton buttonReloadDatabase = new JButton("Перезагрузка БД");
+        buttonReloadDatabase.setFont(font);
+        buttonReloadDatabase.setPreferredSize(new Dimension(200, 30));
+        panelReloadDatabase.add(buttonReloadDatabase);
+
+        this.add(panelReloadDatabase, BorderLayout.EAST);
+
+        buttonReloadDatabase.addActionListener(e -> {
+            Settings.setLastUpdate("213_01.03.2020.txt");
+            buttonReloadDatabase.setText("Перезапустите программу!");
+            buttonReloadDatabase.setEnabled(false);
+        });
+
+
+
     }
 }
