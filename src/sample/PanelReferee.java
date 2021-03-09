@@ -18,6 +18,7 @@ public class PanelReferee extends JPanel{
     JScrollPane scrollPane;
     JComboBox<String> seasonCB;
     JComboBox<String> leagueChooser;
+    JButton buttonShowInfo;
 
     JLabel leftValue;
     JLabel rightValue;
@@ -75,7 +76,7 @@ public class PanelReferee extends JPanel{
         final JComboBox<String> lastOrFullSeason = new JComboBox<>(lastOrFullSeasonString);
         panelChoosers.add(lastOrFullSeason);
 
-        final JButton buttonShowInfo = new JButton("Отобразить!");
+        buttonShowInfo = new JButton("Отобразить!");
         Font fontForButton = new Font("", 0, 18);
         buttonShowInfo.setFont(fontForButton);
         panelChoosers.add(buttonShowInfo);
@@ -595,9 +596,11 @@ public class PanelReferee extends JPanel{
 
 
     public void setFilters(String league){
+        buttonShowInfo.setEnabled(false);
         String season = Settings.getCurrentSeasonInLeague(league);
         seasonCB.setSelectedItem("Сезон " + season);
         leagueChooser.setSelectedItem(league);
+        buttonShowInfo.setEnabled(true);
     }
 
 }

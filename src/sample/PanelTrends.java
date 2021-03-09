@@ -14,6 +14,7 @@ public class PanelTrends extends JPanel{
     final String path = "database/";
     String lastCalculatedLeague = "";
     String lastCalculatedSeason = "";
+    String lastCalculatedNumberOfMatches = "";
     String lastTrendsHA;
     String parameter = "";
     String leagueName = "";
@@ -213,9 +214,11 @@ public class PanelTrends extends JPanel{
     }
 
     public void setFilters(String league){
+        buttonShowInfo.setEnabled(false);
         String season = Settings.getCurrentSeasonInLeague(league);
         seasonChooser.setSelectedItem("Сезон " + season);
         leagueChooser.setSelectedItem(league);
+        buttonShowInfo.setEnabled(true);
 
     }
 

@@ -1109,9 +1109,11 @@ public class PanelBeforeAfter extends JPanel{
     }
 
     public void setFilters(String league){
+        buttonShowInfo.setEnabled(false);
         String season = Settings.getCurrentSeasonInLeague(league);
         seasonChooser.setSelectedItem("Сезон " + season);
         leagueChooser.setSelectedItem(league);
         teamAllOrHomeOrAway.setSelectedItem("Дома");
+        buttonShowInfo.setEnabled(true);
     }
 }

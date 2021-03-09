@@ -498,11 +498,13 @@ public class PanelCalculator extends JPanel{
     }
 
     public void setFilters(String league, String homeTeam, String awayTeam){
+        buttonShow.setEnabled(false);
         String season = Settings.getCurrentSeasonInLeague(league);
         seasonCB.setSelectedItem("Сезон " + season);
         leagueChooser.setSelectedItem(league);
         teamChooserHome.setSelectedItem(homeTeam);
         teamChooserAway.setSelectedItem(awayTeam);
+        buttonShow.setEnabled(true);
     }
 
     public void checkFilters(){

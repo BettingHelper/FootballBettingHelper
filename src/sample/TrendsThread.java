@@ -106,7 +106,7 @@ public class TrendsThread extends Thread{
             Font font = new Font("Arial", Font.BOLD, 15);
             File fileTeams = new File(path + season + "/leagues/" + leagueName + ".txt");
 
-            if (!panelTrends.lastCalculatedLeague.equals(leagueName) || !panelTrends.lastCalculatedSeason.equals(season) || !panelTrends.lastTrendsHA.equals(homeAwayOrAllAll)){
+            if (!panelTrends.lastCalculatedLeague.equals(leagueName) || !panelTrends.lastCalculatedNumberOfMatches.equals(lastOrFull) || !panelTrends.lastCalculatedSeason.equals(season) || !panelTrends.lastTrendsHA.equals(homeAwayOrAllAll)){
                 panelTrends.arrayList.clear();
                 try {
                     BufferedReader in = new BufferedReader(
@@ -119,6 +119,7 @@ public class TrendsThread extends Thread{
                         JPanel teamPanel = new JPanel(new BorderLayout());
                         panelTrends.lastCalculatedLeague = leagueName;
                         panelTrends.lastCalculatedSeason = season;
+                        panelTrends.lastCalculatedNumberOfMatches = lastOrFull;
                         panelTrends.lastTrendsHA = "All-all";
 
                         String text = "<html>";
@@ -175,6 +176,7 @@ public class TrendsThread extends Thread{
                     JPanel teamPanel = new JPanel(new BorderLayout());
                     panelTrends.lastCalculatedLeague = leagueName;
                     panelTrends.lastCalculatedSeason = season;
+                    panelTrends.lastCalculatedNumberOfMatches = lastOrFull;
                     panelTrends.lastTrendsHA = "All-all";
                     String text = "<html>";
 
@@ -291,7 +293,7 @@ public class TrendsThread extends Thread{
             Font font = new Font("Arial", Font.BOLD, 15);
             File fileTeams = new File(path + season + "/leagues/" + leagueName + ".txt");
 
-            if (!panelTrends.lastCalculatedLeague.equals(leagueName) || !panelTrends.lastCalculatedSeason.equals(season) || !panelTrends.lastTrendsHA.equals(homeAwayOrAllAll)){
+            if (!panelTrends.lastCalculatedLeague.equals(leagueName) || !panelTrends.lastCalculatedNumberOfMatches.equals(lastOrFull) || !panelTrends.lastCalculatedSeason.equals(season) || !panelTrends.lastTrendsHA.equals(homeAwayOrAllAll)){
                 panelTrends.arrayList.clear();
                 try {
                     BufferedReader in = new BufferedReader(
@@ -304,6 +306,7 @@ public class TrendsThread extends Thread{
                         JPanel teamPanel = new JPanel(new BorderLayout());
                         panelTrends.lastCalculatedLeague = leagueName;
                         panelTrends.lastCalculatedSeason = season;
+                        panelTrends.lastCalculatedNumberOfMatches= lastOrFull;
                         panelTrends.lastTrendsHA = "Home-away";
                         String text = "<html>";
                         Selector selectorHT = new Selector();
@@ -397,6 +400,7 @@ public class TrendsThread extends Thread{
                     JPanel teamPanel = new JPanel(new BorderLayout());
                     panelTrends.lastCalculatedLeague = leagueName;
                     panelTrends.lastCalculatedSeason = season;
+                    panelTrends.lastCalculatedNumberOfMatches = lastOrFull;
                     panelTrends.lastTrendsHA = "Home-away";
                     String text = "<html>";
 
