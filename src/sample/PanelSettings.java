@@ -312,7 +312,6 @@ public class PanelSettings extends JPanel{
         panelBubblesChartSettings.add(bubbleChartsAll);
         otherSettings.add(panelBubblesChartSettings);
 
-
         secondPanel.add(otherSettings, BorderLayout.EAST);
 
         JButton buttonApply = new JButton("Применить");

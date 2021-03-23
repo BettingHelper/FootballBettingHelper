@@ -94,7 +94,7 @@ public class WindowWithID extends JFrame{
         scaled = bimg.getScaledInstance(32, 32, Image.SCALE_SMOOTH);
         JLabel telegramImage = new JLabel(new ImageIcon(scaled));
         telegramPanel.add(telegramImage, BorderLayout.WEST);
-        String telegram = "<html> (<a href=\"https://tlgg.ru/mgomorov\">Написать в Telegram</a>) </html>";
+        String telegram = "<html> (<a href=\"https://t.me/mgomorov\">Написать в Telegram</a>) </html>";
 
         JLabel telegramLabel = new JLabel(telegram);
         telegramLabel.setFont(fontTezis);

@@ -299,7 +299,6 @@ public class PanelTablesByLeague extends JPanel{
         }
         panelButton.add(buttonShowBubble);
 
-
         container.add(panelButton);
 
         JPanel bubbleChartsPanel = new JPanel(new BorderLayout());
