@@ -698,6 +698,188 @@ public class Selector {
         }
     }
 
+    public void getRef20Matches(String leagueName, String refName, String season){
+        if ((!leagueName.contains("Выберите"))&&(!refName.contains("Выберите"))){
+
+            int numberOfMatchesNeed = 20;
+
+            String path = "database/" + season + "/" + leagueName + "/Matches/";
+            Referee ref = Referee.getRefFromFile(refName, season, leagueName);
+            int index = ref.matchList.size()-1;
+            while (index>=0){
+                listOfMatches.add(0, Match.getMatchFromFileByName(path + ref.matchList.get(index)+ ".xml"));
+                index --;
+            }
+
+            if (listOfMatches.size()<numberOfMatchesNeed){
+                String prevSeason = Settings.getPrevSeason(season);
+                String pathPrev = "database/" + prevSeason + "/" + leagueName + "/Matches/";
+
+                int count = numberOfMatchesNeed;
+                Referee refPrev = Referee.getRefFromFile(refName, prevSeason, leagueName);
+                index = refPrev.matchList.size()-1;
+                while (index>=0){
+                    listOfMatches.add(0 , Match.getMatchFromFileByName(pathPrev + refPrev.matchList.get(index)+ ".xml"));
+                    index --;
+                }
+            }
+
+
+
+            while(listOfMatches.size()>numberOfMatchesNeed){
+                listOfMatches.remove(0);
+            }
+
+            double[][] paramsD = new double[refParams.length][3];
+            for (int i=0; i<listOfMatches.size(); i++){
+                paramsD[0][0] += listOfMatches.get(i).homeYellowCards + listOfMatches.get(i).awayYellowCards;
+                paramsD[0][1] += listOfMatches.get(i).homeYellowCards ;
+                paramsD[0][2] += listOfMatches.get(i).awayYellowCards;
+                refNumberOfMatchesWithParam[0] ++;
+
+                paramsD[1][0] += listOfMatches.get(i).homeYellowCards1T + listOfMatches.get(i).awayYellowCards1T;
+                paramsD[1][1] += listOfMatches.get(i).homeYellowCards1T ;
+                paramsD[1][2] += listOfMatches.get(i).awayYellowCards1T;
+                refNumberOfMatchesWithParam[1] ++;
+
+                paramsD[2][0] += listOfMatches.get(i).homeYellowCards2T + listOfMatches.get(i).awayYellowCards2T;
+                paramsD[2][1] += listOfMatches.get(i).homeYellowCards2T ;
+                paramsD[2][2] += listOfMatches.get(i).awayYellowCards2T;
+                refNumberOfMatchesWithParam[2] ++;
+
+                paramsD[3][0] += listOfMatches.get(i).homeSecondYellowCards + listOfMatches.get(i).awaySecondYellowCards;
+                paramsD[3][1] += listOfMatches.get(i).homeSecondYellowCards;
+                paramsD[3][2] += listOfMatches.get(i).awaySecondYellowCards;
+                refNumberOfMatchesWithParam[3] ++;
+
+                paramsD[4][0] += listOfMatches.get(i).homeDirectRedCards + listOfMatches.get(i).awayDirectRedCards;
+                paramsD[4][1] += listOfMatches.get(i).homeDirectRedCards;
+                paramsD[4][2] += listOfMatches.get(i).awayDirectRedCards;
+                refNumberOfMatchesWithParam[4] ++;
+
+                paramsD[5][0] += listOfMatches.get(i).homeFouls + listOfMatches.get(i).awayFouls;
+                paramsD[5][1] += listOfMatches.get(i).homeFouls;
+                paramsD[5][2] += listOfMatches.get(i).awayFouls;
+                if (listOfMatches.get(i).homeFouls + listOfMatches.get(i).awayFouls > 0){
+                    refNumberOfMatchesWithParam[5] ++;
+                    refNumberOfMatchesWithParam[6] ++;
+                    refNumberOfMatchesWithParam[7] ++;
+                }
+
+                paramsD[6][0] += listOfMatches.get(i).homeFouls1T + listOfMatches.get(i).awayFouls1T;
+                paramsD[6][1] += listOfMatches.get(i).homeFouls1T;
+                paramsD[6][2] += listOfMatches.get(i).awayFouls1T;
+
+                paramsD[7][0] += listOfMatches.get(i).homeFouls2T + listOfMatches.get(i).awayFouls2T;
+                paramsD[7][1] += listOfMatches.get(i).homeFouls2T;
+                paramsD[7][2] += listOfMatches.get(i).awayFouls2T;
+
+                paramsD[8][0] += listOfMatches.get(i).homePen + listOfMatches.get(i).awayPen;
+                paramsD[8][1] += listOfMatches.get(i).homePen;
+                paramsD[8][2] += listOfMatches.get(i).awayPen;
+                refNumberOfMatchesWithParam[8] ++;
+
+                paramsD[9][0] += listOfMatches.get(i).homeFouls + listOfMatches.get(i).awayFouls;
+                paramsD[9][1] += listOfMatches.get(i).homeFouls;
+                paramsD[9][2] += listOfMatches.get(i).awayFouls;
+                refNumberOfMatchesWithParam[9] ++;
+
+                paramsD[10][0] += listOfMatches.get(i).homeTackles + listOfMatches.get(i).awayTackles;
+                paramsD[10][1] += listOfMatches.get(i).homeTackles;
+                paramsD[10][2] += listOfMatches.get(i).awayTackles;
+                refNumberOfMatchesWithParam[10] ++;
+
+            }
+
+            double dispF1 = 0;
+            double dispF2 = 0;
+            double dispF3 = 0;
+            double dispYC1 = 0;
+            double dispYC2 = 0;
+            double dispYC3 = 0;
+            for (int i=0; i<listOfMatches.size(); i++){
+                dispF1 += Math.pow( (listOfMatches.get(i).homeFouls + listOfMatches.get(i).awayFouls - paramsD[5][0]/ (double) listOfMatches.size()) , 2);
+                dispF2 += Math.pow( (listOfMatches.get(i).homeFouls - paramsD[5][1]/ (double) listOfMatches.size()) , 2);
+                dispF3 += Math.pow( (listOfMatches.get(i).awayFouls - paramsD[5][2]/ (double) listOfMatches.size()) , 2);
+                dispYC1 += Math.pow( (listOfMatches.get(i).homeYellowCards + listOfMatches.get(i).awayYellowCards - paramsD[0][0]/ (double) listOfMatches.size()) , 2);
+                dispYC2 += Math.pow( (listOfMatches.get(i).homeYellowCards - paramsD[0][1]/ (double) listOfMatches.size()) , 2);
+                dispYC3 += Math.pow( (listOfMatches.get(i).awayYellowCards - paramsD[0][2]/ (double) listOfMatches.size()) , 2);
+            }
+
+            paramsD[11][0] = Math.sqrt(dispYC1 / (double) listOfMatches.size());
+            paramsD[11][1] = Math.sqrt(dispYC2 / (double) listOfMatches.size());
+            paramsD[11][2] = Math.sqrt(dispYC3 / (double) listOfMatches.size());
+            paramsD[12][0] = Math.sqrt(dispF1 / (double) listOfMatches.size());
+            paramsD[12][1] = Math.sqrt(dispF2 / (double) listOfMatches.size());
+            paramsD[12][2] = Math.sqrt(dispF3 / (double) listOfMatches.size());
+
+
+            double MO_Fouls = paramsD[5][0]/ (double) listOfMatches.size();
+            double MO_FoulsHT = paramsD[5][1]/ (double) listOfMatches.size();
+            double MO_FoulsAT = paramsD[5][2]/ (double) listOfMatches.size();
+            double MO_FoulsDiff = (paramsD[5][1] - paramsD[5][2]) / (double) listOfMatches.size();
+            double MO_YC = paramsD[0][0]/ (double) listOfMatches.size();
+            double MO_YCHT = paramsD[0][1]/(double) listOfMatches.size();
+            double MO_YCAT = paramsD[0][2]/(double) listOfMatches.size();
+            double MO_YCDiff = (paramsD[0][1] - paramsD[0][2]) / (double) listOfMatches.size();
+
+            double verhSumm = 0;
+            double nizSumm1 = 0;
+            double nizSumm2 = 0;
+
+            for (int i=0; i<listOfMatches.size(); i++){
+                verhSumm += (listOfMatches.get(i).homeFouls + listOfMatches.get(i).awayFouls - MO_Fouls)*(listOfMatches.get(i).homeYellowCards + listOfMatches.get(i).awayYellowCards - MO_YC);
+                nizSumm1 += Math.pow( listOfMatches.get(i).homeFouls + listOfMatches.get(i).awayFouls - MO_Fouls , 2);
+                nizSumm2 += Math.pow( listOfMatches.get(i).homeYellowCards + listOfMatches.get(i).awayYellowCards - MO_YC , 2);
+            }
+            paramsD[13][0] = verhSumm / Math.sqrt(nizSumm1*nizSumm2);
+
+            verhSumm = 0;
+            nizSumm1 = 0;
+            nizSumm2 = 0;
+
+            for (int i=0; i<listOfMatches.size(); i++){
+                verhSumm += (listOfMatches.get(i).homeFouls - MO_FoulsHT)*(listOfMatches.get(i).homeYellowCards - MO_YCHT);
+                nizSumm1 += Math.pow( listOfMatches.get(i).homeFouls - MO_FoulsHT , 2);
+                nizSumm2 += Math.pow( listOfMatches.get(i).homeYellowCards - MO_YCHT , 2);
+            }
+            paramsD[13][1] = verhSumm / Math.sqrt(nizSumm1*nizSumm2);
+
+            verhSumm = 0;
+            nizSumm1 = 0;
+            nizSumm2 = 0;
+
+            for (int i=0; i<listOfMatches.size(); i++){
+                verhSumm += (listOfMatches.get(i).awayFouls - MO_FoulsAT)*(listOfMatches.get(i).awayYellowCards - MO_YCAT);
+                nizSumm1 += Math.pow( listOfMatches.get(i).awayFouls - MO_FoulsAT , 2);
+                nizSumm2 += Math.pow( listOfMatches.get(i).awayYellowCards - MO_YCAT , 2);
+            }
+            paramsD[13][2] = verhSumm / Math.sqrt(nizSumm1*nizSumm2);
+
+            verhSumm = 0;
+            nizSumm1 = 0;
+            nizSumm2 = 0;
+
+            for (int i=0; i<listOfMatches.size(); i++){
+                verhSumm += (listOfMatches.get(i).homeFouls - listOfMatches.get(i).awayFouls - MO_FoulsDiff)*(listOfMatches.get(i).homeYellowCards - listOfMatches.get(i).awayYellowCards - MO_YCDiff);
+                nizSumm1 += Math.pow( listOfMatches.get(i).homeFouls - listOfMatches.get(i).awayFouls - MO_FoulsDiff , 2);
+                nizSumm2 += Math.pow( listOfMatches.get(i).homeYellowCards - listOfMatches.get(i).awayYellowCards - MO_YCDiff , 2);
+            }
+            paramsD[14][0] = verhSumm / Math.sqrt(nizSumm1*nizSumm2);
+
+
+
+            for (int i=0; i<paramsD.length; i++){
+                ArrayList<String> parametr = new ArrayList<>();
+                parametr.add(refParams[i]);
+                parametr.add(String.valueOf(MyMath.round(paramsD[i][0], 2)));
+                parametr.add(String.valueOf(MyMath.round(paramsD[i][1], 2)));
+                parametr.add(String.valueOf(MyMath.round(paramsD[i][2], 2)));
+                refList.add(parametr);
+            }
+        }
+    }
+
     public void getConfrontationList(String leagueName, String homeTeamName, String awayTeamName, String allOrHomeAway){
         if ((!leagueName.contains("Выберите"))&&(!homeTeamName.contains("Выберите"))&&(!awayTeamName.contains("Выберите"))){
             ArrayList<String> listOfSeasons = Settings.getListOfSeasons();

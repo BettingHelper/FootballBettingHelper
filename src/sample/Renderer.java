@@ -211,6 +211,8 @@ public class Renderer extends DefaultTableCellRenderer {
                 break;
             }
             case 6:{ //
+                if (cellValue.equals("-"))
+                    break;
                 cell.setBackground(new Color(255, 255, 255));// refTable
                 if (column == 2 && row < table.getRowCount()){
                     double homeValue = Double.parseDouble((table.getValueAt(row, 2)).toString().trim());

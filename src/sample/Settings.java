@@ -235,13 +235,19 @@ public class Settings {
         result.add(this.showDispossessed);
         result.add(this.showPassesAcc);
         result.add(this.showKeyPasses);
+        result.add(this.showTotal);
+        result.add(this.showGoalsBy15Min);
         result.add(this.showGoalKicks);
         result.add(this.showGoalKicks1T);
         result.add(this.showGoalKicks2T);
         result.add(this.showThrowIns);
         result.add(this.showThrowIns1T);
         result.add(this.showThrowIns2T);
-        result.add(this.showTotal);
+        result.add(this.windowsOnTop);
+        result.add(this.pivotTable);
+        result.add(this.showGraphics);
+        result.add(this.trendsHA);
+        result.add(this.useColors);
         result.add(this.bubbleChartsHA);
 
         return result;
@@ -1357,6 +1363,17 @@ public class Settings {
             count ++;
             return (count == 0 && !empty) ? 1 : count;
         }
+    }
+
+    public static String getPrevSeason(String season){
+        if (season.contains("-")){
+            String s1 = String.valueOf(Integer.parseInt(season.split("-")[0])-1);
+            String s2 = String.valueOf(Integer.parseInt(season.split("-")[1])-1);
+            return s1+"-"+s2;
+        } else{
+            return String.valueOf(Integer.parseInt(season)-1);
+        }
+
     }
 
     public static void setWindowResolution(int width, int height){
