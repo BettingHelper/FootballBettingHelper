@@ -114,7 +114,7 @@ public class Main extends JFrame {
                 PanelCalculator panelCalculator = new PanelCalculator();
                 PanelMatchCenter panelMatchCenter = new PanelMatchCenter(panelMatching, panelOneTeamStats, panelConfrontation, panelReferee, panelTablesByLeague, panelTrends, panelBeforeAfter, panelCalculator);
 
-                //YC_Calculator panelYC = new YC_Calculator();
+//                YC_Calculator panelYC = new YC_Calculator();
 
                 jtp.addTab(tabs[0], panelStart);
 //                jtp.addTab(tabs[0], panelYC);

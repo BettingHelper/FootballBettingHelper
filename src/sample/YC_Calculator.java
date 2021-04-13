@@ -3,15 +3,7 @@ package sample;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
-import java.sql.Ref;
 import java.util.ArrayList;
 
 public class YC_Calculator extends JPanel{
@@ -293,26 +285,37 @@ public class YC_Calculator extends JPanel{
             boolean flag = false;
             JLabel labelBet = new JLabel("");
 
+            boolean refNumberOfMatchesFlag = true;
+
             League league = League.getLeagueFromFile(leagueName, season);
             double averageYC = MyMath.round((league.homeYellowCards+league.awayYellowCards)/ (double) league.matchesPlayed , 2);
             double borderYC = 15;
-            Referee referee = Referee.getRefFromFile(ref, season, leagueName);
-            Selector selectorRef = new Selector();
-            selectorRef.getRef20Matches(leagueName, ref, season);
-            int refMatches = selectorRef.listOfMatches.size();
+            //Referee referee = Referee.getRefFromFile(ref, season, leagueName);
 
-            double refYC = MyMath.round(Double.parseDouble(selectorRef.refList.get(0).get(1)) / refMatches, 2);
+            Selector selectorRef20 = new Selector();
+            selectorRef20.getRefNMatches(leagueName, ref, season, refNumberOfMatchesFlag, 20);
+            int refMatches20 = selectorRef20.listOfMatches.size();
 
-            double diff = MyMath.round(Math.abs((refYC / averageYC) * 100 - 100), 1);
+            double refYC20 = MyMath.round(Double.parseDouble(selectorRef20.refList.get(0).get(1)) / refMatches20, 2);
+            double diff20 = MyMath.round(Math.abs((refYC20 / averageYC) * 100 - 100), 1);
 
-            if (diff > borderYC){
+            Selector selectorRef5 = new Selector();
+            selectorRef5.getRefNMatches(leagueName, ref, season, refNumberOfMatchesFlag, 5);
+            int refMatches5 = selectorRef5.listOfMatches.size();
+
+            double refYC5 = MyMath.round(Double.parseDouble(selectorRef5.refList.get(0).get(1)) / refMatches5, 2);
+            double diff5 = MyMath.round(Math.abs((refYC5 / refYC20) * 100 - 100), 1);
+
+
+            if (refNumberOfMatchesFlag && diff20 > borderYC && diff5 < borderYC){
                 flag = true;
 
                 textResult += "Судья подходит. <br>" +
                         "Средние ЖК за матч по лиге: " + averageYC + "<br>" +
-                        "Средние ЖК арбитра " + ref + ": " + refYC + "<br>" +
-                        "Отклонение судьи: " + diff + "<br>"
-                        + "<br>";
+                        "Средние ЖК арбитра " + ref + ": " + refYC20 + "<br>" +
+                        "Отклонение судьи: " + diff20 + "<br>" +
+                        "Отклонение судьи за 5 игр: " + diff5 + "<br>" +
+                        "<br>";
 
                 Selector selectorHT = new Selector();
                 selectorHT.getListOfMatches(leagueName, homeTeam, "Дома", season, "Весь сезон");
@@ -327,13 +330,13 @@ public class YC_Calculator extends JPanel{
 
                 double teamsPercent = MyMath.round( (htPlus+atPlus)/teamsMatches * 100, 2);
 
-                double refPlus = getPlusYC(parameter, selectorRef.listOfMatches, valueForSlider);
-                double refPercent = MyMath.round( refPlus/refMatches * 100, 2);
+                double refPlus = getPlusYC(parameter, selectorRef20.listOfMatches, valueForSlider);
+                double refPercent = MyMath.round( refPlus/refMatches20 * 100, 2);
 
                 textResult += "Показатели по командам: " + (htPlus+atPlus) + " из " + (int) teamsMatches +  ": " + teamsPercent + "% <br>" +
                         "Процент команд: " + teamsPercent + "<br><br>" +
 
-                        "Средние ЖК арбитра " + ref + ": " + refYC + "<br>" +
+                        "Средние ЖК арбитра " + ref + ": " + refYC20 + "<br>" +
                         "Процент арбитра: " + refPercent + "<br><br>";
 
                 double totalPercent = MyMath.round( (refPercent+teamsPercent)/ 2.0, 2);
@@ -346,20 +349,20 @@ public class YC_Calculator extends JPanel{
                     double awayTeamPercent = atPlus / (double) selectorAT.listOfMatches.size() * 100;
 
 
-                    if (homeTeamPercent < 50){
+                    /*if (homeTeamPercent < 50){
                         textResult += "Дополнительный расчет хозяев: <br>";
 
                         double homeTeamYC = Double.parseDouble(selectorHT.pList.get(14).get(1))
                                 + Double.parseDouble(selectorHT.pList.get(14).get(2));
 
                         double deltaHT = MyMath.round(Math.abs(homeTeamYC / averageYC *100 - 100) , 1);
-                        double deltaRef = MyMath.round(Math.abs(refYC / averageYC *100 - 100), 1);
+                        double deltaRef = MyMath.round(Math.abs(refYC20 / averageYC *100 - 100), 1);
 
                         if (deltaRef > deltaHT){
-                            textResult += "Отклонение судьи ( " + deltaRef + ") > отклонения хозяев (" + deltaHT + ").<br>" +
+                            textResult += "Отклонение судьи ( " + deltaRef + ") больше отклонения хозяев (" + deltaHT + ").<br>" +
                                     "Это допустимо. <br>";
                         } else {
-                            textResult += "Отклонение судьи ( " + deltaRef + ") <= отклонения хозяев (" + deltaHT + ").<br>" +
+                            textResult += "Отклонение судьи ( " + deltaRef + ") не больше отклонения хозяев (" + deltaHT + ").<br>" +
                                     "Условия не выполнены. <br>";
                             flag = false;
                         }
@@ -372,17 +375,17 @@ public class YC_Calculator extends JPanel{
                                 + Double.parseDouble(selectorAT.pList.get(14).get(2));
 
                         double deltaAT = MyMath.round(Math.abs(awayTeamYC / averageYC *100 - 100) , 1);
-                        double deltaRef = MyMath.round(Math.abs(refYC / averageYC *100 - 100), 1);
+                        double deltaRef = MyMath.round(Math.abs(refYC20 / averageYC *100 - 100), 1);
 
                         if (deltaRef > deltaAT){
-                            textResult += "Отклонение судьи ( " + deltaRef + ") > отклонения гостей (" + deltaAT + ").<br>" +
+                            textResult += "Отклонение судьи ( " + deltaRef + ") больше отклонения гостей (" + deltaAT + ").<br>" +
                                     "Это допустимо. <br>";
                         } else {
-                            textResult += "Отклонение судьи ( " + deltaRef + ") <= отклонения гостей (" + deltaAT + ").<br>" +
+                            textResult += "Отклонение судьи ( " + deltaRef + ") не больше отклонения гостей (" + deltaAT + ").<br>" +
                                     "Условия не выполнены. <br>";
                             flag = false;
                         }
-                    }
+                    }*/
 
 
 
@@ -418,9 +421,6 @@ public class YC_Calculator extends JPanel{
             panelData.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
             int ttt = 0;
-
-
-
 
             scrollPane = new JScrollPane(panelData);
         } else {

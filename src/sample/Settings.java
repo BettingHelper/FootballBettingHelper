@@ -147,23 +147,23 @@ public class Settings {
         this.showDispossessed = arrayList.get(43);
         this.showPassesAcc = arrayList.get(44);
         this.showKeyPasses = arrayList.get(45);
-        this.showTotal = arrayList.get(46);
-        this.showGoalsBy15Min = arrayList.get(47);
-        this.showGoalKicks = arrayList.get(48);
-        this.showGoalKicks1T = arrayList.get(49);
-        this.showGoalKicks2T = arrayList.get(50);
-        this.showThrowIns = arrayList.get(51);
-        this.showThrowIns1T = arrayList.get(52);
-        this.showThrowIns2T = arrayList.get(53);
+        this.showGoalKicks = arrayList.get(46);
+        this.showGoalKicks1T = arrayList.get(47);
+        this.showGoalKicks2T = arrayList.get(48);
+        this.showThrowIns = arrayList.get(49);
+        this.showThrowIns1T = arrayList.get(50);
+        this.showThrowIns2T = arrayList.get(51);
         this.windowResolution = String.valueOf(width) + "x" + String.valueOf(height);
         this.trendPercent = String.valueOf(percent);
         this.form = formS;
-        this.windowsOnTop = arrayList.get(54);
-        this.pivotTable = arrayList.get(55);
-        this.showGraphics = arrayList.get(56);
-        this.trendsHA = arrayList.get(57);
-        this.useColors = arrayList.get(58);
-        this.bubbleChartsHA = arrayList.get(59);
+        this.windowsOnTop = arrayList.get(52);
+        this.pivotTable = arrayList.get(53);
+        this.showGraphics = arrayList.get(54);
+        this.trendsHA = arrayList.get(55);
+        this.useColors = arrayList.get(56);
+        this.bubbleChartsHA = arrayList.get(57);
+        this.showGoalsBy15Min = arrayList.get(58);
+        this.showTotal = arrayList.get(59);
         this.localTime = localTime;
         this.ip = ip;
     }
@@ -235,8 +235,6 @@ public class Settings {
         result.add(this.showDispossessed);
         result.add(this.showPassesAcc);
         result.add(this.showKeyPasses);
-        result.add(this.showTotal);
-        result.add(this.showGoalsBy15Min);
         result.add(this.showGoalKicks);
         result.add(this.showGoalKicks1T);
         result.add(this.showGoalKicks2T);
@@ -249,6 +247,8 @@ public class Settings {
         result.add(this.trendsHA);
         result.add(this.useColors);
         result.add(this.bubbleChartsHA);
+        result.add(this.showGoalsBy15Min);
+        result.add(this.showTotal);
 
         return result;
     }

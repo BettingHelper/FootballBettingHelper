@@ -698,10 +698,8 @@ public class Selector {
         }
     }
 
-    public void getRef20Matches(String leagueName, String refName, String season){
+    public void getRefNMatches(String leagueName, String refName, String season, boolean flag, int number){
         if ((!leagueName.contains("Выберите"))&&(!refName.contains("Выберите"))){
-
-            int numberOfMatchesNeed = 20;
 
             String path = "database/" + season + "/" + leagueName + "/Matches/";
             Referee ref = Referee.getRefFromFile(refName, season, leagueName);
@@ -711,11 +709,15 @@ public class Selector {
                 index --;
             }
 
-            if (listOfMatches.size()<numberOfMatchesNeed){
+            if (listOfMatches.size() < 5){
+                flag = false;
+            }
+
+            if (listOfMatches.size()< number){
                 String prevSeason = Settings.getPrevSeason(season);
                 String pathPrev = "database/" + prevSeason + "/" + leagueName + "/Matches/";
 
-                int count = numberOfMatchesNeed;
+                int count = number;
                 Referee refPrev = Referee.getRefFromFile(refName, prevSeason, leagueName);
                 index = refPrev.matchList.size()-1;
                 while (index>=0){
@@ -724,9 +726,11 @@ public class Selector {
                 }
             }
 
+            if (listOfMatches.size() < 10){
+                flag = false;
+            }
 
-
-            while(listOfMatches.size()>numberOfMatchesNeed){
+            while(listOfMatches.size()> number){
                 listOfMatches.remove(0);
             }
 

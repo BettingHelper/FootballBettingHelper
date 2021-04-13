@@ -428,8 +428,6 @@ public class PanelSettings extends JPanel{
                 arrayList.add(dispossessed.isSelected());
                 arrayList.add(passesAcc.isSelected());
                 arrayList.add(keyPasses.isSelected());
-                arrayList.add(showTotal.isSelected());
-                arrayList.add(goalsBy15Min.isSelected());
                 arrayList.add(goalKicks.isSelected());
                 arrayList.add(goalKicks1T.isSelected());
                 arrayList.add(goalKicks2T.isSelected());
@@ -442,6 +440,8 @@ public class PanelSettings extends JPanel{
                 arrayList.add(flagTrendsHA);
                 arrayList.add(useColors.isSelected());
                 arrayList.add(flagBubbleChartsHA);
+                arrayList.add(goalsBy15Min.isSelected());
+                arrayList.add(showTotal.isSelected());
 
                 settings = new Settings(arrayList, Main.getFrames()[0].getWidth(), Main.getFrames()[0].getHeight(), slider.getValue(), formS, settings.getIp(), timeChooser.getSelectedIndex());
                 settings.pushSettingsToFile();
