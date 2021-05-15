@@ -312,6 +312,16 @@ public class PanelSettings extends JPanel{
         panelBubblesChartSettings.add(bubbleChartsAll);
         otherSettings.add(panelBubblesChartSettings);
 
+        JPanel panelCalculatorSettings = new JPanel();
+        panelCalculatorSettings.setBorder(BorderFactory.createTitledBorder("Расчеты в калькуляторе"));
+
+        final JCheckBox calc1T = new JCheckBox("1 тайм", settings.calc1T);
+        panelCalculatorSettings.add(calc1T);
+        final JCheckBox calc2T = new JCheckBox("2 тайм", settings.calc2T);
+        panelCalculatorSettings.add(calc2T);
+
+        otherSettings.add(panelCalculatorSettings);
+
         secondPanel.add(otherSettings, BorderLayout.EAST);
 
         JButton buttonApply = new JButton("Применить");
@@ -442,6 +452,8 @@ public class PanelSettings extends JPanel{
                 arrayList.add(flagBubbleChartsHA);
                 arrayList.add(goalsBy15Min.isSelected());
                 arrayList.add(showTotal.isSelected());
+                arrayList.add(calc1T.isSelected());
+                arrayList.add(calc2T.isSelected());
 
                 settings = new Settings(arrayList, Main.getFrames()[0].getWidth(), Main.getFrames()[0].getHeight(), slider.getValue(), formS, settings.getIp(), timeChooser.getSelectedIndex());
                 settings.pushSettingsToFile();

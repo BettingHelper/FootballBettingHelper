@@ -14,7 +14,7 @@ import java.net.URISyntaxException;
 
 public class PanelStart extends JPanel{
     JPanel container;
-    String currentVersion = "5.0.3";
+    String currentVersion = "5.1";
     String newestVersion;
     final String path = "database/";
 

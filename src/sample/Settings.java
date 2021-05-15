@@ -26,7 +26,8 @@ import java.util.TimeZone;
         "showGoalKicks", "showGoalKicks1T", "showGoalKicks2T",
         "showThrowIns", "showThrowIns1T", "showThrowIns2T",
         "showTotal", "showGoalsBy15Min", "windowResolution", "trendPercent", "form", "windowsOnTop",
-        "localTime", "pivotTable", "showGraphics", "ip", "useColors", "trendsHA", "bubbleChartsHA"
+        "localTime", "pivotTable", "showGraphics", "ip", "useColors", "trendsHA", "bubbleChartsHA",
+        "calc1T", "calc2T"
 })
 
 public class Settings {
@@ -96,6 +97,8 @@ public class Settings {
     public boolean bubbleChartsHA;
     public boolean showGraphics;
     public boolean useColors;
+    public boolean calc1T;
+    public boolean calc2T;
 
     public Settings(){
     }
@@ -164,6 +167,8 @@ public class Settings {
         this.bubbleChartsHA = arrayList.get(57);
         this.showGoalsBy15Min = arrayList.get(58);
         this.showTotal = arrayList.get(59);
+        this.calc1T = arrayList.get(60);
+        this.calc2T = arrayList.get(61);
         this.localTime = localTime;
         this.ip = ip;
     }
@@ -249,6 +254,8 @@ public class Settings {
         result.add(this.bubbleChartsHA);
         result.add(this.showGoalsBy15Min);
         result.add(this.showTotal);
+        result.add(this.calc1T);
+        result.add(this.calc2T);
 
         return result;
     }

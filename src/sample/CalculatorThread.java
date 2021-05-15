@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class CalculatorThread extends Thread{
     final String path;
@@ -221,7 +222,23 @@ public class CalculatorThread extends Thread{
         jpb.setValue((int) (currentStage / (double) numberOfStages * 100));
 
         ArrayList<Double> calculatedParams = new ArrayList();
-        data = new String[6][9];
+
+        Settings settings = Settings.getSettingsFromFile();
+
+        int colCount = 3;
+        int index1T = 3;
+        int index2T = 3;
+        if (settings.calc1T){
+            colCount += 3;
+            index2T += 3;
+        }
+
+        if (settings.calc2T){
+            colCount += 3;
+        }
+
+
+        data = new String[6][colCount];
 
         // Угловые за матч
         calculatedParams = calcParams(24, 10);
@@ -229,15 +246,19 @@ public class CalculatorThread extends Thread{
         data[0][1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
         data[0][2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
         // Угловые за 1 тайм
-        calculatedParams = calcParams(25, 11);
-        data[0][3] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
-        data[0][4] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
-        data[0][5] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        if (settings.calc1T){
+            calculatedParams = calcParams(25, 11);
+            data[0][index1T] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
+            data[0][index1T + 1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
+            data[0][index1T + 2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        }
         // Угловые за 2 тайм
-        calculatedParams = calcParams(26, 12);
-        data[0][6] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
-        data[0][7] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
-        data[0][8] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        if (settings.calc2T){
+            calculatedParams = calcParams(26, 12);
+            data[0][index2T] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
+            data[0][index2T + 1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
+            data[0][index2T + 2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        }
 
         currentStage++;
         jpb.setValue((int) (currentStage / (double) numberOfStages * 100));
@@ -248,15 +269,19 @@ public class CalculatorThread extends Thread{
         data[1][1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
         data[1][2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
         // Удары в створ за 1 тайм
-        calculatedParams = calcParams(15, 27);
-        data[1][3] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
-        data[1][4] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
-        data[1][5] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        if (settings.calc1T){
+            calculatedParams = calcParams(15, 27);
+            data[1][index1T] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
+            data[1][index1T + 1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
+            data[1][index1T + 2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        }
         // Удары в створ за 2 тайм
-        calculatedParams = calcParams(16, 28);
-        data[1][6] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
-        data[1][7] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
-        data[1][8] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        if (settings.calc2T){
+            calculatedParams = calcParams(16, 28);
+            data[1][index2T] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
+            data[1][index2T + 1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
+            data[1][index2T + 2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        }
 
         currentStage++;
         jpb.setValue((int) (currentStage / (double) numberOfStages * 100));
@@ -267,15 +292,19 @@ public class CalculatorThread extends Thread{
         data[2][1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
         data[2][2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
         // Фолы за 1 тайм
-        calculatedParams = calcParams(31, 31);
-        data[2][3] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
-        data[2][4] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
-        data[2][5] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        if (settings.calc1T){
+            calculatedParams = calcParams(31, 31);
+            data[2][index1T] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
+            data[2][index1T + 1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
+            data[2][index1T + 2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        }
         // Фолы за 2 тайм
-        calculatedParams = calcParams(32, 32);
-        data[2][6] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
-        data[2][7] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
-        data[2][8] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        if (settings.calc2T){
+            calculatedParams = calcParams(32, 32);
+            data[2][index2T] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
+            data[2][index2T + 1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
+            data[2][index2T + 2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        }
 
         currentStage++;
         jpb.setValue((int) (currentStage / (double) numberOfStages * 100));
@@ -286,15 +315,20 @@ public class CalculatorThread extends Thread{
         data[3][1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
         data[3][2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
         // Удары от ворот за 1 тайм
-        calculatedParams = calcParams(49, 23);
-        data[3][3] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
-        data[3][4] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
-        data[3][5] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        if (settings.calc1T){
+            calculatedParams = calcParams(49, 23);
+            data[3][index1T] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
+            data[3][index1T + 1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
+            data[3][index1T + 2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        }
         // Удары от ворот за 2 тайм
-        calculatedParams = calcParams(50, 24);
-        data[3][6] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
-        data[3][7] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
-        data[3][8] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        if (settings.calc2T){
+            calculatedParams = calcParams(50, 24);
+            data[3][index2T] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
+            data[3][index2T + 1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
+            data[3][index2T + 2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        }
+
 
         currentStage++;
         jpb.setValue((int) (currentStage / (double) numberOfStages * 100));
@@ -305,15 +339,19 @@ public class CalculatorThread extends Thread{
         data[4][1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
         data[4][2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
         // Вброс аутов за 1 тайм
-        calculatedParams = calcParams(52, 20);
-        data[4][3] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
-        data[4][4] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
-        data[4][5] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        if (settings.calc1T){
+            calculatedParams = calcParams(52, 20);
+            data[4][index1T] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
+            data[4][index1T + 1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
+            data[4][index1T + 2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        }
         // Вброс аутов за 2 тайм
-        calculatedParams = calcParams(53, 21);
-        data[4][6] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
-        data[4][7] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
-        data[4][8] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        if (settings.calc2T){
+            calculatedParams = calcParams(53, 21);
+            data[4][index2T] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
+            data[4][index2T + 1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
+            data[4][index2T + 2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        }
 
         currentStage++;
         jpb.setValue((int) (currentStage / (double) numberOfStages * 100));
@@ -324,21 +362,25 @@ public class CalculatorThread extends Thread{
         data[5][1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
         data[5][2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
         // Вброс аутов за 1 тайм
-        calculatedParams = calcParams(12, 25);
-        data[5][3] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
-        data[5][4] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
-        data[5][5] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        if (settings.calc1T){
+            calculatedParams = calcParams(12, 25);
+            data[5][index1T] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
+            data[5][index1T + 1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
+            data[5][index1T + 2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        }
         // Вброс аутов за 2 тайм
-        calculatedParams = calcParams(13, 26);
-        data[5][6] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
-        data[5][7] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
-        data[5][8] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        if (settings.calc2T){
+            calculatedParams = calcParams(13, 26);
+            data[5][index2T] = calculatedParams.get(0) + " : " + calculatedParams.get(1);
+            data[5][index2T + 1] = String.valueOf(MyMath.round(calculatedParams.get(0) + calculatedParams.get(1),2));
+            data[5][index2T + 2] = String.valueOf(MyMath.round(calculatedParams.get(0) - calculatedParams.get(1),2));
+        }
 
         currentStage++;
         jpb.setValue((int) (currentStage / (double) numberOfStages * 100));
 
         pCalc.dataPanel.removeAll();
-        pCalc.dataPanel.add(getResultPanel(), BorderLayout.CENTER);
+        pCalc.dataPanel.add(getResultPanel(settings), BorderLayout.CENTER);
         pCalc.dataPanel.revalidate();
         pCalc.revalidate();
 
@@ -385,16 +427,16 @@ public class CalculatorThread extends Thread{
         double awayCornersSelf = pCalc.currentLeague.getParameterValue(Team.getShortName(homeTeam), "Общее", indexInTable, 1) + sumAT;
         double homeCornersSOpp = pCalc.currentLeague.getParameterValue(Team.getShortName(awayTeam), "Общее", indexInTable, 0) + sumHT_Opp;
 
-        System.out.println("Текущий сезон:");
-        System.out.println("Все игры");
-        System.out.println("Промежуточные результаты хозяев: " + MyMath.round(homeCornersSelf , 2) + " и " + MyMath.round(awayCornersOpp , 2));
-        System.out.println("Промежуточные результаты гостей : " + MyMath.round(awayCornersSelf , 2) + " и " + MyMath.round(homeCornersSOpp , 2));
+//        System.out.println("Текущий сезон:");
+//        System.out.println("Все игры");
+//        System.out.println("Промежуточные результаты хозяев: " + MyMath.round(homeCornersSelf , 2) + " и " + MyMath.round(awayCornersOpp , 2));
+//        System.out.println("Промежуточные результаты гостей : " + MyMath.round(awayCornersSelf , 2) + " и " + MyMath.round(homeCornersSOpp , 2));
 
         resultHT[0][0] = MyMath.getValueBetweenAB(homeCornersSelf, awayCornersOpp,  slider_HT_4_Value/ pCalc.maxSliderValue);
         resultAT[0][0] = MyMath.getValueBetweenAB(awayCornersSelf, homeCornersSOpp, slider_AT_4_Value/ pCalc.maxSliderValue);
 
-        System.out.println("Хозяева : " + MyMath.round(resultHT[0][0] , 2));
-        System.out.println("Гости : " + MyMath.round(resultAT[0][0] , 2));
+//        System.out.println("Хозяева : " + MyMath.round(resultHT[0][0] , 2));
+//        System.out.println("Гости : " + MyMath.round(resultAT[0][0] , 2));
         /////////////////// &&&&&&&&&&&&&&&&&&&& Считаем статистику сезона (ВСЕ МАТЧИ)
 
         /////////////////// *************** Считаем статистику сезона (Дом/выезд)
@@ -430,16 +472,16 @@ public class CalculatorThread extends Thread{
         homeCornersSOpp = pCalc.currentLeague.getParameterValue(Team.getShortName(awayTeam), "Выезд", indexInTable, 0) + sumHT_Opp;
 
 
-        System.out.println("Текущий сезон:");
-        System.out.println("Дом/выезд");
-        System.out.println("Промежуточные результаты хозяев: " + MyMath.round(homeCornersSelf , 2) + " и " + MyMath.round(awayCornersOpp , 2));
-        System.out.println("Промежуточные результаты гостей : " + MyMath.round(awayCornersSelf , 2) + " и " + MyMath.round(homeCornersSOpp , 2));
+//        System.out.println("Текущий сезон:");
+//        System.out.println("Дом/выезд");
+//        System.out.println("Промежуточные результаты хозяев: " + MyMath.round(homeCornersSelf , 2) + " и " + MyMath.round(awayCornersOpp , 2));
+//        System.out.println("Промежуточные результаты гостей : " + MyMath.round(awayCornersSelf , 2) + " и " + MyMath.round(homeCornersSOpp , 2));
 
         resultHT[0][1] = MyMath.getValueBetweenAB(homeCornersSelf, awayCornersOpp,  slider_HT_4_Value/ pCalc.maxSliderValue);
         resultAT[0][1] = MyMath.getValueBetweenAB(awayCornersSelf, homeCornersSOpp, slider_AT_4_Value/ pCalc.maxSliderValue);
 
-        System.out.println("Хозяева : " + MyMath.round(resultHT[0][1] , 2));
-        System.out.println("Гости : " + MyMath.round(resultAT[0][1] , 2));
+//        System.out.println("Хозяева : " + MyMath.round(resultHT[0][1] , 2));
+//        System.out.println("Гости : " + MyMath.round(resultAT[0][1] , 2));
         /////////////////// &&&&&&&&&&&&&&&&&&&& Считаем статистику сезона (Дом/выезд)
 
         /////////////////// ******************** Слайдер 2 - В зависимости от его значения посчитанные ниже значения будут разными
@@ -481,16 +523,16 @@ public class CalculatorThread extends Thread{
         awayCornersSelf = pCalc.currentLeague.getParameterValue(Team.getShortName(homeTeam), "Общее", indexInTable, 1) + sumAT;
         homeCornersSOpp = pCalc.currentLeague.getParameterValue(Team.getShortName(awayTeam), "Общее", indexInTable, 0) + sumHT_Opp;
 
-        System.out.println("Личные встречи:");
-        System.out.println("Все игры");
-        System.out.println("Промежуточные результаты хозяев: " + MyMath.round(homeCornersSelf , 2) + " и " + MyMath.round(awayCornersOpp , 2));
-        System.out.println("Промежуточные результаты гостей : " + MyMath.round(awayCornersSelf , 2) + " и " + MyMath.round(homeCornersSOpp , 2));
+//        System.out.println("Личные встречи:");
+//        System.out.println("Все игры");
+//        System.out.println("Промежуточные результаты хозяев: " + MyMath.round(homeCornersSelf , 2) + " и " + MyMath.round(awayCornersOpp , 2));
+//        System.out.println("Промежуточные результаты гостей : " + MyMath.round(awayCornersSelf , 2) + " и " + MyMath.round(homeCornersSOpp , 2));
 
         resultHT[1][0] = MyMath.getValueBetweenAB(homeCornersSelf, awayCornersOpp,   slider_HT_4_Value/ pCalc.maxSliderValue);
         resultAT[1][0] = MyMath.getValueBetweenAB(awayCornersSelf, homeCornersSOpp,  slider_AT_4_Value/ pCalc.maxSliderValue);
 
-        System.out.println("Хозяева : " + MyMath.round(resultHT[1][0] , 2));
-        System.out.println("Гости : " + MyMath.round(resultAT[1][0] , 2));
+//        System.out.println("Хозяева : " + MyMath.round(resultHT[1][0] , 2));
+//        System.out.println("Гости : " + MyMath.round(resultAT[1][0] , 2));
         /////////////////// ******************** Считаем статистику личных встреч (Все матчи)
 
         /////////////////// ******************** Считаем статистику личных встреч (Только хозяева)
@@ -525,16 +567,16 @@ public class CalculatorThread extends Thread{
         awayCornersSelf = pCalc.currentLeague.getParameterValue(Team.getShortName(homeTeam), "Дом", indexInTable, 1) + sumAT;
         homeCornersSOpp = pCalc.currentLeague.getParameterValue(Team.getShortName(awayTeam), "Выезд", indexInTable, 0) + sumHT_Opp;
 
-        System.out.println("Личные встречи:");
-        System.out.println("На поле хозяев");
-        System.out.println("Промежуточные результаты хозяев: " + MyMath.round(homeCornersSelf , 2) + " и " + MyMath.round(awayCornersOpp , 2));
-        System.out.println("Промежуточные результаты гостей : " + MyMath.round(awayCornersSelf , 2) + " и " + MyMath.round(homeCornersSOpp , 2));
+//        System.out.println("Личные встречи:");
+//        System.out.println("На поле хозяев");
+//        System.out.println("Промежуточные результаты хозяев: " + MyMath.round(homeCornersSelf , 2) + " и " + MyMath.round(awayCornersOpp , 2));
+//        System.out.println("Промежуточные результаты гостей : " + MyMath.round(awayCornersSelf , 2) + " и " + MyMath.round(homeCornersSOpp , 2));
 
         resultHT[1][1] = MyMath.getValueBetweenAB(homeCornersSelf, awayCornersOpp,   slider_HT_4_Value/ pCalc.maxSliderValue);
         resultAT[1][1] = MyMath.getValueBetweenAB(awayCornersSelf, homeCornersSOpp,  slider_AT_4_Value/ pCalc.maxSliderValue);
 
-        System.out.println("Хозяева : " + MyMath.round(resultHT[1][1] , 2));
-        System.out.println("Гости : " + MyMath.round(resultAT[1][1] , 2));
+//        System.out.println("Хозяева : " + MyMath.round(resultHT[1][1] , 2));
+//        System.out.println("Гости : " + MyMath.round(resultAT[1][1] , 2));
         /////////////////// ******************** Считаем статистику личных встреч (Только хозяева)
 
         /////////////////// ******************** Слайдер 2 - В зависимости от его значения посчитанные ниже значения будут разными
@@ -547,9 +589,9 @@ public class CalculatorThread extends Thread{
         double resultATValue = MyMath.getValueBetweenAB(currentSeason_AT, headToHeadMatches_AT, slider_AT_3_Value/ pCalc.maxSliderValue);
         /////////////////// &&&&&&&&&&&&&&&&&&&& Слайдер 3 - В зависимости от его значения посчитанные ниже значения будут разными
 
-        System.out.println("Итоговый результат:");
-        System.out.println(homeTeam + "  " + resultHTValue + " : " + resultATValue + "  " + awayTeam);
-        System.out.println("***********************************");
+//        System.out.println("Итоговый результат:");
+//        System.out.println(homeTeam + "  " + resultHTValue + " : " + resultATValue + "  " + awayTeam);
+//        System.out.println("***********************************");
 
         result.add(resultHTValue);
         result.add(resultATValue);
@@ -557,7 +599,7 @@ public class CalculatorThread extends Thread{
         return result;
     }
 
-    public JPanel getResultPanel(){
+    public JPanel getResultPanel(Settings settings){
         JPanel result = new JPanel(new VerticalLayout());
 
         JPanel headerPanel = new JPanel(new BorderLayout());
@@ -595,21 +637,42 @@ public class CalculatorThread extends Thread{
 
         result.add(headerPanel);
 
-        String[] colHeads = {"Показатель",
+        String[] colHeads = new String[]{"Показатель",
                 "Расч. счет матча", "Расч. тотал матча", "Расч. фора хозяев",
                 "Расч. счет 1Т", "Расч. тотал 1Т", "Расч. фора 1Т",
                 "Расч. счет 2Т", "Расч. тотал 2Т", "Расч. фора 2Т",
         };
+        if (!settings.calc1T && settings.calc2T){
+            colHeads = new String[]{"Показатель",
+                    "Расч. счет матча", "Расч. тотал матча", "Расч. фора хозяев",
+                    "Расч. счет 2Т", "Расч. тотал 2Т", "Расч. фора 2Т",
+            };
+        }
+        if (settings.calc1T && !settings.calc2T){
+            colHeads = new String[]{"Показатель",
+                    "Расч. счет матча", "Расч. тотал матча", "Расч. фора хозяев",
+                    "Расч. счет 1Т", "Расч. тотал 1Т", "Расч. фора 1Т",
+            };
+        }
+        if (!settings.calc1T && !settings.calc2T){
+            colHeads = new String[]{"Показатель",
+                    "Расч. счет матча", "Расч. тотал матча", "Расч. фора хозяев",
+            };
+        }
+
         String[] params = {"Угловые", "Удары в створ", "Фолы", "Удары от ворот", "Вброс аутов", "Удары общие"};
         Object[][] dataForTable = new Object[params.length][colHeads.length];
 
+
         for (int i=0; i<data.length; i++){
-            dataForTable[i] = new Object[]{
-                    params[i],
-                    data[i][0],  data[i][1],  data[i][2],
-                    data[i][3],  data[i][4],  data[i][5],
-                    data[i][6],  data[i][7],  data[i][8]
-            };
+            Object[] obj = new Object[colHeads.length];
+            obj[0] = params[i];
+
+            for (int k=1; k<obj.length; k++){
+                obj[k] = data[i][k-1];
+            }
+
+            dataForTable[i] = obj;
         }
 
 
